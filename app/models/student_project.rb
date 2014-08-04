@@ -1,4 +1,4 @@
-class StudentProjects < ActiveRecord::Base
+class StudentProject < ActiveRecord::Base
   belongs_to :student
   belongs_to :project
 end

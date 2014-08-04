@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :program
-  belongs_to :company
+  has_one :company, through: :program
   has_many :student_projects
-  has_many :students, through: :student_projects
+  has_one :student, through: :student_projects
 end
