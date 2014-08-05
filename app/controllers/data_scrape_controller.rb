@@ -7,7 +7,7 @@ class DataScrapeController < ApplicationController
        'sTime' => '13:30', 
        'sUsername' => '@jessrudder',
        'nStatus' => 1,
-       'nPullRequests' => 17,
+       'nPullRequests' => 170,
        'fLight' => true
       },
       {'sDate' => 'yesterday', 
@@ -21,7 +21,7 @@ class DataScrapeController < ApplicationController
        'sTime' => '16:30',
        'sUsername' => '@christinaleuci',
        'nStatus' => 2,
-       'nPullRequests' => 23,
+       'nPullRequests' => 1,
        'fLight' => false
       }
    ].to_json

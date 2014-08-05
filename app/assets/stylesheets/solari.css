@@ -3,7 +3,7 @@
 }
 
 html, body {
-	height: 98%;
+	height: 100%;
 }
 
 a {
@@ -126,12 +126,12 @@ h1 {
 }
 .solari-board-header {
   padding: 10px 15px 10px;
-  height: 55px;
+  height: 70px;
 }
 ul.solari-board-columns {
   font-size: 18px;
   font-family: Lato, Arial, sans-serif;
-  height: 21px;
+  height: 40px;
   padding: 5px 1px 11px 17px;
 }
 ul.solari-board-rows {
@@ -163,16 +163,17 @@ li.username, li.product, li.status, li.time, li.pull-requests {
 }
 /* Column Width */
 li.time {
-  width: 112px;
+  width: 115px;
 }
 li.username {
   width: 605px;
 }
 li.status {
-  width: 86px;
+  width: 90px;
 }
 li.pull-requests {
-  width: 48px;
+  width: 115px;
+
 }
 
 .letterbox {
@@ -216,7 +217,7 @@ li.pull-requests {
 }
 li.board-data {
   padding-left: 15px;
-  height: 35px;
+  height: 40px;
   padding-top: 2px;
   clear: left;
   border-bottom: 1px solid #000;
@@ -244,6 +245,7 @@ li.board-data {
 #next-due {
   float: right;
   margin-right: 15px;
+  margin-top: -10px;
   margin-bottom: 5px;
   padding: 5px;
   background-color: #000;

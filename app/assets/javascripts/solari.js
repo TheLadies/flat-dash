@@ -17,7 +17,7 @@
 var RATE_VARIANCE = 8; // for determining random animation rate in milliseconds
 var RATE_BASE = 8; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 8; // total number of rows displayed on the solari board
-var SECOND_SECTION_START = 8; // the first row that contains a next due case
+var SECOND_SECTION_START = 9; // the first row that contains a next due case
 var LETTER_HEIGHT = 26; // height of a single letter frame (in pixels) in the letter image
 var FIRST_CHAR_CODE = 32; // the first ASCII character that is represented in the letter image
 var LAST_CHAR_CODE = 96; // the last ASCII character that is represented in the letter image
@@ -26,7 +26,7 @@ var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in p
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
 var USERNAME_BOXES = 25; // number of letter boxes displayed in the departure column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var PULL_BOXES = 2; // number of letter boxes displayed in the track column
+var PULL_BOXES = 3; // number of letter boxes displayed in the track column
 var REFRESH_TIME = 60; //refresh time in seconds
 var EMPTY_ROW = {
     "sTime": "",
@@ -164,7 +164,7 @@ function addSolariBoard(divSelector) {
             $section = $('#usernames .solari-board-rows');
         }
         // add a row
-        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="pull-requests"></li><li class=alert><span class="circle"></span></li></ul></li>');
+        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="pull-requests"></li></ul></li>');
 
         // add the letter boxes in the time column
         for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
@@ -216,7 +216,7 @@ function UpdateSolariRow(row, current_row, new_row) {
     SpinChars(rate, '#time-row' + row, TIME_BOXES, current_row.sTime.replace(":",""), new_row.sTime.replace(":",""));
     SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
-    //turn pull-requests numbers into strings for display. Ensure they are always two chars long
+    //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
     current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
     new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 1 ? new_row.nPullRequests.toString() : "0" + new_row.nPullRequests.toString();
     SpinChars(rate, '#pull-requests-row' + row, PULL_BOXES, current_row.sPull, new_row.sPull);  
