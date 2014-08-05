@@ -36,12 +36,13 @@ class Repository < ActiveRecord::Base
     Repository.limit(2).all.each do |repo|
       repo.get_pull_requests.each do |pull|
       # binding.pry
-      puts repo.name
-      puts pull.user.login
-      puts pull.created_at
-      puts pull.updated_at
-      puts pull.base.repo.name
-      puts pull.base.repo.full_name
+      find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, created_at: pull.created_at, updated_at: pull.created_at)
+      # puts repo.name
+      # puts pull.user.login
+      # puts pull.created_at
+      # puts pull.updated_at
+      # puts pull.base.repo.name
+      # puts pull.base.repo.full_name
       end
     end
   end

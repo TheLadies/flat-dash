@@ -1,9 +1,9 @@
 class DataController < ApplicationController
 
     def index
-        # Repository.get_repos
-        # Repository.make_repos
-        data = Repository.get_pull_requests
-
+      # Repository.get_repos
+      # Repository.make_repos
+      Repository.new.get_pull_requests
     end
+
 end
