@@ -157,7 +157,7 @@ a#show-solari {
   color: gray;
 }
 
-li.departure, li.product, li.status, li.time, li.track {
+li.username, li.product, li.status, li.time, li.track {
   float: left;
   margin: 2px 14px 2px 0;
 }
@@ -165,7 +165,7 @@ li.departure, li.product, li.status, li.time, li.track {
 li.time {
   width: 112px;
 }
-li.departure {
+li.username {
   width: 605px;
 }
 li.status {
@@ -222,7 +222,7 @@ li.board-data {
   border-bottom: 1px solid #000;
 }
 
-#arrivals h1, #departures h1 {
+#arrivals h1, #usernames h1 {
   font-size: 36px;
   text-transform: uppercase;
   padding-top: 10px;
@@ -235,7 +235,7 @@ li.board-data {
   margin-right: 13px;
   float: left;
 }
-#departures .solari-board-icon {
+#usernames .solari-board-icon {
   
 }
 #arrivals .solari-board-icon {
