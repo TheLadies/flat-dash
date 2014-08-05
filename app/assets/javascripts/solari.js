@@ -8,20 +8,8 @@
  * date.js:
  * http://www.datejs.com/ 
  *
- *
  * Copyright © 2013 Fog Creek Software, Inc. All rights reserved.
- *
  * Released under the MIT license
- *
- * INSTRUCTIONS:
- * The solari board app takes an arbitrary json payload from a post command to target url via jsonp (wrapped in a function call)
- * Currently, the solari board assumes a json structure in the following format:
- *    [
- *        {'sDate':'today','sTime':'13:30','sDeparture':'foo@example.com','nStatus':1,'nTrack':17, 'fLight':true},
- *        {'sDate':'yesterday','sTime':'16:00','sDeparture':'bar@example.com','nStatus':2,'nTrack':19, 'fLight':false},
- *        {'sDate':'July 8th, 2013','sTime':'16:30','sDeparture':'baz@example.com','nStatus':2,'nTrack':23, 'fLight':false}
- *    ]
- *
  *  The nStatus field is only used if status_override = false.
  */
 
@@ -36,13 +24,13 @@ var LAST_CHAR_CODE = 96; // the last ASCII character that is represented in the 
 var CHAR_FACTOR = 2; // every N character in the letter image is a "real" character
 var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in pixels)
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
-var DEPARTURE_BOXES = 25; // number of letter boxes displayed in the departure column
+var USERNAME_BOXES = 25; // number of letter boxes displayed in the departure column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
 var TRACK_BOXES = 2; // number of letter boxes displayed in the track column
 var REFRESH_TIME = 60; //refresh time in seconds
 var EMPTY_ROW = {
     "sTime": "",
-    "sDeparture": "",
+    "sUsername": "",
     "nStatus": 0,
     "sStatus": "",
     "nTrack" : 0
@@ -94,7 +82,7 @@ function addSolariBoard(divSelector) {
     var $solari = $("<div class=\"column solari_grid\">" +
             "<a id='show-solari' href=\"index.html\" onclick=\"localStorage['StopSolari']=0\">Show Solari Board</a>" +
             "<div id=\"solari\" class=\"panel\">" +
-            "<div id=\"departures\">" +
+            "<div id=\"usernames\">" +
             "<header class=\"solari-board-header rounded\"> " +
             "<div class=\"solari-board-icon\"> </div>" +
             "<div class=\"clockContainer\">" +
@@ -115,7 +103,7 @@ function addSolariBoard(divSelector) {
             "</header>" +
             "<ul class=\"solari-board-columns rounded\">" +
             "<li class=\"time\">Time</li>" +
-            "<li class=\"departure\">Departure</li>" +
+            "<li class=\"username\">Username</li>" +
             "<li class=\"status\">Status</li>" +
             "<li class=\"track\">Track</li>" +
             "</ul>" +
@@ -173,10 +161,10 @@ function addSolariBoard(divSelector) {
         current_board[add_rows] = EMPTY_ROW;
 
         if ($section === undefined) {
-            $section = $('#departures .solari-board-rows');
+            $section = $('#usernames .solari-board-rows');
         }
         // add a row
-        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=departure></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="track"></li><li class=alert><span class="circle"></span></li></ul></li>');
+        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="track"></li><li class=alert><span class="circle"></span></li></ul></li>');
 
         // add the letter boxes in the time column
         for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
@@ -188,8 +176,8 @@ function addSolariBoard(divSelector) {
         }
 
         // add the letter boxes in the middle column
-        for (var add_cols = 0; add_cols < DEPARTURE_BOXES; add_cols++) {
-            $('#row' + add_rows + ' li.departure').append('<div id=departure-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
+        for (var add_cols = 0; add_cols < USERNAME_BOXES; add_cols++) {
+            $('#row' + add_rows + ' li.username').append('<div id=username-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
         }
 
         // add the letter boxes in the track column
@@ -226,7 +214,7 @@ function UpdateSolariRow(row, current_row, new_row) {
     var rate = RATE_BASE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE;
 
     SpinChars(rate, '#time-row' + row, TIME_BOXES, current_row.sTime.replace(":",""), new_row.sTime.replace(":",""));
-    SpinChars(rate, '#departure-row' + row, DEPARTURE_BOXES, current_row.sDeparture, new_row.sDeparture);
+    SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
     //turn track numbers into strings for display. Ensure they are always two chars long
     current_row.sTrack = current_row === EMPTY_ROW ? "" : current_row.nTrack === -1? "--" : current_row.nTrack.toString().length > 1 ? current_row.nTrack.toString() : "0" + current_row.nTrack.toString();
@@ -326,7 +314,7 @@ function GetFailBoard() {
     for (var row = 0; row < BOARD_ROWS; row++) {
         board[row] = {
             "sTime": "",
-            "sDeparture": fail_whale[row],
+            "sUsername": fail_whale[row],
             "nStatus": 0,
             "nTrack": 0
         };
@@ -346,7 +334,7 @@ function updateSolariBoard() {
                 return;
             }
             //redraw label if recovering from a fail
-            $("ul.solari-board-columns li.departure").text("Departure");
+            $("ul.solari-board-columns li.username").text("Username");
             if (new_board.length === 0) {
                 clearBoard();
             } else {
@@ -391,14 +379,14 @@ function updateSolariBoard() {
             syncing = false;
             updateSolariTable(GetFailBoard());
             NextDue("#next-due", '-FA1L-', '', '');
-            $("ul.solari-board-columns li.departure").text("FAIL WHALE");
+            $("ul.solari-board-columns li.username").text("FAIL WHALE");
         });
 }
 
 function clearBoard() {
     //stop all animations
     $(".time").children().stop(true, true);
-    $(".departure").children().stop(true, true);
+    $(".username").children().stop(true, true);
     $(".status").children().stop(true, true);
     $(".track").children().stop(true, true);
     //clear the next due and all rows

@@ -157,7 +157,7 @@ a#show-solari {
   color: gray;
 }
 
-li.alert, li.departure, li.product, li.status, li.time, li.track {
+li.departure, li.product, li.status, li.time, li.track {
   float: left;
   margin: 2px 14px 2px 0;
 }
@@ -174,9 +174,7 @@ li.status {
 li.track {
   width: 48px;
 }
-li.alert {
-  width: 10px;
-}
+
 .letterbox {
   float: left;
   margin-right: 3px;
@@ -286,20 +284,7 @@ li.board-data {
   font-weight: bold;
   top: 5px;
 }
-.circle, .circle-on {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 2px;
-  margin-top: 5px;
-  background: rgba(250, 212, 17, 0.6);
-  border-radius: 8px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-}
-.circle-on {
-  background: #FFE500;
-}
+
 #last-updated {
   margin: 6px 0 2px 4px;
   height: 25px;
@@ -342,7 +327,7 @@ div#ticker {
 	 float: left;
 	 text-align: center;
 }
-
+.rounded {color:white;}
 .clockList { margin:0 auto; padding:0px; list-style:none; text-align:center; }
 .clockList li { display:inline; font-size:4em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; }
 
