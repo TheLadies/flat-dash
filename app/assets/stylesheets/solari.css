@@ -157,7 +157,7 @@ a#show-solari {
   color: gray;
 }
 
-li.username, li.product, li.status, li.time, li.track {
+li.username, li.product, li.status, li.time, li.pull-requests {
   float: left;
   margin: 2px 14px 2px 0;
 }
@@ -171,7 +171,7 @@ li.username {
 li.status {
   width: 86px;
 }
-li.track {
+li.pull-requests {
   width: 48px;
 }
 

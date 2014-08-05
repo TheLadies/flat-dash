@@ -7,21 +7,21 @@ class DataScrapeController < ApplicationController
        'sTime' => '13:30', 
        'sUsername' => '@jessrudder',
        'nStatus' => 1,
-       'nTrack' => 17,
+       'nPullRequests' => 17,
        'fLight' => true
       },
       {'sDate' => 'yesterday', 
        'sTime' => '16:00',
        'sUsername' => '@denineguy',
        'nStatus' => 2,
-       'nTrack' => 19,
+       'nPullRequests' => 19,
        'fLight' =>false
       },
       {'sDate' => 'July 8th, 2013',
        'sTime' => '16:30',
        'sUsername' => '@christinaleuci',
        'nStatus' => 2,
-       'nTrack' => 23,
+       'nPullRequests' => 23,
        'fLight' => false
       }
    ].to_json

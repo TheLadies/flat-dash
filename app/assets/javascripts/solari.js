@@ -26,14 +26,14 @@ var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in p
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
 var USERNAME_BOXES = 25; // number of letter boxes displayed in the departure column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var TRACK_BOXES = 2; // number of letter boxes displayed in the track column
+var PULL_BOXES = 2; // number of letter boxes displayed in the track column
 var REFRESH_TIME = 60; //refresh time in seconds
 var EMPTY_ROW = {
     "sTime": "",
     "sUsername": "",
     "nStatus": 0,
     "sStatus": "",
-    "nTrack" : 0
+    "nPullRequests" : 0
 };
 
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
@@ -105,7 +105,7 @@ function addSolariBoard(divSelector) {
             "<li class=\"time\">Time</li>" +
             "<li class=\"username\">Username</li>" +
             "<li class=\"status\">Status</li>" +
-            "<li class=\"track\">Track</li>" +
+            "<li class=\"pull-requests\">Pull Requests</li>" +
             "</ul>" +
             "<ul class=\"solari-board-rows rounded\">" +
             "</ul>" +
@@ -142,7 +142,7 @@ function addSolariBoard(divSelector) {
         return;
     }
 
-    $('li.track').click(function () {
+    $('li.pull-requests').click(function () {
         updateSolariBoard();
     });
 
@@ -164,7 +164,7 @@ function addSolariBoard(divSelector) {
             $section = $('#usernames .solari-board-rows');
         }
         // add a row
-        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="track"></li><li class=alert><span class="circle"></span></li></ul></li>');
+        $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class=status><div class=iconbox><div class=status-icon></div></div></li><li class="pull-requests"></li><li class=alert><span class="circle"></span></li></ul></li>');
 
         // add the letter boxes in the time column
         for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
@@ -180,9 +180,9 @@ function addSolariBoard(divSelector) {
             $('#row' + add_rows + ' li.username').append('<div id=username-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
         }
 
-        // add the letter boxes in the track column
-        for (var add_track_col = 0; add_track_col < TRACK_BOXES; add_track_col++) {
-            $('#row' + add_rows + ' li.track').append('<div id=track-row' + add_rows + 'box' + add_track_col + ' class=letterbox></div>');
+        // add the letter boxes in the pull-requests column
+        for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
+            $('#row' + add_rows + ' li.pull-requests').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
         }
     }
     solari_setup_done = 1;
@@ -216,10 +216,10 @@ function UpdateSolariRow(row, current_row, new_row) {
     SpinChars(rate, '#time-row' + row, TIME_BOXES, current_row.sTime.replace(":",""), new_row.sTime.replace(":",""));
     SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
-    //turn track numbers into strings for display. Ensure they are always two chars long
-    current_row.sTrack = current_row === EMPTY_ROW ? "" : current_row.nTrack === -1? "--" : current_row.nTrack.toString().length > 1 ? current_row.nTrack.toString() : "0" + current_row.nTrack.toString();
-    new_row.sTrack = new_row === EMPTY_ROW ? "" : new_row.nTrack === -1? "--" :new_row.nTrack.toString().length > 1 ? new_row.nTrack.toString() : "0" + new_row.nTrack.toString();
-    SpinChars(rate, '#track-row' + row, TRACK_BOXES, current_row.sTrack, new_row.sTrack);  
+    //turn pull-requests numbers into strings for display. Ensure they are always two chars long
+    current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
+    new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 1 ? new_row.nPullRequests.toString() : "0" + new_row.nPullRequests.toString();
+    SpinChars(rate, '#pull-requests-row' + row, PULL_BOXES, current_row.sPull, new_row.sPull);  
     SpinImage(rate, '#row' + row + ' .status-icon', current_row.nStatus, new_row.nStatus);
 
     //clear and apply light class
@@ -316,7 +316,7 @@ function GetFailBoard() {
             "sTime": "",
             "sUsername": fail_whale[row],
             "nStatus": 0,
-            "nTrack": 0
+            "nPullRequests": 0
         };
     }
     return board;
@@ -388,7 +388,7 @@ function clearBoard() {
     $(".time").children().stop(true, true);
     $(".username").children().stop(true, true);
     $(".status").children().stop(true, true);
-    $(".track").children().stop(true, true);
+    $(".pull-requests").children().stop(true, true);
     //clear the next due and all rows
     NextDue("#next-due", '00:00', '', '');
     for (var r = 0; r < BOARD_ROWS; r++) {
