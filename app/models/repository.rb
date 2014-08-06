@@ -45,7 +45,7 @@ class Repository < ActiveRecord::Base
     self.all.each do |repo|
       user = repo.user_login
       pull_count = self.where(user_login: user).count
-      students << ({:user_login => user, :pull_count => pull_count})
+      students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
     end
     return students
   end
