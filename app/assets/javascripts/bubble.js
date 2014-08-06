@@ -1,4 +1,4 @@
-var BEVERAGES = [
+var TEAM_MEMBERS = [
  {"name":"Msea","value":1},
  {"name":"ChavaLovesFyedka","value":1},
  {"name":"emmaife","value":1},
@@ -113,52 +113,55 @@ function animate(data) {
   
 }
 
-animate(BEVERAGES);
-
-animate(BEVERAGES);
+animate(TEAM_MEMBERS);
 ////////// ^ code goes above  ^  /////////////////////////////////////////////
 
 setTimeout(function() {
-  BEVERAGES[0].value = 90;            // changes value of tea to 100
-  animate(BEVERAGES);
+  TEAM_MEMBERS[0].value = 90;            // changes value of tea to 100
+  animate(TEAM_MEMBERS);
 }, 1000);
 
 setTimeout(function() {
-  BEVERAGES[4].value = 3;            // changes value of coffe to 3
-  animate(BEVERAGES);
+  TEAM_MEMBERS[4].value = 3;            // changes value of coffe to 3
+  animate(TEAM_MEMBERS);
 }, 1500);
 
 setTimeout(function() {
-  BEVERAGES.pop();                 // removes wine
-  animate(BEVERAGES);
-}, 2000);
+  TEAM_MEMBERS.pop();                 // removes wine
+  animate(TEAM_MEMBERS);
+}, 5000);
 
 setTimeout(function() {
-  BEVERAGES.push({name: "kombucha", value: 50});     // adds kombucha in
-  animate(BEVERAGES);
+  TEAM_MEMBERS.push({name: "kombucha", value: 50});     // adds kombucha in
+  animate(TEAM_MEMBERS);
 }, 2500);
 
 setTimeout(function() {
-  BEVERAGES.push({name: "wine", value: 60});    // adds wine back
-  animate(BEVERAGES);
+  TEAM_MEMBERS.push({name: "wine", value: 60});    // adds wine back
+  animate(TEAM_MEMBERS);
 }, 3000);
 
 setTimeout(function() {
-  BEVERAGES[3].value = 40;             // changes value of gatorade to 50
-  animate(BEVERAGES);
+  TEAM_MEMBERS[3].value = 40;             // changes value of gatorade to 50
+  animate(TEAM_MEMBERS);
 }, 3500);
 
 setTimeout(function() {
-  BEVERAGES[4].value = 10;             // coffee is now 10
-  animate(BEVERAGES);
+  TEAM_MEMBERS[4].value = 10;             // coffee is now 10
+  animate(TEAM_MEMBERS);
 }, 3750);
 
 setTimeout(function() {
-  BEVERAGES.push({name: "mountain dew", value: 100});    // adds wine back
-  animate(BEVERAGES);
+  TEAM_MEMBERS.push({name: "mountain dew", value: 100});    // adds wine back
+  animate(TEAM_MEMBERS);
 }, 3000);
 
 setTimeout(function() {
-  BEVERAGES[0].value = 15;             // tea is now 15
-  animate(BEVERAGES);
+  TEAM_MEMBERS[0].value = 15;             // tea is now 15
+  animate(TEAM_MEMBERS);
 }, 4000);
+
+setTimeout(function() {
+  TEAM_MEMBERS.pop();                 // removes wine
+  animate(TEAM_MEMBERS);
+}, 5000);
