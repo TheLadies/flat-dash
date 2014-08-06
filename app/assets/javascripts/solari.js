@@ -78,7 +78,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"solari-board-icon\"> Flatiron Ruby005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"clock\">00:00</span>" +
+    "<span class=\"time\">00:00</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -105,7 +105,7 @@ function addSolariBoard(divSelector) {
   //add the board html
   $(divSelector).append($solari);
 
-  //set up clock
+  //set up time
   setInterval(function () {
     var date = new Date();
     // Convert to 12 hour format
@@ -180,7 +180,7 @@ function addSolariBoard(divSelector) {
 
 function NextDue(id, time, offset, add_class) {
   $(id + ' .today').html(offset);
-  $(id + ' .clock').html(time);
+  $(id + ' .time').html(time);
   $(id + ' .inner').attr('class', 'inner ' + add_class); // reset the applied classes
 }
 
@@ -344,7 +344,7 @@ function updateSolariBoard() {
         nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
       }
       // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nStatus])
+      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nPullRequests])
       NextDue("#time-frame", time, sOffset, status_class);
     } else {
       NextDue("#time-frame", '00:00', '', '');
