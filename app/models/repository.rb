@@ -1,3 +1,4 @@
+require 'active_record'
 class Repository < ActiveRecord::Base
   attr_reader :client
 
@@ -46,6 +47,7 @@ class Repository < ActiveRecord::Base
       pull_count = self.where(user_login: user).count
       students << ({:user_login => user, :pull_count => pull_count})
     end
+    return students
   end
 end
 
