@@ -7,6 +7,8 @@ class DataController < ApplicationController
     end
 
     def show
+      @pull_count = Repository.pull_request_by_user
+      
       render "#{params[:id]}.html"
     end
 
