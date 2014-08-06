@@ -13,36 +13,28 @@ class Repository < ActiveRecord::Base
 
 
   def self.get_repos
-    # binding.pry
     repos = client.org_repos("flatiron-school-students")
     repos.map do |repo|
       repo.full_name
-      # repo.name
     end
   end
 
-  def self.make_repos
-    repos = get_repos
-    repos.map do |name|
-      find_or_create_by(name: name)
-    end
-  end
+  # def self.make_repos
+  #   repos = get_repos
+  #   repos.map do |name|
+  #     find_or_create_by(name: name)
+  #   end
+  # end
 
-  def get_pull_requests
-    client.pull_requests(name)
-  end
+  # def get_pull_requests(repo)
+  #   client.pull_requests(repo)
+  # end
 
   def self.make_pull_requests
-    Repository.limit(2).all.each do |repo|
-      repo.get_pull_requests.each do |pull|
-      # binding.pry
-      find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, created_at: pull.created_at, updated_at: pull.created_at)
-      # puts repo.name
-      # puts pull.user.login
-      # puts pull.created_at
-      # puts pull.updated_at
-      # puts pull.base.repo.name
-      # puts pull.base.repo.full_name
+    get_repos.each do |repo|
+      client.pull_requests(repo).each do |pull|
+       # repo.get_pull_requests.each do |pull|
+      find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
       end
     end
   end
