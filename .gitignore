@@ -10,7 +10,18 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+class DataScrapeController < ApplicationController
+  protect_from_forgery except: :solari_data
 
+  def solari_data
+    json = Repository.top_pull_requests().to_json
+
+   render json: json, callback: params[:callback]
+  end
+end
+
+<div class="solari">
+</div>
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
