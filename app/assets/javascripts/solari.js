@@ -31,8 +31,6 @@ var REFRESH_TIME = 60; //refresh time in seconds
 var EMPTY_ROW = {
     "sTime": "",
     "sUsername": "",
-    "nStatus": 0,
-    "sStatus": "",
     "nPullRequests" : 0
 };
 
