@@ -19,8 +19,8 @@ var RATE_BASE = 8; // for determining random animation rate in milliseconds
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
 var SECOND_SECTION_START = 9; // the first row that contains a next due case
 var LETTER_HEIGHT = 26; // height of a single letter frame (in pixels) in the letter image
-var FIRST_CHAR_CODE = 32; // the first ASCII character that is represented in the letter image
-var LAST_CHAR_CODE = 96; // the last ASCII character that is represented in the letter image
+var FIRST_CHAR_CODE = 48; // the first ASCII character that is represented in the letter image
+var LAST_CHAR_CODE = 90; // the last ASCII character that is represented in the letter image
 var CHAR_FACTOR = 2; // every N character in the letter image is a "real" character
 var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in pixels)
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
@@ -179,9 +179,7 @@ function addSolariBoard(divSelector) {
 }
 
 function NextDue(id, time, offset, add_class) {
-  $(id + ' .today').html(offset);
   $(id + ' .time-week').html(time);
-  $(id + ' .inner').attr('class', 'inner ' + add_class); // reset the applied classes
 }
 
 function updateSolariTable(board){
