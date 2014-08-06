@@ -13,13 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20140805215520) do
 
-  create_table "charts", force: true do |t|
+  create_table "companies", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "companies", force: true do |t|
-    t.string   "name"
+  create_table "data_scrapes", force: true do |t|
+    t.string   "auth_name"
+    t.string   "user_name"
+    t.string   "repo_name"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,7 +49,6 @@ ActiveRecord::Schema.define(version: 20140805215520) do
   add_index "projects", ["program_id"], name: "index_projects_on_program_id"
 
   create_table "repositories", force: true do |t|
-    t.string   "name"
     t.string   "repo_name"
     t.string   "repo_full_name"
     t.string   "user_login"
