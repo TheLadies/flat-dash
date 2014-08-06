@@ -51,7 +51,7 @@ class Repository < ActiveRecord::Base
     name_collection.each do |name|
       if !name_used.include? name
         name_used << name
-        pull_data << {:name => name, :count => name_collection.count(name)}
+        pull_data << {:name => name, :value => name_collection.count(name)}
       end
     end
     pull_data

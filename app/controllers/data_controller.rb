@@ -8,8 +8,13 @@ class DataController < ApplicationController
 
     def show
       @pull_count = Repository.pull_request_by_user
+
+      respond_to do |f|
+        f.html {render "#{params[:id]}.html"}
+        f.json {render json: @pull_count }
+      end
       
-      render "#{params[:id]}.html"
+      
     end
 
 end
