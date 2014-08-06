@@ -38,6 +38,15 @@ class Repository < ActiveRecord::Base
       end
     end
   end
+
+  def self.top_pull_requests
+    students = []
+    self.all.each do |repo|
+      user = repo.user_login
+      pull_count = self.where(user_login: user).count
+      students << ({:user_login => user, :pull_count => pull_count})
+    end
+  end
 end
 
 
