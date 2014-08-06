@@ -47,6 +47,7 @@ class Repository < ActiveRecord::Base
       user = repo.user_login
       pull_count = self.where(user_login: user).count
       students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
+      #pull.updated_at.strftime("%R")
     end
     return students
   end
