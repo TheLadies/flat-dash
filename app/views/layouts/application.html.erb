@@ -2,12 +2,36 @@
 <html>
 <head>
   <title>FlatDash</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
+
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
     <!-- link to D3 library here -->
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <!-- Audio -->
+  <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
+
+  <script>
+        $(document).ready(function() {
+            URL = "/solari_data.json";
+            REFRESH_TIME = 1;
+            addSolariBoard(".solari");
+        });
+    </script>
+   <!-- <script src="/app/models_realtime/refreshFogbugz.rb">
+        // This forces one refresh on page load to start with the latest data
+        // 
+        // A trigger must be configured in FogBugz to handle live updates
+        //   1) In the Settings menu (the gear icon), select URL Trigger
+        //   2) Select the Case Event types that should trigger an update to the Solari board
+        //   3) In URL, enter the web address to refreshFogbugz.py
+        //   4) Optional, define a Filter for only cases that apply to the Solari board
+    </script> -->
 </head>
 <body class="chart-page">
 
