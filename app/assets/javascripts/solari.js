@@ -78,7 +78,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"solari-board-icon\"> Flatiron Ruby005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"time\">00:00</span>" +
+    "<span class=\"time-week\">00:00</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -105,7 +105,7 @@ function addSolariBoard(divSelector) {
   //add the board html
   $(divSelector).append($solari);
 
-  //set up time
+  //set up time-week
   setInterval(function () {
     var date = new Date();
     // Convert to 12 hour format
@@ -180,7 +180,7 @@ function addSolariBoard(divSelector) {
 
 function NextDue(id, time, offset, add_class) {
   $(id + ' .today').html(offset);
-  $(id + ' .time').html(time);
+  $(id + ' .time-week').html(time);
   $(id + ' .inner').attr('class', 'inner ' + add_class); // reset the applied classes
 }
 
@@ -207,7 +207,7 @@ function UpdateSolariRow(row, current_row, new_row) {
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
   current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
 
-  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 1 ? new_row.nPullRequests.toString() : "0" + new_row.nPullRequests.toString();
+  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 1 ? new_row.nPullRequests.toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
 
   SpinChars(rate, '#pull-requests-row' + row, PULL_BOXES, current_row.sPull, new_row.sPull);  
   SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nPullRequests, new_row.nPullRequests);
@@ -344,7 +344,7 @@ function updateSolariBoard() {
         nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
       }
       // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nPullRequests])
+      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nStatus])
       NextDue("#time-frame", time, sOffset, status_class);
     } else {
       NextDue("#time-frame", '00:00', '', '');
