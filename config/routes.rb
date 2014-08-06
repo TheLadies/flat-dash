@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'data#index'
 
-  get '/data' => 'data#index'
+  # get '/data' => 'data#index'
+  resources :data, only: [:index, :show]
 end
