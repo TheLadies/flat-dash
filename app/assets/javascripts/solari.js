@@ -207,7 +207,7 @@ function UpdateSolariRow(row, current_row, new_row) {
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
   current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
 
-  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 1 ? new_row.nPullRequests.toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
+  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 2 ? new_row.nPullRequests.toString() :new_row.nPullRequests.toString().length > 1 ? (new_row.nPullRequests = "0" + new_row.nPullRequests).toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
 
   SpinChars(rate, '#pull-requests-row' + row, PULL_BOXES, current_row.sPull, new_row.sPull);  
   SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nPullRequests, new_row.nPullRequests);
