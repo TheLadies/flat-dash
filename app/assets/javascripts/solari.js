@@ -19,7 +19,7 @@ var RATE_BASE = 8; // for determining random animation rate in milliseconds
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
 var SECOND_SECTION_START = 9; // the first row that contains a next due case
 var LETTER_HEIGHT = 26; // height of a single letter frame (in pixels) in the letter image
-var FIRST_CHAR_CODE = 48; // the first ASCII character that is represented in the letter image
+var FIRST_CHAR_CODE = 64; // the first ASCII character that is represented in the letter image
 var LAST_CHAR_CODE = 90; // the last ASCII character that is represented in the letter image
 var CHAR_FACTOR = 2; // every N character in the letter image is a "real" character
 var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in pixels)
@@ -334,7 +334,6 @@ function updateSolariBoard() {
     }
     var next_due_row = new_board[i];
     if (time) {
-      
       var timeDelta = Date.parse(next_due_row.sDate + ", " + time).getTime() - new Date().getTime();
       var nOffset = timeDelta > 0 ? Math.floor(timeDelta / (1000 * 60 * 60 * 24)) : Math.ceil(timeDelta / (1000 * 60 * 60 * 24)); //divide by miliseconds per day and round to zero
       var sOffset = (nOffset === 0 ? "" : nOffset.toString() + "d"); //if next due is not today, append a "d"
