@@ -16,7 +16,7 @@
 // some constants and enums
 var RATE_VARIANCE = 8; // for determining random animation rate in milliseconds
 var RATE_BASE = 8; // for determining random animation rate in milliseconds  
-var BOARD_ROWS = 10; // total number of rows displayed on the solari board
+var BOARD_ROWS = 15; // total number of rows displayed on the solari board
 var SECOND_SECTION_START = 9; // the first row that contains a next due case
 var LETTER_HEIGHT = 26; // height of a single letter frame (in pixels) in the letter image
 var FIRST_CHAR_CODE = 32; // the first ASCII character that is represented in the letter image
