@@ -40,14 +40,25 @@ class Repository < ActiveRecord::Base
     end
   end
 
+  # def self.top_pull_requests
+  #   students = []
+  #   self.all.each do |repo|
+  #     user = repo.user_login
+  #     pull_count = self.where(user_login: user).count
+  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
+  #   end
+  #   return students
+  # end
+
   def self.top_pull_requests
     students = []
-    self.all.each do |repo|
-      user = repo.user_login
-      pull_count = self.where(user_login: user).count
+    users = self.all.pluck(:user_login)
+    self.all.pluck(:user_login).uniq.each do |user|
+      pull_count = users.count(user)
       students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
     end
-    return students
+    students.sort_by { |hsh| hsh[:nPullRequests] }.reverse
+    # binding.pry
   end
 end
 
