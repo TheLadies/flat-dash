@@ -5,52 +5,7 @@ var BEVERAGES = [
   {"name":"gatorade","value":3},
   {"name":"coffee","value":86},
   {"name":"fanta","value":6},
-  {"name":"apple juice","value":59},
-  {"name":"bourbon","value":1},
-  {"name":"coke","value":82},
-  {"name":"lemonade","value":18},
-  {"name":"hot chocolate","value":16},
-  {"name":"rage","value":61},
-  {"name":"water","value":38},
-  {"name":"apple","value":74},
-  {"name":"banana","value":5},
-  {"name":"pear","value":54},
-  {"name":"tree","value":3},
-  {"name":"monkey","value":86},
-  {"name":"grape","value":6},
-  {"name":"peach juice","value":59},
-  {"name":"tires","value":1},
-  {"name":"pepsi","value":82},
-  {"name":"candy","value":18},
-  {"name":"hot milk","value":16},
-  {"name":"sadness","value":61},
-  {"name":"trampolines","value":38},
-  {"name":"green","value":74},
-  {"name":"brown","value":5},
-  {"name":"bloopers","value":54},
-  {"name":"energy","value":3},
-  {"name":"fury","value":86},
-  {"name":"red","value":6},
-  {"name":"cup juice","value":59},
-  {"name":"candle","value":1},
-  {"name":"peas","value":82},
-  {"name":"lemons","value":18},
-  {"name":"carrot chocolate","value":16},
-  {"name":"tead","value":61},
-  {"name":"asdf","value":38},
-  {"name":"rteunrtu","value":74},
-  {"name":"peace","value":5},
-  {"name":"sdfg","value":54},
-  {"name":"paodfk","value":3},
-  {"name":"wlkefval","value":86},
-  {"name":"asd.vm","value":6},
-  {"name":"asdlkjb juice","value":59},
-  {"name":"as,dmvadkjhc","value":1},
-  {"name":"asdoiw","value":82},
-  {"name":"alald","value":18},
-  {"name":"hot peanuts","value":16},
-  {"name":"temper","value":61},
-  {"name":"tears","value":38}
+  {"name":"wine","value":38}
 ];
 
 ////////// v code goes below   v  /////////////////////////////////////////////
@@ -65,7 +20,7 @@ var bubble = d3.layout.pack()
     .size([800, 800])
     .padding(1.5);
 
-var color = d3.scale.category20b();
+var color = d3.scale.category10();
 
 function animate(data) {
 
