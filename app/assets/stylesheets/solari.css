@@ -141,6 +141,10 @@ ul.solari-board-columns, ul.solari-board-rows {
   width:772px;
 }
 
+.bubble-chart{
+  float:right;
+}
+
 #epoch-tracking {
   width: 510px;
   margin: auto;
