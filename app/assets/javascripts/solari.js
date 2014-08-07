@@ -90,6 +90,8 @@ function addSolariBoard(divSelector) {
     "</ul>" +
     "</div>" +
     "</header>" +
+    "<div class=\"bubble-chart\">"+
+    "</div>"+
     "<ul class=\"solari-board-columns rounded\">" +
     "<li class=\"time\">Time</li>" +
     "<li class=\"username\">Username</li>" +
@@ -98,8 +100,6 @@ function addSolariBoard(divSelector) {
     "<ul class=\"solari-board-rows rounded\">" +
     "</ul>" +
     "</div>" +
-    "<div class=\"bubble-chart\">"+
-    "</div>"+
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
     "</div>" +
     "</div>" +

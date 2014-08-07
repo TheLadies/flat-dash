@@ -137,8 +137,10 @@ ul.solari-board-columns {
 ul.solari-board-rows {
   padding: 2px 0 0;
 }
+
 ul.solari-board-columns, ul.solari-board-rows {
-  width:772px;
+width:55%;
+float:center;
 }
 
 .bubble-chart{
@@ -321,3 +323,12 @@ div#ticker {
 
 #point { position:relative; padding-left:2px; padding-right:2px; }
 #ampm { font-size:2em; margin-left:2px; }
+
+.bubble-chart{
+  float: right;
+  /*background: #27282c;*/
+  background: red;
+  height: 650px;
+  width: 44.5%;
+  margin: 0 auto;
+}
