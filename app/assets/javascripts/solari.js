@@ -119,7 +119,7 @@ function addSolariBoard(divSelector) {
 
     // Set am/pm
     $("#ampm").html(hours < 12 ? " am" : " pm");
-  }, 15000); // every 15 seconds is plenty accurate
+  }, 1); // every 15 seconds is plenty accurate
 
 
   // show the solari board.
