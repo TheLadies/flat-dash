@@ -75,7 +75,7 @@ function addSolariBoard(divSelector) {
     "<div id=\"solari\" class=\"panel\">" +
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
-    "<div class=\"solari-board-icon\"> Flatiron Ruby005 Pull Requests From This </div>" +
+    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
     "<span class=\"time-week\">00:00</span>" +
@@ -119,7 +119,7 @@ function addSolariBoard(divSelector) {
 
     // Set am/pm
     $("#ampm").html(hours < 12 ? " am" : " pm");
-  }, 15000); // every 15 seconds is plenty accurate
+  }, 1); // every 15 seconds is plenty accurate
 
 
   // show the solari board.

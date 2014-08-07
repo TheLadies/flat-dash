@@ -139,12 +139,15 @@ ul.solari-board-rows {
 }
 
 ul.solari-board-columns, ul.solari-board-rows {
-width:55%;
-float:center;
+  width:55%;
+  float:center;
 }
 
 .bubble-chart{
-  float:right;
+  float: right;
+  height: 650px;
+  width: 44.5%;
+  margin: 0 auto;
 }
 
 #epoch-tracking {
@@ -237,7 +240,7 @@ li.board-data {
   text-shadow: #000000 1px 1px 1px;
 }
 .solari-board-icon {
-  width: 46%;
+  width: 47%;
   height: 50px;
   margin-top: 3px;
   margin-left: 20px;
