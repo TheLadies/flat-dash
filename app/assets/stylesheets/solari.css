@@ -144,10 +144,6 @@ ul.solari-board-columns, ul.solari-board-rows {
 
 .bubble-chart{
   float: right;
-  background: #27282c;
-  border: 2px solid;
-  border-radius: 4px;
-  border-color: #000;
   height: 650px;
   width: 44.5%;
   margin: 0 auto;
