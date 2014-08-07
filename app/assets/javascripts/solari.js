@@ -116,7 +116,7 @@ function addSolariBoard(divSelector) {
     $("#min").html((minutes < 10 ? "0" : "") + minutes);
 
     // Set am/pm
-    $("#ampm").html(hours < 12 ? " am" : " pm");
+    $("#ampm").html(hours < 12 ? " AM" : " PM");
   }, 1);
 
 
