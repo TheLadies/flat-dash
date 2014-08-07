@@ -69,10 +69,7 @@ class Repository < ActiveRecord::Base
     end
     pull_counts_array
   end
-  
-end  
-  
-
+end
 
 # repos.size
 # repos.first.class

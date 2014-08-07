@@ -1,17 +1,6 @@
-/*!
- * Solari Board jQuery App
- * http://github.com/FogCreek/solari-board
- *
- * Uses jquery.transit.js:
- * http://ricostacruz.com/jquery.transit/
- *
- * date.js:
- * http://www.datejs.com/ 
- *
- * Copyright © 2013 Fog Creek Software, Inc. All rights reserved.
+/* Copyright © 2013 Fog Creek Software, Inc. All rights reserved.
  * Released under the MIT license
- *  The nStatus field is only used if status_override = false.
- */
+ *  The nStatus field is only used if status_override = false.*/
 
 // some constants and enums
 var RATE_VARIANCE = 8; // for determining random animation rate in milliseconds
@@ -119,29 +108,29 @@ function addSolariBoard(divSelector) {
 
     // Set am/pm
     $("#ampm").html(hours < 12 ? " am" : " pm");
-  }, 15000); // every 15 seconds is plenty accurate
+  }, 1); // every 15 seconds is plenty accurate
 
 
   // show the solari board.
-  if (!localStorage['StopSolari'] || localStorage['StopSolari'] === '0') {
-    $('#solari').show();
+  // if (!localStorage['StopSolari'] || localStorage['StopSolari'] === '0') {
+  //   $('#solari').show();
     $('#show-solari').hide();
-  } else {
-    $('#solari').hide();
-    $('#show-solari').show();
-    return;
-  }
+  // } else {
+  //   $('#solari').hide();
+  //   $('#show-solari').show();
+  //   return;
+  // }
 
   $('li.pull-requests').click(function () {
     updateSolariBoard();
   });
 
   // we want people who don't care about the solari board to be able to hide it.
-  $('#time-frame').click(function () {
-    localStorage['StopSolari'] = '1';
-    $('#solari').hide();
-    $('#show-solari').show();
-  });
+  // $('#time-frame').click(function () {
+  //   localStorage['StopSolari'] = '1';
+  //   $('#solari').hide();
+  //   $('#show-solari').show();
+  // });
   // and show it
   var $section;
 
