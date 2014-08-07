@@ -43,7 +43,7 @@ var URL = "";
 var URL_SUFFIX = "";
 
 var LAST_STATUS = 4;
-var NextDueStatus = ["", "soon", "null", "overdue", ""];
+var TimeFrameStatus = ["week", "month", "semester"];
 var solari_setup_done = 0;
 var syncing = false;
 var current_board = [];
@@ -75,10 +75,10 @@ function addSolariBoard(divSelector) {
     "<div id=\"solari\" class=\"panel\">" +
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
-    "<div class=\"solari-board-icon\"> Flatiron Ruby005 Pull Requests From This </div>" +
+    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"time-week\">00:00</span>" +
+    "<span class=\"time-week\">SEMESTER</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -105,7 +105,7 @@ function addSolariBoard(divSelector) {
   //add the board html
   $(divSelector).append($solari);
 
-  //set up time-week
+  //set up clockList
   setInterval(function () {
     var date = new Date();
     // Convert to 12 hour format
@@ -117,7 +117,7 @@ function addSolariBoard(divSelector) {
 
     // Set am/pm
     $("#ampm").html(hours < 12 ? " am" : " pm");
-  }, 15000); // every 15 seconds is plenty accurate
+  }, 1);
 
 
   // show the solari board.
@@ -174,7 +174,7 @@ function addSolariBoard(divSelector) {
     }
   }
   solari_setup_done = 1;
-  window.setInterval(function (){updateSolariBoard()}, 1000 * REFRESH_TIME);
+  window.setInterval(function (){updateSolariBoard()}, 1 * REFRESH_TIME);
   updateSolariBoard();
 }
 
@@ -342,10 +342,10 @@ function updateSolariBoard() {
         nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
       }
       // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nStatus])
+      var status_class = (new_board[0] === EMPTY_ROW ? "fail" : TimeFrameStatus[next_due_row.sTimeFrame])
       NextDue("#time-frame", time, sOffset, status_class);
     } else {
-      NextDue("#time-frame", '00:00', '', '');
+      NextDue("#time-frame", 'fail', '', '');
     }
   //now that the nStatus values have been set, update the board
   updateSolariTable(new_board);
@@ -369,7 +369,7 @@ function clearBoard() {
   $(".username").children().stop(true, true);
   $(".pull-requests").children().stop(true, true);
   //clear the next due and all rows
-  NextDue("#time-frame", '00:00', '', '');
+  NextDue("#time-frame", '-FA1L-', '', '');
   for (var r = 0; r < BOARD_ROWS; r++) {
     UpdateSolariRow(r, current_board[r], EMPTY_ROW);
     current_board[r] = EMPTY_ROW;
