@@ -1,12 +1,66 @@
-var BEVERAGES = [
-  {"name":"tea","value":74},
-  {"name":"whiskey","value":5},
-  {"name":"beer","value":54},
-  {"name":"gatorade","value":3},
-  {"name":"coffee","value":86},
-  {"name":"fanta","value":6},
-  {"name":"wine","value":38}
-];
+// var TEST_DATA = [
+//  {"name":"Msea","value":1},
+//  {"name":"ChavaLovesFyedka","value":1},
+//  {"name":"emmaife","value":1},
+//  {"name":"SML4EVA","value":1},
+//  {"name":"wontaeyang","value":1},
+//  {"name":"corbinpage","value":1},
+//  {"name":"eugmill","value":1},
+//  {"name":"pat-whitrock","value":1},
+//  {"name":"TSiege","value":1},
+//  {"name":"lipenco","value":1},
+//  {"name":"ErikPeterson","value":1},
+//  {"name":"NegaMorgan","value":1},
+//  {"name":"brian1987","value":1},
+//  {"name":"MProuts","value":1},
+//  {"name":"chriskohlbrenner","value":1},
+//  {"name":"FifthSurprise","value":1},
+//  {"name":"cheeseandpepper","value":1},
+//  {"name":"bokwon","value":1},
+//  {"name":"kamoh","value":108},
+//  {"name":"elowing","value":115},
+//  {"name":"natalieparellano","value":124},
+//  {"name":"wlowry88","value":117},
+//  {"name":"vanessadean","value":116},
+//  {"name":"lizzerdrix","value":94},
+//  {"name":"dsully360","value":108},
+//  {"name":"mmlkrx","value":85},
+//  {"name":"amyrjohnson","value":88},
+//  {"name":"ablwr","value":112},
+//  {"name":"mrmitchboyer","value":102},
+//  {"name":"ldemarest","value":62},
+//  {"name":"ilanasufrin","value":82},
+//  {"name":"zacksheppard","value":93},
+//  {"name":"KorenLeslieCohen","value":101},
+//  {"name":"JessRudder","value":106},
+//  {"name":"ambertunnell","value":124},
+//  {"name":"jusjmkim","value":121},
+//  {"name":"callahanchris","value":116},
+//  {"name":"jbarrieault","value":117},
+//  {"name":"pcrglennon","value":115},
+//  {"name":"randallreedjr","value":101},
+//  {"name":"ccmeyers","value":109},
+//  {"name":"rebeccagreenblatt","value":93},
+//  {"name":"Ewarren7","value":78},
+//  {"name":"simonseroussi","value":77},
+//  {"name":"juliataitz","value":112},
+//  {"name":"kriscroes","value":64},
+//  {"name":"biancatompkins","value":59},
+//  {"name":"cassidypignatello","value":70},
+//  {"name":"analuperez","value":82},
+//  {"name":"ChristinaLeuci","value":53},
+//  {"name":"denineguy","value":105},
+//  {"name":"SpencerTang","value":63},
+//  {"name":"aviflombaum","value":1},
+//  {"name":"kylefdoherty","value":88},
+//  {"name":"adriennefishman","value":85},
+//  {"name":"loganhasson","value":6},
+//  {"name":"bshore01","value":83},
+//  {"name":"timothywtan","value":48},
+//  {"name":"bajh","value":109},
+//  {"name":"davidcoronado","value":48},
+//  {"name":"jackiemorgan","value":6}
+// ];
 
 ////////// v code goes below   v  /////////////////////////////////////////////
 
@@ -20,7 +74,7 @@ var bubble = d3.layout.pack()
     .size([800, 800])
     .padding(1.5);
 
-var color = d3.scale.category10();
+var color = d3.scale.category20b();
 
 function animate(data) {
 
@@ -59,52 +113,74 @@ function animate(data) {
   
 }
 
-animate(BEVERAGES);
+// $(function(){
+  console.log("hello");
+    var TEAM_MEMBERS;
+  $.ajax({
+    url: "/data/heart",
+    type: "GET",
+    dataType: "json"
+  }).done(function(data){
+    TEAM_MEMBERS = data;
 
-animate(BEVERAGES);
+    animate(TEAM_MEMBERS);
+
+      setTimeout(function() {
+        TEAM_MEMBERS[0].value = 90;            // changes value of tea to 100
+        animate(TEAM_MEMBERS);
+      }, 1000);
+
+      setTimeout(function() {
+        TEAM_MEMBERS[4].value = 3;            // changes value of coffe to 3
+        animate(TEAM_MEMBERS);
+      }, 1500);
+
+      setTimeout(function() {
+        TEAM_MEMBERS.pop();                 // removes wine
+        animate(TEAM_MEMBERS);
+      }, 5000);
+
+      setTimeout(function() {
+        TEAM_MEMBERS.push({name: "kombucha", value: 50});     // adds kombucha in
+        animate(TEAM_MEMBERS);
+      }, 2500);
+
+      setTimeout(function() {
+        TEAM_MEMBERS.push({name: "wine", value: 60});    // adds wine back
+        animate(TEAM_MEMBERS);
+      }, 3000);
+
+      setTimeout(function() {
+        TEAM_MEMBERS[3].value = 40;             // changes value of gatorade to 50
+        animate(TEAM_MEMBERS);
+      }, 3500);
+
+      setTimeout(function() {
+        TEAM_MEMBERS[4].value = 10;             // coffee is now 10
+        animate(TEAM_MEMBERS);
+      }, 3750);
+
+      setTimeout(function() {
+        TEAM_MEMBERS.push({name: "mountain dew", value: 100});    // adds wine back
+        animate(TEAM_MEMBERS);
+      }, 3000);
+
+      setTimeout(function() {
+        TEAM_MEMBERS[0].value = 15;             // tea is now 15
+        animate(TEAM_MEMBERS);
+      }, 4000);
+
+      setTimeout(function() {
+        TEAM_MEMBERS.pop();                 // removes wine
+        animate(TEAM_MEMBERS);
+      }, 5000);
+        console.log(TEAM_MEMBERS)  
+    });
+
+  // })
+
+  // $.getScript("/data/heart", function(){console.log("taco")})
+// });
+
+
 ////////// ^ code goes above  ^  /////////////////////////////////////////////
-
-setTimeout(function() {
-  BEVERAGES[0].value = 90;            // changes value of tea to 100
-  animate(BEVERAGES);
-}, 1000);
-
-setTimeout(function() {
-  BEVERAGES[4].value = 3;            // changes value of coffe to 3
-  animate(BEVERAGES);
-}, 1500);
-
-setTimeout(function() {
-  BEVERAGES.pop();                 // removes wine
-  animate(BEVERAGES);
-}, 2000);
-
-setTimeout(function() {
-  BEVERAGES.push({name: "kombucha", value: 50});     // adds kombucha in
-  animate(BEVERAGES);
-}, 2500);
-
-setTimeout(function() {
-  BEVERAGES.push({name: "wine", value: 60});    // adds wine back
-  animate(BEVERAGES);
-}, 3000);
-
-setTimeout(function() {
-  BEVERAGES[3].value = 40;             // changes value of gatorade to 50
-  animate(BEVERAGES);
-}, 3500);
-
-setTimeout(function() {
-  BEVERAGES[4].value = 10;             // coffee is now 10
-  animate(BEVERAGES);
-}, 3750);
-
-setTimeout(function() {
-  BEVERAGES.push({name: "mountain dew", value: 100});    // adds wine back
-  animate(BEVERAGES);
-}, 3000);
-
-setTimeout(function() {
-  BEVERAGES[0].value = 15;             // tea is now 15
-  animate(BEVERAGES);
-}, 4000);
