@@ -40,6 +40,40 @@ class Repository < ActiveRecord::Base
     end
   end
 
+  def self.top_pull_requests
+    pull_counts_array = []
+    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+    pulls = student_pulls.values
+    users.each_with_index do |user, i|
+      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+    end
+  pull_counts_array
+  end
+
+  def self.todays_pull_requests
+    pull_counts_array = []
+    student_pulls = Repository.where("pull_updated_at > ?", 1.days.ago).group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+    pulls = student_pulls.values
+    users.each_with_index do |user, i|
+      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+    end
+  pull_counts_array
+  end
+
+  def self.week_ago_pull_requests
+    pull_counts_array = []
+    student_pulls = Repository.where("pull_updated_at > ?", 1.weeks.ago).group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+    pulls = student_pulls.values
+    users.each_with_index do |user, i|
+      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+    end
+  pull_counts_array
+  end
+
+end  
   # def self.top_pull_requests
   #   students = []
   #   self.all.each do |repo|
@@ -78,17 +112,8 @@ class Repository < ActiveRecord::Base
   # end
 
   # Today 
-  def self.top_pull_requests
-    pull_counts_array = []
-    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
-    users = student_pulls.keys
-    pulls = student_pulls.values
-    users.each_with_index do |user, i|
-      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
-    end
-  pull_counts_array
-  end
-end
+   
+
 
 # Last days 7 days  
 
