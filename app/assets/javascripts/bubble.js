@@ -64,6 +64,11 @@
 
 ////////// v code goes below   v  /////////////////////////////////////////////
 
+    
+$(function(){
+
+setTimeout(function() {
+
 var svg = d3.select('.bubble-chart')
   .append('svg')
   .attr('width', 800)
@@ -74,113 +79,116 @@ var bubble = d3.layout.pack()
     .size([800, 800])
     .padding(1.5);
 
-var color = d3.scale.category20b();
 
-function animate(data) {
+  var color = d3.scale.category20b();
 
-  var treeLikeData = {"children": data};
+  function animate(data) {
 
-  var bubbleData = bubble.nodes(treeLikeData)
-    .filter(function(d) { return !d.children; });
+    var treeLikeData = {"children": data};
 
-  var node = svg.selectAll('.node')
-    .data(bubbleData, function(d) { return d.name; });
+    var bubbleData = bubble.nodes(treeLikeData)
+      .filter(function(d) { return !d.children; });
 
-  var enter = node.enter().append('g')
-    .attr('class', 'node')
-    .attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
-  enter.append('circle')
-    .style('fill', function(d) { return color(d.name); })
-    .attr('r' , 0);
-  enter.append('text')
-    .style('opacity', 1)
-    .style('fill', 'black')
-    .style('text-anchor', 'middle')
-    .text(function(d) { return d.name; });
+    var node = svg.selectAll('.node')
+      .data(bubbleData, function(d) { return d.name; });
 
-  var update = node.transition()
-    .attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
-  update.select('circle')
-      .attr('r' , function(d) { return d.r; });
-  update.select('text')
-      .style('opacity', 1);
+    var enter = node.enter().append('g')
+      .attr('class', 'node')
+      .attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
+    enter.append('circle')
+      .style('fill', function(d) { return color(d.name); })
+      .attr('r' , 0);
+    enter.append('text')
+      .style('opacity', 1)
+      .style('fill', 'black')
+      .style('text-anchor', 'middle')
+      .text(function(d) { return d.name; });
 
-  var exit = node.exit()
-    .transition()
-      .remove();
-  exit.select('circle').attr('r', 0);
-  exit.select('text').style('opacity', 0);
-  
-}
+    var update = node.transition()
+      .attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
 
-// $(function(){
-  console.log("hello");
-    var TEAM_MEMBERS;
-  $.ajax({
-    url: "/data/heart",
-    type: "GET",
-    dataType: "json"
-  }).done(function(data){
-    TEAM_MEMBERS = data;
+    update.select('circle')
+        .attr('r' , function(d) { return d.r; });
+    update.select('text')
+        .style('opacity', 1);
 
-    animate(TEAM_MEMBERS);
+    var exit = node.exit()
+      .transition()
+        .remove();
+    exit.select('circle').attr('r', 0);
+    exit.select('text').style('opacity', 0);
+    
+  }
 
-      setTimeout(function() {
-        TEAM_MEMBERS[0].value = 90;            // changes value of tea to 100
-        animate(TEAM_MEMBERS);
-      }, 1000);
 
-      setTimeout(function() {
-        TEAM_MEMBERS[4].value = 3;            // changes value of coffe to 3
-        animate(TEAM_MEMBERS);
-      }, 1500);
+    console.log("hello");
+      var TEAM_MEMBERS;
+    $.ajax({
+      url: "/data/heart",
+      type: "GET",
+      dataType: "json"
+    }).done(function(data){
+      TEAM_MEMBERS = data;
 
-      setTimeout(function() {
-        TEAM_MEMBERS.pop();                 // removes wine
-        animate(TEAM_MEMBERS);
-      }, 5000);
+      animate(TEAM_MEMBERS);
 
-      setTimeout(function() {
-        TEAM_MEMBERS.push({name: "kombucha", value: 50});     // adds kombucha in
-        animate(TEAM_MEMBERS);
-      }, 2500);
+        setTimeout(function() {
+          TEAM_MEMBERS[0].value = 90;            // changes value of tea to 100
+          animate(TEAM_MEMBERS);
+        }, 1000);
 
-      setTimeout(function() {
-        TEAM_MEMBERS.push({name: "wine", value: 60});    // adds wine back
-        animate(TEAM_MEMBERS);
-      }, 3000);
+        setTimeout(function() {
+          TEAM_MEMBERS[4].value = 3;            // changes value of coffe to 3
+          animate(TEAM_MEMBERS);
+        }, 1500);
 
-      setTimeout(function() {
-        TEAM_MEMBERS[3].value = 40;             // changes value of gatorade to 50
-        animate(TEAM_MEMBERS);
-      }, 3500);
+        setTimeout(function() {
+          TEAM_MEMBERS.pop();                 // removes wine
+          animate(TEAM_MEMBERS);
+        }, 5000);
 
-      setTimeout(function() {
-        TEAM_MEMBERS[4].value = 10;             // coffee is now 10
-        animate(TEAM_MEMBERS);
-      }, 3750);
+        setTimeout(function() {
+          TEAM_MEMBERS.push({name: "kombucha", value: 50});     // adds kombucha in
+          animate(TEAM_MEMBERS);
+        }, 2500);
 
-      setTimeout(function() {
-        TEAM_MEMBERS.push({name: "mountain dew", value: 100});    // adds wine back
-        animate(TEAM_MEMBERS);
-      }, 3000);
+        setTimeout(function() {
+          TEAM_MEMBERS.push({name: "wine", value: 60});    // adds wine back
+          animate(TEAM_MEMBERS);
+        }, 3000);
 
-      setTimeout(function() {
-        TEAM_MEMBERS[0].value = 15;             // tea is now 15
-        animate(TEAM_MEMBERS);
-      }, 4000);
+        setTimeout(function() {
+          TEAM_MEMBERS[3].value = 40;             // changes value of gatorade to 50
+          animate(TEAM_MEMBERS);
+        }, 3500);
 
-      setTimeout(function() {
-        TEAM_MEMBERS.pop();                 // removes wine
-        animate(TEAM_MEMBERS);
-      }, 5000);
-        console.log(TEAM_MEMBERS)  
-    });
+        setTimeout(function() {
+          TEAM_MEMBERS[4].value = 10;             // coffee is now 10
+          animate(TEAM_MEMBERS);
+        }, 3750);
 
-  // })
+        setTimeout(function() {
+          TEAM_MEMBERS.push({name: "mountain dew", value: 100});    // adds wine back
+          animate(TEAM_MEMBERS);
+        }, 3000);
 
-  // $.getScript("/data/heart", function(){console.log("taco")})
-// });
+        setTimeout(function() {
+          TEAM_MEMBERS[0].value = 15;             // tea is now 15
+          animate(TEAM_MEMBERS);
+        }, 4000);
+
+        setTimeout(function() {
+          TEAM_MEMBERS.pop();                 // removes wine
+          animate(TEAM_MEMBERS);
+        }, 5000);
+          console.log(TEAM_MEMBERS)  
+      });
+
+    // })
+
+    // $.getScript("/data/heart", function(){console.log("taco")})
+  }, 200);
+});
 
 
 ////////// ^ code goes above  ^  /////////////////////////////////////////////
