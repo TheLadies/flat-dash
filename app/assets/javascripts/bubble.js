@@ -40,6 +40,7 @@ var bubble = d3.layout.pack()
       .style('text-anchor', 'middle')
       .text(function(d) { return d.name; });
 
+
     node.attr('transform', function(d) {
         return 'translate(' + d.x + ',' + d.y + ')'; 
       });
@@ -49,6 +50,13 @@ var bubble = d3.layout.pack()
     node.select('text')
         .style('opacity', 1);
 
+    for(var i = 0; i < $(".node").size(); i++) {
+      if ($(".node circle")[i].r.animVal.value < 10) {
+        $($(".node text")[i]).hide()
+      } else {
+        $($(".node text")[i]).show()
+      }
+    }
 
     var exit = node.exit()
       .transition()
