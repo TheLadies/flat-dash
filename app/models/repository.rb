@@ -50,33 +50,49 @@ class Repository < ActiveRecord::Base
   #   return students
   # end
 
-  def self.last_updated_pull
-    students = []
-    self.all.each do |repo|
-      # binding.pry
-      user = repo.user_login
-      pull_date = self.where(user_login: user).pluck(:pull_updated_at)
-      pull_date_max = pull_date.max
-      pull_count = self.where(user_login: user).count
-      students << ({:sDate =>"today", :sTime => pull_date.max, :sUsername => "@"+ user, :sTimeFrame => "semester", :nPullRequests => pull_count})
-      # pull_date.max
-     end  
-     students.uniq.sort_by{|student| student[:nPullRequests] }.reverse
-     # binding.pry
-  end
+  # def self.last_updated_pull
+  #   students = []
+  #   self.all.each do |repo|
+  #     # binding.pry
+  #     user = repo.user_login
+  #     pull_date = self.where(user_login: user).pluck(:pull_updated_at)
+  #     pull_date_max = pull_date.max
+  #     pull_count = self.where(user_login: user).count
+  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pull_count})
+  #     # pull_date.max
+  #    end  
+  #    students.uniq.sort_by{|student| student[:nPullRequests] }.reverse
+  #    # binding.pry
+  # end
 
-  def self.top_pull_requests
-    students = []
-    users = self.all.pluck(:user_login)
-    self.all.pluck(:user_login).uniq.each do |user|
-      # binding.pry
-      pull_count = users.count(user)
-      students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
-    end
-    students.sort_by {|student| student[:nPullRequests] }.reverse
+  # def self.top_pull_requests
+  #   students = []
+  #   users = self.all.pluck(:user_login)
+  #   users.uniq.each do |user|
+  #     # binding.pry
+  #     pull_count = users.count(user)
+  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pull_count})
+  #   end
+  #   students.sort_by {|student| student[:nPullRequests] }.reverse
     
+  # end
+
+  # Today 
+  def self.top_pull_requests
+    pull_counts_array = []
+    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+    pulls = student_pulls.values
+    users.each_with_index do |user, i|
+      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+    end
+  pull_counts_array
   end
 end
+
+# Last days 7 days  
+
+# Today 
 
 
 # repos.size
