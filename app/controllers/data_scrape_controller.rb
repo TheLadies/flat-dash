@@ -9,14 +9,12 @@ class DataScrapeController < ApplicationController
        'sTimeFrame' => 'week',
        'nPullRequests' => 170
       },
-      {'sDate' => 'yesterday', 
-       'sTime' => '16:00',
+      {'sTime' => '16:00',
        'sUsername' => '@denineguy',
        'sTimeFrame' => 'week',
        'nPullRequests' => 19
       },
-      {'sDate' => 'July 8th, 2013',
-       'sTime' => '16:30',
+      {'sTime' => '16:30',
        'sUsername' => '@christinaleuci',
        'sTimeFrame' => 'week',
        'nPullRequests' => 1

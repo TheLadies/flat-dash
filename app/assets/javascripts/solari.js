@@ -45,7 +45,6 @@ var URL_SUFFIX = "";
 var LAST_STATUS = 4;
 var TimeFrameStatus = ["week", "month", "semester"];
 var solari_setup_done = 0;
-var syncing = false;
 var current_board = [];
 
 //an attempt to reduce slowdown from animations
@@ -78,7 +77,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"time-week\">SEMESTER</span>" +
+    "<span class=\"time-time\">SEMESTER</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -179,10 +178,11 @@ function addSolariBoard(divSelector) {
 }
 
 function NextDue(id, time, offset, add_class) {
-  $(id + ' .time-week').html(time);
+  $(id + ' .time-time').html(time);
 }
 
 function updateSolariTable(board){
+
   for (var row = 0; row < BOARD_ROWS; row++) {
     if ((board[row] === undefined)) {
       // make this an empty row
@@ -214,17 +214,21 @@ function UpdateSolariRow(row, current_row, new_row) {
 function SpinChars(rate, selector_prefix, max_boxes, current_text, new_text) {
   //populate each box
   var num_spins = 0;
+
   for (var box = 0; box < max_boxes; box++) {
     // get the to and from character codes for this box
     var to_char_code = ToUpper(((new_text.length > box) ? new_text.charCodeAt(box) : 32));
     var from_char_code = ToUpper(((current_text.length > box) ? current_text.charCodeAt(box) : 32));
     var final_pos = '';
+
     if (from_char_code > to_char_code) {
       num_spins = ((LAST_CHAR_CODE - from_char_code) + (to_char_code - FIRST_CHAR_CODE)) * CHAR_FACTOR;
       final_pos = ((LETTER_HEIGHT * (to_char_code - FIRST_CHAR_CODE)) * CHAR_FACTOR) * -1;
+    
     } else {
       num_spins = (to_char_code - from_char_code) * CHAR_FACTOR;
     }
+
     var selector = selector_prefix + 'box' + box; // add the box part
 
     SpinIt(selector, num_spins, rate, LETTER_HEIGHT, final_pos);
@@ -238,6 +242,7 @@ function SpinImage(rate, selector, from_pos, to_pos) {
   if (from_pos > to_pos) {
     num_spins = (((LAST_STATUS - from_pos) + to_pos) * IMAGE_FACTOR);
     final_pos = ((IMAGE_HEIGHT * to_pos) * IMAGE_FACTOR) * -1;
+  
   } else {
     num_spins = ((to_pos - from_pos) * IMAGE_FACTOR);
   }
@@ -271,8 +276,10 @@ function SpinIt(selector, num_spins, rate, pixel_distance, final_pos) {
       {backgroundPosition: updateBpY(1)},
       {duration: rate, easing: "linear"}
     );
+    
     // on the very last iteration, use a call back to set the background position to the "real" position
     var f = function () {};
+
     if ((final_pos !== '') && (ii === (num_spins-1))) {
       f = function() {
         $(selector).css('backgroundPosition', bpX + ' ' + final_pos);
@@ -294,6 +301,7 @@ function GetFailBoard() {
   fail_whale[7] = "        '--/_.'----''";
 
   var board = [];
+
   // update each row on the board
   for (var row = 0; row < BOARD_ROWS; row++) {
     board[row] = {
@@ -306,57 +314,58 @@ function GetFailBoard() {
 }
 
 function updateSolariBoard() {
-  if (syncing) {
+  $.getJSON(URL + (URL.indexOf("?") === -1 ? '?' : '&') + "callback=?" + URL_SUFFIX, function(new_board) {
+
+  if (new_board === null) {
+    //the last updated footer won't get refreshed, but if data is null, it probably shouldn't
     return;
   }
 
-  syncing = true;
+  //redraw label if recovering from a fail
+  $("ul.solari-board-columns li.username").text("Username");
+  if (new_board.length === 0) {
+    clearBoard();
 
-  $.getJSON(URL + (URL.indexOf("?") === -1 ? '?' : '&') + "callback=?" + URL_SUFFIX, function(new_board) {
-
-    syncing = false;
-
-    if (new_board === null) {
-      //the last updated footer won't get refreshed, but if data is null, it probably shouldn't
-      return;
-    }
-    //redraw label if recovering from a fail
-    $("ul.solari-board-columns li.username").text("Username");
-    if (new_board.length === 0) {
-      clearBoard();
-    } else {
-    //the next due box should display information on the row for which time info is available, which may not be from the first case
-    var i, time;
+  } else {
+  //the next due box should display information on the row for which time info is available, which may not be from the first case
+  var i, time;
     for (i=0; i < BOARD_ROWS; i++) {
-      time = new_board[i].sTime;
+      time = new_board[i].sTimeFrame;
       if (typeof time !== "undefined" && time !== "")
         break;
     }
+
     var next_due_row = new_board[i];
+
     if (time) {
-      var timeDelta = Date.parse(next_due_row.sDate + ", " + time).getTime() - new Date().getTime();
-      var nOffset = timeDelta > 0 ? Math.floor(timeDelta / (1000 * 60 * 60 * 24)) : Math.ceil(timeDelta / (1000 * 60 * 60 * 24)); //divide by miliseconds per day and round to zero
-      var sOffset = (nOffset === 0 ? "" : nOffset.toString() + "d"); //if next due is not today, append a "d"
-      if(status_override) {
-        var hrsDelta = Number(time.substring(0,2)) - new Date().getHours();
-        nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
-      }
-      // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "fail" : TimeFrameStatus[next_due_row.sTimeFrame])
-      NextDue("#time-frame", time, sOffset, status_class);
-    } else {
-      NextDue("#time-frame", 'fail', '', '');
+    var timeDelta = Date.parse(next_due_row.sDate + ", " + time).getTime() - new Date().getTime();
+    var nOffset = timeDelta > 0 ? Math.floor(timeDelta / (1000 * 60 * 60 * 24)) : Math.ceil(timeDelta / (1000 * 60 * 60 * 24)); //divide by miliseconds per day and round to zero
+    var sOffset = (nOffset === 0 ? "" : nOffset.toString() + "d"); //if next due is not today, append a "d"
+    
+    if(status_override) {
+      var hrsDelta = Number(time.substring(0,2)) - new Date().getHours();
+      nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
     }
+
+    // add the appropriate class based on status. If no data, green.
+    var status_class = (new_board[0] === EMPTY_ROW ? "fail" : TimeFrameStatus[next_due_row.sTimeFrame])
+    NextDue("#time-frame", time, sOffset, status_class);
+
+  } else {
+    NextDue("#time-frame", 'fail', '', '');
+  }
+
   //now that the nStatus values have been set, update the board
   updateSolariTable(new_board);
   }
+
     // update last refresh time text
     $('#last-updated span').fadeOut("slow", function() {
       var now = new Date();
       $('#last-updated span').html(now.toLocaleString());
     }).fadeIn("slow");
+
   }).error(function () {
-    syncing = false;
     updateSolariTable(GetFailBoard());
     NextDue("#time-frame", '-FA1L-', '', '');
     $("ul.solari-board-columns li.username").text("FAIL WHALE");
@@ -368,8 +377,10 @@ function clearBoard() {
   $(".time").children().stop(true, true);
   $(".username").children().stop(true, true);
   $(".pull-requests").children().stop(true, true);
+
   //clear the next due and all rows
   NextDue("#time-frame", '-FA1L-', '', '');
+
   for (var r = 0; r < BOARD_ROWS; r++) {
     UpdateSolariRow(r, current_board[r], EMPTY_ROW);
     current_board[r] = EMPTY_ROW;
