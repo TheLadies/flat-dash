@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140805215520) do
 
-  create_table "charts", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "companies", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -45,7 +40,6 @@ ActiveRecord::Schema.define(version: 20140805215520) do
   add_index "projects", ["program_id"], name: "index_projects_on_program_id"
 
   create_table "repositories", force: true do |t|
-    t.string   "name"
     t.string   "repo_name"
     t.string   "repo_full_name"
     t.string   "user_login"
@@ -55,15 +49,15 @@ ActiveRecord::Schema.define(version: 20140805215520) do
     t.datetime "pull_updated_at"
   end
 
-  create_table "student_projects", force: true do |t|
+  create_table "student_project", force: true do |t|
     t.integer  "student_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "student_projects", ["project_id"], name: "index_student_projects_on_project_id"
-  add_index "student_projects", ["student_id"], name: "index_student_projects_on_student_id"
+  add_index "student_project", ["project_id"], name: "index_student_project_on_project_id"
+  add_index "student_project", ["student_id"], name: "index_student_project_on_student_id"
 
   create_table "students", force: true do |t|
     t.string   "username"
