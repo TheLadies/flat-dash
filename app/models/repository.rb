@@ -72,8 +72,7 @@ class Repository < ActiveRecord::Base
     end
   pull_counts_array
   end
-
-end  
+ 
   # def self.top_pull_requests
   #   students = []
   #   self.all.each do |repo|
