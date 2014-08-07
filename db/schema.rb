@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804160512) do
+ActiveRecord::Schema.define(version: 20140805215520) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_scrapes", force: true do |t|
+    t.string   "auth_name"
+    t.string   "user_name"
+    t.string   "repo_name"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +47,16 @@ ActiveRecord::Schema.define(version: 20140804160512) do
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id"
   add_index "projects", ["program_id"], name: "index_projects_on_program_id"
+
+  create_table "repositories", force: true do |t|
+    t.string   "repo_name"
+    t.string   "repo_full_name"
+    t.string   "user_login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "pull_created_at"
+    t.datetime "pull_updated_at"
+  end
 
   create_table "student_projects", force: true do |t|
     t.integer  "student_id"
