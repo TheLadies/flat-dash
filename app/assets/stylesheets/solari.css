@@ -137,6 +137,9 @@ ul.solari-board-columns {
 ul.solari-board-rows {
   padding: 2px 0 0;
 }
+ul.solari-board-columns, ul.solari-board-rows {
+  width:772px;
+}
 
 #epoch-tracking {
   width: 510px;
