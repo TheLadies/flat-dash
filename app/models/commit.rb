@@ -18,11 +18,11 @@ class Commit < ActiveRecord::Base
 
   def self.make_commit_list
     get_commits.collect do |repo_name| 
-      client.commits(repo_name).collect do |commit_list|
-        # commit_list.author.login if commit_list.author
-        # commit_list.commit.message
+      client.commits(repo_name).each do |commit_list|
+        binding.pry
         if commit_list.author
-          find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
+          commit_list.commit.author.name
+          # find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
         end
       end
     end.flatten

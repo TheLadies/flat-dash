@@ -115,6 +115,15 @@ class Repository < ActiveRecord::Base
     repository_array     
   end
 
+  def self.student_repo_name
+    repository_array = []
+    student_repos = Repository.select(:user_login, :repo_name).to_a.map(&:serializable_hash)
+    student_repos.each do |student|
+       repository_array << student["user_login"]+"/"+student["repo_name"]
+    end
+    repository_array.count
+  end
+
 end
 
 # repos.size
