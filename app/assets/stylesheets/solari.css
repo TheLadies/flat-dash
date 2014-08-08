@@ -335,3 +335,14 @@ div#ticker {
   margin: 0 auto;
   font-size: 12px;
 }
+
+.glyphicon {
+  color: red;
+}
+
+.container {
+  color:white;
+  width:530px !important;
+  float: right;
+  margin-top: -26px;
+}

@@ -2,9 +2,8 @@
  * Released under the MIT license
  *  The nStatus field is only used if status_override = false.*/
 
-// some constants and enums
-var RATE_VARIANCE = 8; // for determining random animation rate in milliseconds
-var RATE_BASE = 8; // for determining random animation rate in milliseconds  
+var RATE_VARIANCE = 1; // for determining random animation rate in milliseconds
+var RATE_BASE = 1; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
 var SECOND_SECTION_START = 9; // the first row that contains a next due case
 var LETTER_HEIGHT = 26; // height of a single letter frame (in pixels) in the letter image
@@ -13,10 +12,10 @@ var LAST_CHAR_CODE = 90; // the last ASCII character that is represented in the 
 var CHAR_FACTOR = 2; // every N character in the letter image is a "real" character
 var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in pixels)
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
-var USERNAME_BOXES = 20; // number of letter boxes displayed in the departure column
+var USERNAME_BOXES = 20; // number of letter boxes displayed in the username column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var PULL_BOXES = 3; // number of letter boxes displayed in the track column
-var REFRESH_TIME = 60; //refresh time in seconds
+var PULL_BOXES = 3; // number of letter boxes displayed in the pullrequest column
+var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
   "sTime": "",
   "sUsername": "",
@@ -82,7 +81,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"bubble-chart\">"+
     "</div>"+
     "<ul class=\"solari-board-columns rounded\">" +
-    "<li class=\"time\">Time</li>" +
+    "<li class=\"time\">Pushed At</li>" +
     "<li class=\"username\">Username</li>" +
     "<li class=\"pull-requests\">Pull Requests</li>" +
     "</ul>" +
@@ -90,6 +89,12 @@ function addSolariBoard(divSelector) {
     "</ul>" +
     "</div>" +
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
+    "<div class=\"container\">"+
+    "Made with <span class=\"glyphicon glyphicon-heart\"></span> at the <a href=\"http://flatironschool.com/\" target=\"_blank\" id=\"school\">Flatiron School</a> | "+
+    "<a href=\"https://github.com/denineguy\" target=\"_blank\">@denineguy</a> | " + 
+    "<a href=\"https://github.com/christinaleuci\" target=\"_blank\">@christinaleuci</a> | " + 
+    "<a href=\"https://github.com/jessrudder\" target=\"_blank\">@jessrudder</a></p>" +
+    "</div>" +
     "</div>" +
     "</div>" +
     "</div>").html();
@@ -145,7 +150,7 @@ function addSolariBoard(divSelector) {
     // add a row
     $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class="pull-requests"><div class=pull-icon></div></li></ul></li>');
 
-    // add the letter boxes in the time column
+    // add the letter boxes in the left column
     for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
       $('#row' + add_rows + ' li.time').append('<div id=time-row' + add_rows + 'box' + add_time_col + ' class=letterbox></div>');
       // insert a dot after the second box
@@ -159,7 +164,7 @@ function addSolariBoard(divSelector) {
       $('#row' + add_rows + ' li.username').append('<div id=username-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
     }
 
-    // add the letter boxes in the pull-requests column
+    // add the letter boxes in the right column
     for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
       $('#row' + add_rows + ' li.pull-requests').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
     }
