@@ -101,7 +101,7 @@ function addSolariBoard(divSelector) {
   //add the board html
   $(divSelector).append($solari);
 
-  //set up time-week
+  //set up right hand clock
   setInterval(function () {
     var date = new Date();
     // Convert to 12 hour format
@@ -117,26 +117,12 @@ function addSolariBoard(divSelector) {
 
 
   // show the solari board.
-  // if (!localStorage['StopSolari'] || localStorage['StopSolari'] === '0') {
-  //   $('#solari').show();
     $('#show-solari').hide();
-  // } else {
-  //   $('#solari').hide();
-  //   $('#show-solari').show();
-  //   return;
-  // }
 
   $('li.pull-requests').click(function () {
     updateSolariBoard();
   });
 
-  // we want people who don't care about the solari board to be able to hide it.
-  // $('#time-frame').click(function () {
-  //   localStorage['StopSolari'] = '1';
-  //   $('#solari').hide();
-  //   $('#show-solari').show();
-  // });
-  // and show it
   var $section;
 
   // build the solari board
@@ -174,8 +160,8 @@ function addSolariBoard(divSelector) {
   updateSolariBoard();
 }
 
-function NextDue(id, time, offset, add_class) {
-  $(id + ' .time-week').html(time);
+function NextDue(id, timeframe) {
+  $(id + ' .time-week').html(timeframe);
 }
 
 function updateSolariTable(board){
@@ -324,24 +310,15 @@ function updateSolariBoard() {
     //the next due box should display information on the row for which time info is available, which may not be from the first case
     var i, time;
     for (i=0; i < BOARD_ROWS; i++) {
-      time = new_board[i].sTime;
-      if (typeof time !== "undefined" && time !== "")
+      timeframe = new_board[i].sTimeFrame;
+      if (typeof timeframe !== "undefined" && timeframe !== "")
         break;
     }
     var next_due_row = new_board[i];
-    if (time) {
-      var timeDelta = Date.parse(next_due_row.sDate + ", " + time).getTime() - new Date().getTime();
-      var nOffset = timeDelta > 0 ? Math.floor(timeDelta / (1000 * 60 * 60 * 24)) : Math.ceil(timeDelta / (1000 * 60 * 60 * 24)); //divide by miliseconds per day and round to zero
-      var sOffset = (nOffset === 0 ? "" : nOffset.toString() + "d"); //if next due is not today, append a "d"
-      if(status_override) {
-        var hrsDelta = Number(time.substring(0,2)) - new Date().getHours();
-        nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
-      }
-      // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nStatus])
-      NextDue("#time-frame", time, sOffset, status_class);
+    if (timeframe) {
+      NextDue("#time-frame", timeframe);
     } else {
-      NextDue("#time-frame", '00:00', '', '');
+      NextDue("#time-frame", "");
     }
   //now that the nStatus values have been set, update the board
   updateSolariTable(new_board);
@@ -354,7 +331,7 @@ function updateSolariBoard() {
   }).error(function () {
     syncing = false;
     updateSolariTable(GetFailBoard());
-    NextDue("#time-frame", '-FA1L-', '', '');
+    NextDue("#time-frame", '-FA1L-');
     $("ul.solari-board-columns li.username").text("FAIL WHALE");
   });
 }
@@ -365,7 +342,7 @@ function clearBoard() {
   $(".username").children().stop(true, true);
   $(".pull-requests").children().stop(true, true);
   //clear the next due and all rows
-  NextDue("#time-frame", '00:00', '', '');
+  NextDue("#time-frame", "");
   for (var r = 0; r < BOARD_ROWS; r++) {
     UpdateSolariRow(r, current_board[r], EMPTY_ROW);
     current_board[r] = EMPTY_ROW;

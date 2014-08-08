@@ -1,4 +1,4 @@
-require 'active_record'
+
 class Repository < ActiveRecord::Base
   attr_reader :client
 
@@ -14,6 +14,7 @@ class Repository < ActiveRecord::Base
 
 
   def self.get_repos
+    
     repos = client.org_repos("flatiron-school-students")
     repos.map do |repo|
       repo.full_name
@@ -87,6 +88,33 @@ class Repository < ActiveRecord::Base
     end
     pull_data
   end
+
+  def self.top_repositories
+    repository_array = []
+    pull_dates = Repository.group(:repo_name).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    top_repository = Repository.group(:repo_name).order("count_all DESC").calculate(:count, :all)
+    repos = top_repository.keys
+    count = top_repository.values
+    last_pull = pull_dates
+    top_repository.keys.each_with_index do |repo, i|
+      repository_array << ({:sDate => last_pull[repo].strftime("%F"), :sTime => last_pull[repo].strftime("%R"), :sRepository => repo, :sTimeFrame => "week", :nPullRequests => count[i]})     
+    end
+    repository_array
+  end
+
+  def self.bottom_repositories
+    repository_array = []
+    pull_dates = Repository.group(:repo_name).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    bottom_repository = Repository.group(:repo_name).order("count_all ASC").calculate(:count, :all)
+    repos = bottom_repository.keys
+    count = bottom_repository.values
+    last_pull = pull_dates
+    bottom_repository.keys.each_with_index do |repo, i|
+      repository_array << ({:sDate => last_pull[repo].strftime("%F"), :sTime => last_pull[repo].strftime("%R"), :sRepository => repo, :sTimeFrame => "week", :nPullRequests => count[i]})
+    end
+    repository_array     
+  end
+
 end
 
 # repos.size
