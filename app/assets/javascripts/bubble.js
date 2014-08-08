@@ -75,19 +75,12 @@ $(function(){
         animate(TEAM_MEMBERS);
       }, 500);
 
-      var anim1_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim2_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim3_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim4_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim5_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim6_id = Math.floor((Math.random() * TEAM_MEMBERS.length));
-
-      var anim1_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim2_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim3_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim4_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim5_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
-      var anim6_r = Math.floor((Math.random() * TEAM_MEMBERS.length));
+      var anim1_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
+      var anim2_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
+      var anim3_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
+      var anim4_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
+      var anim5_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
+      var anim6_id = Math.floor(Math.random() * TEAM_MEMBERS.length);
 
 
         setTimeout(function() {
