@@ -65,7 +65,7 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => count[i]})     
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "semester", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end

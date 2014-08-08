@@ -329,7 +329,10 @@ div#ticker {
 
 .bubble-chart{
   float: right;
-  /*background: #27282c;*/
+  background: url("../images/train-panel-bg.png") repeat #262829;
+  margin: 0 0 8px 0;
+  box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
   height: 650px;
   width: 44.5%;
   margin: 0 auto;

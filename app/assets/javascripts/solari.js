@@ -78,7 +78,7 @@ function addSolariBoard(divSelector) {
     "</ul>" +
     "</div>" +
     "</header>" +
-    "<div class=\"bubble-chart\">"+
+    "<div class=\"bubble-chart rounded\">"+
     "</div>"+
     "<ul class=\"solari-board-columns rounded\">" +
     "<li class=\"time\">Pushed At</li>" +
