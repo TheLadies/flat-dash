@@ -69,9 +69,25 @@ class Repository < ActiveRecord::Base
     end
     pull_counts_array
   end
-  
-end  
-  
+
+  def self.pull_request_by_user
+    
+    name_collection = Repository.all.collect do |repo|
+      repo.user_login
+    end
+
+    name_used = []
+    pull_data = []
+    
+    name_collection.each do |name|
+      if !name_used.include? name
+        name_used << name
+        pull_data << {:name => name, :value => name_collection.count(name)}
+      end
+    end
+    pull_data
+  end
+end
 
 # repos.size
 # repos.first.class
