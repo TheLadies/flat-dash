@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805215520) do
+ActiveRecord::Schema.define(version: 20140808140330) do
+
+  create_table "commits", force: true do |t|
+    t.string   "name"
+    t.string   "user_login"
+    t.text     "commit_message"
+    t.datetime "commit_created_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -57,6 +64,8 @@ ActiveRecord::Schema.define(version: 20140805215520) do
     t.datetime "pull_created_at"
     t.datetime "pull_updated_at"
   end
+
+  add_index "repositories", ["user_login"], name: "index_repositories_on_user_login"
 
   create_table "student_projects", force: true do |t|
     t.integer  "student_id"
