@@ -14,6 +14,7 @@ class Repository < ActiveRecord::Base
 
 
   def self.get_repos
+    
     repos = client.org_repos("flatiron-school-students")
     repos.map do |repo|
       repo.full_name
@@ -113,7 +114,7 @@ class Repository < ActiveRecord::Base
     end
     repository_array     
   end
-  
+
 end
 
 # repos.size
