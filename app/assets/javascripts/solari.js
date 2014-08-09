@@ -2,6 +2,8 @@
  * Released under the MIT license
  *  The nStatus field is only used if status_override = false.*/
 
+// you will need  to take information from here and append it in the specific views
+
 var RATE_VARIANCE = 1; // for determining random animation rate in milliseconds
 var RATE_BASE = 1; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
@@ -17,6 +19,7 @@ var TIME_BOXES = 4; // number of letter boxes displayed in the time column
 var PULL_BOXES = 3; // number of letter boxes displayed in the pullrequest column
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
+  // will need to specify this for sem, week, day
   "sTime": "",
   "sUsername": "",
   "sTimeFrame": "",
@@ -63,10 +66,11 @@ function addSolariBoard(divSelector) {
     "<div id=\"solari\" class=\"panel\">" +
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
+    // will need to append this
     "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"time-week\">00:00</span>" +
+    "<span class=\"time-length\">00:00</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -81,6 +85,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"bubble-chart rounded\">"+
     "</div>"+
     "<ul class=\"solari-board-columns rounded\">" +
+    // append
     "<li class=\"time\">Pushed At</li>" +
     "<li class=\"username\">Username</li>" +
     "<li class=\"pull-requests\">Pull Requests</li>" +
@@ -101,7 +106,7 @@ function addSolariBoard(divSelector) {
   //add the board html
   $(divSelector).append($solari);
 
-  //set up time-week
+  //set up right hand clock
   setInterval(function () {
     var date = new Date();
     // Convert to 12 hour format
@@ -112,31 +117,17 @@ function addSolariBoard(divSelector) {
     $("#min").html((minutes < 10 ? "0" : "") + minutes);
 
     // Set am/pm
-    $("#ampm").html(hours < 12 ? " am" : " pm");
+    $("#ampm").html(hours < 12 ? "AM" : " PM");
   }, 1); // every 15 seconds is plenty accurate
 
 
   // show the solari board.
-  // if (!localStorage['StopSolari'] || localStorage['StopSolari'] === '0') {
-  //   $('#solari').show();
     $('#show-solari').hide();
-  // } else {
-  //   $('#solari').hide();
-  //   $('#show-solari').show();
-  //   return;
-  // }
 
   $('li.pull-requests').click(function () {
     updateSolariBoard();
   });
 
-  // we want people who don't care about the solari board to be able to hide it.
-  // $('#time-frame').click(function () {
-  //   localStorage['StopSolari'] = '1';
-  //   $('#solari').hide();
-  //   $('#show-solari').show();
-  // });
-  // and show it
   var $section;
 
   // build the solari board
@@ -148,9 +139,11 @@ function addSolariBoard(divSelector) {
       $section = $('#usernames .solari-board-rows');
     }
     // add a row
+    // append
     $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class="pull-requests"><div class=pull-icon></div></li></ul></li>');
 
     // add the letter boxes in the left column
+    // append
     for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
       $('#row' + add_rows + ' li.time').append('<div id=time-row' + add_rows + 'box' + add_time_col + ' class=letterbox></div>');
       // insert a dot after the second box
@@ -160,11 +153,13 @@ function addSolariBoard(divSelector) {
     }
 
       // add the letter boxes in the middle column
+      // append
     for (var add_cols = 0; add_cols < USERNAME_BOXES; add_cols++) {
       $('#row' + add_rows + ' li.username').append('<div id=username-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
     }
 
     // add the letter boxes in the right column
+    // append
     for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
       $('#row' + add_rows + ' li.pull-requests').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
     }
@@ -174,8 +169,8 @@ function addSolariBoard(divSelector) {
   updateSolariBoard();
 }
 
-function NextDue(id, time, offset, add_class) {
-  $(id + ' .time-week').html(time);
+function NextDue(id, timeframe) {
+  $(id + ' .time-length').html(timeframe);
 }
 
 function updateSolariTable(board){
@@ -199,6 +194,7 @@ function UpdateSolariRow(row, current_row, new_row) {
   SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
+  // append
   current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
 
   new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 2 ? new_row.nPullRequests.toString() :new_row.nPullRequests.toString().length > 1 ? (new_row.nPullRequests = "0" + new_row.nPullRequests).toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
@@ -293,6 +289,7 @@ function GetFailBoard() {
   // update each row on the board
   for (var row = 0; row < BOARD_ROWS; row++) {
     board[row] = {
+      // append
       "sTime": "",
       "sUsername": fail_whale[row],
       "nPullRequests": 0
@@ -317,6 +314,7 @@ function updateSolariBoard() {
       return;
     }
     //redraw label if recovering from a fail
+    // append
     $("ul.solari-board-columns li.username").text("Username");
     if (new_board.length === 0) {
       clearBoard();
@@ -324,24 +322,15 @@ function updateSolariBoard() {
     //the next due box should display information on the row for which time info is available, which may not be from the first case
     var i, time;
     for (i=0; i < BOARD_ROWS; i++) {
-      time = new_board[i].sTime;
-      if (typeof time !== "undefined" && time !== "")
+      timeframe = new_board[i].sTimeFrame;
+      if (typeof timeframe !== "undefined" && timeframe !== "")
         break;
     }
     var next_due_row = new_board[i];
-    if (time) {
-      var timeDelta = Date.parse(next_due_row.sDate + ", " + time).getTime() - new Date().getTime();
-      var nOffset = timeDelta > 0 ? Math.floor(timeDelta / (1000 * 60 * 60 * 24)) : Math.ceil(timeDelta / (1000 * 60 * 60 * 24)); //divide by miliseconds per day and round to zero
-      var sOffset = (nOffset === 0 ? "" : nOffset.toString() + "d"); //if next due is not today, append a "d"
-      if(status_override) {
-        var hrsDelta = Number(time.substring(0,2)) - new Date().getHours();
-        nOffset += timeDelta < 0 ? -1 : 0; // if the time difference is negative, which means we are within 24 hours of due, so reduce day offset by 1
-      }
-      // add the appropriate class based on status. If no data, green.
-      var status_class = (new_board[0] === EMPTY_ROW ? "later" : NextDueStatus[next_due_row.nStatus])
-      NextDue("#time-frame", time, sOffset, status_class);
+    if (timeframe) {
+      NextDue("#time-frame", timeframe);
     } else {
-      NextDue("#time-frame", '00:00', '', '');
+      NextDue("#time-frame", "");
     }
   //now that the nStatus values have been set, update the board
   updateSolariTable(new_board);
@@ -354,18 +343,20 @@ function updateSolariBoard() {
   }).error(function () {
     syncing = false;
     updateSolariTable(GetFailBoard());
-    NextDue("#time-frame", '-FA1L-', '', '');
+    // append
+    NextDue("#time-frame", '-FA1L-');
     $("ul.solari-board-columns li.username").text("FAIL WHALE");
   });
 }
 
 function clearBoard() {
   //stop all animations
+  // append
   $(".time").children().stop(true, true);
   $(".username").children().stop(true, true);
   $(".pull-requests").children().stop(true, true);
   //clear the next due and all rows
-  NextDue("#time-frame", '00:00', '', '');
+  NextDue("#time-frame", "");
   for (var r = 0; r < BOARD_ROWS; r++) {
     UpdateSolariRow(r, current_board[r], EMPTY_ROW);
     current_board[r] = EMPTY_ROW;
