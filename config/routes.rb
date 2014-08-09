@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :data, only: [:index, :show]
   
   # get '/index.html' => 'data_scrape#index' 
-  get '/solari_data' => 'data_scrape#solari_data'
+  get '/solari_pull_semester' => 'data_scrape#solari_pull_semester'
+  get '/week' => 'data_scrape#week'
+  get '/day' => 'data_scrape#day'
 end

@@ -2,6 +2,8 @@
  * Released under the MIT license
  *  The nStatus field is only used if status_override = false.*/
 
+// you will need  to take information from here and append it in the specific views
+
 var RATE_VARIANCE = 1; // for determining random animation rate in milliseconds
 var RATE_BASE = 1; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board

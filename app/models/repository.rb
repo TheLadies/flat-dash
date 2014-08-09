@@ -39,7 +39,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => count[i]})     
+      # changes data_scrape for semester pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end
@@ -53,7 +54,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => count[i]})     
+      # changes data for todays pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "TODAY", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end  
@@ -66,7 +68,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "semester", :nPullRequests => count[i]})     
+      # changes data for week pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end
