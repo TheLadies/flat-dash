@@ -2,6 +2,8 @@
  * Released under the MIT license
  *  The nStatus field is only used if status_override = false.*/
 
+// you will need  to take information from here and append it in the specific views
+
 var RATE_VARIANCE = 1; // for determining random animation rate in milliseconds
 var RATE_BASE = 1; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
@@ -17,6 +19,7 @@ var TIME_BOXES = 4; // number of letter boxes displayed in the time column
 var PULL_BOXES = 3; // number of letter boxes displayed in the pullrequest column
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
+  // will need to specify this for sem, week, day
   "sTime": "",
   "sUsername": "",
   "sTimeFrame": "",
@@ -63,10 +66,11 @@ function addSolariBoard(divSelector) {
     "<div id=\"solari\" class=\"panel\">" +
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
+    // will need to append this
     "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
-    "<span class=\"time-week\">00:00</span>" +
+    "<span class=\"time-length\">00:00</span>" +
     "</div>" +
     "</div>" +
     "<div class=\"clockContainer\">" +
@@ -81,6 +85,7 @@ function addSolariBoard(divSelector) {
     "<div class=\"bubble-chart rounded\">"+
     "</div>"+
     "<ul class=\"solari-board-columns rounded\">" +
+    // append
     "<li class=\"time\">Pushed At</li>" +
     "<li class=\"username\">Username</li>" +
     "<li class=\"pull-requests\">Pull Requests</li>" +
@@ -112,7 +117,7 @@ function addSolariBoard(divSelector) {
     $("#min").html((minutes < 10 ? "0" : "") + minutes);
 
     // Set am/pm
-    $("#ampm").html(hours < 12 ? " am" : " pm");
+    $("#ampm").html(hours < 12 ? "AM" : " PM");
   }, 1); // every 15 seconds is plenty accurate
 
 
@@ -134,9 +139,11 @@ function addSolariBoard(divSelector) {
       $section = $('#usernames .solari-board-rows');
     }
     // add a row
+    // append
     $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class="pull-requests"><div class=pull-icon></div></li></ul></li>');
 
     // add the letter boxes in the left column
+    // append
     for (var add_time_col = 0; add_time_col < TIME_BOXES; add_time_col++) {
       $('#row' + add_rows + ' li.time').append('<div id=time-row' + add_rows + 'box' + add_time_col + ' class=letterbox></div>');
       // insert a dot after the second box
@@ -146,11 +153,13 @@ function addSolariBoard(divSelector) {
     }
 
       // add the letter boxes in the middle column
+      // append
     for (var add_cols = 0; add_cols < USERNAME_BOXES; add_cols++) {
       $('#row' + add_rows + ' li.username').append('<div id=username-row' + add_rows + 'box' + add_cols + ' class=letterbox></div>');
     }
 
     // add the letter boxes in the right column
+    // append
     for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
       $('#row' + add_rows + ' li.pull-requests').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
     }
@@ -161,7 +170,7 @@ function addSolariBoard(divSelector) {
 }
 
 function NextDue(id, timeframe) {
-  $(id + ' .time-week').html(timeframe);
+  $(id + ' .time-length').html(timeframe);
 }
 
 function updateSolariTable(board){
@@ -185,6 +194,7 @@ function UpdateSolariRow(row, current_row, new_row) {
   SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
+  // append
   current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
 
   new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 2 ? new_row.nPullRequests.toString() :new_row.nPullRequests.toString().length > 1 ? (new_row.nPullRequests = "0" + new_row.nPullRequests).toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
@@ -279,6 +289,7 @@ function GetFailBoard() {
   // update each row on the board
   for (var row = 0; row < BOARD_ROWS; row++) {
     board[row] = {
+      // append
       "sTime": "",
       "sUsername": fail_whale[row],
       "nPullRequests": 0
@@ -303,6 +314,7 @@ function updateSolariBoard() {
       return;
     }
     //redraw label if recovering from a fail
+    // append
     $("ul.solari-board-columns li.username").text("Username");
     if (new_board.length === 0) {
       clearBoard();
@@ -331,6 +343,7 @@ function updateSolariBoard() {
   }).error(function () {
     syncing = false;
     updateSolariTable(GetFailBoard());
+    // append
     NextDue("#time-frame", '-FA1L-');
     $("ul.solari-board-columns li.username").text("FAIL WHALE");
   });
@@ -338,6 +351,7 @@ function updateSolariBoard() {
 
 function clearBoard() {
   //stop all animations
+  // append
   $(".time").children().stop(true, true);
   $(".username").children().stop(true, true);
   $(".pull-requests").children().stop(true, true);

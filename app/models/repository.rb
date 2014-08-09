@@ -14,7 +14,6 @@ class Repository < ActiveRecord::Base
 
 
   def self.get_repos
-    
     repos = client.org_repos("flatiron-school-students")
     repos.map do |repo|
       repo.full_name
@@ -39,7 +38,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => count[i]})     
+      # changes data_scrape for semester pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end
@@ -53,7 +53,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => count[i]})     
+      # changes data for todays pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "TODAY", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end  
@@ -66,7 +67,8 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "semester", :nPullRequests => count[i]})     
+      # changes data for week pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i]})     
     end
     pull_counts_array
   end
@@ -115,8 +117,55 @@ class Repository < ActiveRecord::Base
     repository_array     
   end
 
-end
+  def self.student_repo_names
+    repository_array = []
+    student_repos = Repository.select(:user_login, :repo_name).to_a.map(&:serializable_hash)
+    student_repos.each do |student|
+       repository_array << student["user_login"]+"/"+student["repo_name"]
+    end
+    repository_array
+  end
 
+  #This gets the branch name for all of the repos
+
+  def self.branches 
+    new_array = []
+    student_repo_names.each do |repo_name|
+      if Repository.client.repository?(repo_name) == true
+        branch_name = Repository.client.branches(repo_name)
+        if branch_name.length > 1 
+          new_array << (branch_name.last.name)
+        else 
+          new_array << (branch_name.first.name)
+        end
+      end  
+    end
+    new_array
+  end  
+
+  # method to check if repository exists
+  def self.repo
+    repo_array = []
+    student_repo_names.each do |repo_name|
+      if Repository.client.repository?(repo_name)
+        repo_array << repo_name
+      end
+    end
+    repo_array
+  end
+
+  #method to get the branches
+
+  def self.new_branches
+    branches = Repository.client.branches("denineguy/fe-oo-atm-ruby-005")
+    if branches.length > 1
+      branches.last.name
+    else 
+      branches.first.name 
+    end
+  end
+
+end
 # repos.size
 # repos.first.class
 # repos.first.pull_requests
