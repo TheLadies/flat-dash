@@ -10,6 +10,7 @@
   <%= analytics_init if Rails.env.production? %>
 
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="assets/heart"></script>
 
 </head>
 <body class="heart-div">
@@ -37,6 +38,7 @@
   <polygon fill-rule="evenodd" clip-rule="evenodd" fill="#666666" points="226.167,20.967 226.167,4.162 229.128,4.162   229.128,18.007 236.85,18.007 236.85,20.967 226.167,20.967 "/>
 </svg>
 
+  <div class="heart-chart"></div>
   <div class="useful-div">
     <p class="useful-p">DO SOMETHING USEFUL </p>
   </div>

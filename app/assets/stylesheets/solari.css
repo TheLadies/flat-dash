@@ -385,6 +385,7 @@ div#ticker {
 
 .useful-div {
   position: relative;
+  height: 100px;
 }
 
 .useful-p {
