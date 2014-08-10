@@ -15,7 +15,7 @@ var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in p
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
 var USERNAME_BOXES = 20; // number of letter boxes displayed in the username column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var PULL_BOXES = 3; // number of letter boxes displayed in the pullrequest column
+var PULL_BOXES = 20; // number of letter boxes displayed in the pullrequest column
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
   // will need to specify this for sem, week, day
@@ -56,7 +56,7 @@ function addSolariBoard2(divSelector) {
  
   if (arguments.length === 0) {
       $("body").append("<div id=\"solariBoardDiv\" style=\"width:970px;margin:0 auto;overflow:hidden\"></div>");
-      divSelector = "#solariBoardCommitDiv";
+      divSelector = "#solariBoardDiv";
   }
      
   //The html structure of the solari board. This implementation is pretty ugly, but it's a simple, single-append solution. 
@@ -66,7 +66,7 @@ function addSolariBoard2(divSelector) {
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
     // will need to append this
-    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests for The </div>" +
+    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Recent Commits for </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
     "<span class=\"time-length\">00:00</span>" +
@@ -81,13 +81,11 @@ function addSolariBoard2(divSelector) {
     "</ul>" +
     "</div>" +
     "</header>" +
-    "<div class=\"bubble-chart rounded\">"+
-    "</div>"+
-    "<ul class=\"solari-board-columns rounded\">" +
+    "<ul class=\"solari-board-columns2 rounded\">" +
     // append
-    "<li class=\"time\">Pushed At</li>" +
+    "<li class=\"time\">Time</li>" +
     "<li class=\"username\">Username</li>" +
-    "<li class=\"pull-requests\">Pull Requests</li>" +
+    "<li class=\"pull-requests\">Commit Messages</li>" +
     "</ul>" +
     "<ul class=\"solari-board-rows rounded\">" +
     "</ul>" +

@@ -134,12 +134,40 @@ ul.solari-board-columns {
   height: 40px;
   padding: 5px 0px 11px 20px;
 }
+
+
 ul.solari-board-rows {
   padding: 2px 0 0;
 }
 
-ul.solari-board-columns, ul.solari-board-rows {
+ul.solari-board-columns2, ul.solari-board-rows {
   width:55%;
+  float:center;
+}
+
+
+.solari-board-columns2, .solari-board-header, .solari-board-rows {
+  background: url("../images/train-panel-bg.png") repeat #262829;
+  margin: 0 0 8px 0;
+  box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  -moz-box-shadow: 1px 1px 3px #000;
+}
+.solari-board-header {
+  padding: 10px 0px 10px;
+  height: 70px;
+}
+ul.solari-board-columns2 {
+  font-size: 18px;
+  font-family: Lato, Arial, sans-serif;
+  height: 40px;
+  padding: 5px 0px 11px 20px;
+}
+
+
+
+ul.solari-board-columns2, ul.solari-board-rows {
+  width:100%;
   float:center;
 }
 

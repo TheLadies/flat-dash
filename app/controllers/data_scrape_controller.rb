@@ -25,7 +25,7 @@ class DataScrapeController < ApplicationController
   end
 
   def commits
-    def solari_pull_day
+    def latest_commit_messages
       json = Repository.todays_pull_requests().to_json
 
       render json: json, callback: params[:callback]
