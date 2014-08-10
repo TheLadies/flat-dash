@@ -66,7 +66,7 @@ function addSolariBoard(divSelector) {
     "<div id=\"usernames\">" +
     "<header class=\"solari-board-header rounded\"> " +
     // will need to append this
-    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests From This </div>" +
+    "<div class=\"solari-board-icon\"> Flatiron Ruby-005 Pull Requests for The </div>" +
     "<div id=\"time-frame\">" +
     "<div class=\"inner low\">" +
     "<span class=\"time-length\">00:00</span>" +
