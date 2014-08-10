@@ -16,6 +16,7 @@ $(function(){
     var color = d3.scale.category20b();
 
     function animate(data) {
+      debugger;
 
     var treeLikeData = {"children": data};
 
@@ -135,6 +136,14 @@ $(function(){
           TEAM_MEMBERS.pop();                 
           animate(TEAM_MEMBERS);
         }, 5000);
+
+        setTimeout(function() {
+          animate(TEAM_MEMBERS);
+        }, 3000);
+
+        setTimeout(function() {
+          animate(TEAM_MEMBERS);
+        }, 3000);
       });
 
     }, 200);
