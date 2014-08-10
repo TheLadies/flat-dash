@@ -63,10 +63,9 @@ $(function(){
     exit.select('text').style('opacity', 0);
   }
 
-
     var TEAM_MEMBERS;
     $.ajax({
-      url: "/data/heart",
+      url: URL,
       type: "GET",
       dataType: "json"
     }).done(function(data){
@@ -135,6 +134,14 @@ $(function(){
           TEAM_MEMBERS.pop();                 
           animate(TEAM_MEMBERS);
         }, 5000);
+
+        setTimeout(function() {
+          animate(TEAM_MEMBERS);
+        }, 3000);
+
+        setTimeout(function() {
+          animate(TEAM_MEMBERS);
+        }, 3000);
       });
 
     }, 200);

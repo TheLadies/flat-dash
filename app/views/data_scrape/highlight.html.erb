@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>FlatDash</title>
+  <META http-equiv="refresh" content="10;URL=heart">
   <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
@@ -16,9 +17,16 @@
   <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
 
 </head>
-<body class="chart-page">
-  <%= render 'data_scrape/index' %>
-<%= yield %>
+<body>
+ <script>
+    $(document).ready(function() {
+      URL = "/solari_pull_day.json";
+      REFRESH_TIME = 1;
+      addSolariBoard(".solari");
+    });
+  </script>
+  <div class="solari">
+  </div>
 
 </body>
 </html>
