@@ -54,7 +54,7 @@ class Repository < ActiveRecord::Base
     last_pull = pull_dates
     users.each_with_index do |user, i|
       # changes data for todays pulls
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "TODAY", :nPullRequests => count[i]})     
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "TODAY", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
     pull_counts_array
   end  
@@ -68,7 +68,7 @@ class Repository < ActiveRecord::Base
     last_pull = pull_dates
     users.each_with_index do |user, i|
       # changes data for week pulls
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i]})     
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
     pull_counts_array
   end

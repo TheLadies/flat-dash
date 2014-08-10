@@ -63,7 +63,6 @@ $(function(){
     exit.select('text').style('opacity', 0);
   }
 
-    var URL = "/solari_pull_semester"
     var TEAM_MEMBERS;
     $.ajax({
       url: URL,
@@ -71,7 +70,6 @@ $(function(){
       dataType: "json"
     }).done(function(data){
       TEAM_MEMBERS = data;
-      debugger;
       setTimeout(function() {
         animate(TEAM_MEMBERS);
       }, 500);

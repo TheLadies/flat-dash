@@ -10,8 +10,8 @@ class DataScrapeController < ApplicationController
 
   def week
     def solari_pull_week
+      
       json = Repository.week_ago_pull_requests().to_json
-
       render json: json, callback: params[:callback]
     end
   end
