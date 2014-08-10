@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   get '/solari_pull_semester' => 'data_scrape#solari_pull_semester'
   get '/week' => 'data_scrape#week'
   get '/day' => 'data_scrape#day'
+  get '/commits' => 'data_scrape#commits'
+  get '/highlight' => 'data_scrape#highlight'
+  get '/heart' => 'data_scrape#heart'
+
 end

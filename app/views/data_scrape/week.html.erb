@@ -1,11 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FlatDash</title>
+  <META http-equiv="refresh" content="10;URL=day">
+  <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= analytics_init if Rails.env.production? %>
+
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+
+  <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
+
+</head>
+<body>
  <script>
     $(document).ready(function() {
       URL = "/solari_pull_week.json";
       REFRESH_TIME = 1;
       addSolariBoard(".solari");
     });
-</script>
-<div class="solari">
-</div>
+  </script>
+  <div class="solari">
+  </div>
 
 <!-- you will need to append information to the solari.js -->
+
+</body>
+</html>
