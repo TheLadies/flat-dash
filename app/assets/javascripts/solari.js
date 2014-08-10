@@ -3,7 +3,6 @@
  *  The nStatus field is only used if status_override = false.*/
 
 // you will need  to take information from here and append it in the specific views
-
 var RATE_VARIANCE = 1; // for determining random animation rate in milliseconds
 var RATE_BASE = 1; // for determining random animation rate in milliseconds  
 var BOARD_ROWS = 15; // total number of rows displayed on the solari board
@@ -25,7 +24,7 @@ var EMPTY_ROW = {
   "sTimeFrame": "",
   "nPullRequests" : 0
 };
-
+// debugger;
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
 var status_override = true;
 var URL = "";
@@ -189,7 +188,7 @@ function updateSolariTable(board){
 
 function UpdateSolariRow(row, current_row, new_row) {
   var rate = RATE_BASE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE;
-
+  // debugger;
   SpinChars(rate, '#time-row' + row, TIME_BOXES, current_row.sTime.replace(":",""), new_row.sTime.replace(":",""));
   SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
