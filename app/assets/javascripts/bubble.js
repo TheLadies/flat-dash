@@ -16,7 +16,6 @@ $(function(){
     var color = d3.scale.category20b();
 
     function animate(data) {
-      debugger;
 
     var treeLikeData = {"children": data};
 
@@ -64,14 +63,15 @@ $(function(){
     exit.select('text').style('opacity', 0);
   }
 
-
+    var URL = "/solari_pull_semester"
     var TEAM_MEMBERS;
     $.ajax({
-      url: "/data/heart",
+      url: URL,
       type: "GET",
       dataType: "json"
     }).done(function(data){
       TEAM_MEMBERS = data;
+      debugger;
       setTimeout(function() {
         animate(TEAM_MEMBERS);
       }, 500);
