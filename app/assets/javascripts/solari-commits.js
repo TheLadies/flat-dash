@@ -19,10 +19,10 @@ var COMMIT_BOXES = 32; // number of letter boxes displayed in the pullrequest co
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
   // will need to specify this for sem, week, day
+  "sDate": "",
   "sTime": "",
   "sUsername": "",
-  "sTimeFrame": "",
-  "nPullRequests" : 0
+  "nCommitMessage" : ""
 };
 // debugger;
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
@@ -171,6 +171,7 @@ function NextDue(id, timeframe) {
 }
 
 function updateSolariTable(board){
+  debugger;
   for (var row = 0; row < BOARD_ROWS; row++) {
     if ((board[row] === undefined)) {
       // make this an empty row
@@ -192,12 +193,12 @@ function UpdateSolariRow(row, current_row, new_row) {
 
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
   // append
-  current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nPullRequests === -1? "--" : current_row.nPullRequests.toString().length > 1 ? current_row.nPullRequests.toString() : "0" + current_row.nPullRequests.toString();
+  current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nCommitMessage === -1? "--" : current_row.nCommitMessage.toString().length > 1 ? current_row.nCommitMessage.toString() : "0" + current_row.nCommitMessage.toString();
 
-  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 2 ? new_row.nPullRequests.toString() :new_row.nPullRequests.toString().length > 1 ? (new_row.nPullRequests = "0" + new_row.nPullRequests).toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
+  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nCommitMessage === -1? "--" :new_row.nCommitMessage.toString().length > 2 ? new_row.nCommitMessage.toString() :new_row.nCommitMessage.toString().length > 1 ? (new_row.nCommitMessage = "0" + new_row.nCommitMessage).toString() : (new_row.nCommitMessage = "00" + new_row.nCommitMessage).toString();
 
   SpinChars(rate, '#pull-requests-row' + row, COMMIT_BOXES, current_row.sPull, new_row.sPull);  
-  SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nPullRequests, new_row.nPullRequests);
+  SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nCommitMessage, new_row.nCommitMessage);
 }
 
 function SpinChars(rate, selector_prefix, max_boxes, current_text, new_text) {
@@ -289,7 +290,7 @@ function GetFailBoard() {
       // append
       "sTime": "",
       "sUsername": fail_whale[row],
-      "nPullRequests": 0
+      "nCommitMessage": 0
     };
   }
   return board;
