@@ -201,6 +201,11 @@ li.username, li.product, li.time, li.pull-requests {
   float: left;
   margin: 2px 14px 2px 0;
 }
+
+li.pull-requests2 {
+  float: left;
+  margin: 2px 14px 2px 0;
+}
 /* Column Width */
 li.time {
   width: 115px;
@@ -211,6 +216,11 @@ li.username {
 
 li.pull-requests {
   width: 115px;
+
+}
+
+li.pull-requests2 {
+  width: 750px;
 
 }
 

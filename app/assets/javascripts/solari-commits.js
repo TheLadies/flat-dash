@@ -85,7 +85,7 @@ function addSolariBoard2(divSelector) {
     // append
     "<li class=\"time\">Time</li>" +
     "<li class=\"username\">Username</li>" +
-    "<li class=\"pull-requests\">Commit Messages</li>" +
+    "<li class=\"pull-requests2\">Commit Messages</li>" +
     "</ul>" +
     "<ul class=\"solari-board-rows rounded\">" +
     "</ul>" +
@@ -121,8 +121,8 @@ function addSolariBoard2(divSelector) {
   // show the solari board.
     $('#show-solari').hide();
 
-  $('li.pull-requests').click(function () {
-    updateSolariBoard();
+  $('li.pull-requests2').click(function () {
+    updateSolariBoard2();
   });
 
   var $section;
@@ -137,7 +137,7 @@ function addSolariBoard2(divSelector) {
     }
     // add a row
     // append
-    $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class="pull-requests"><div class=pull-icon></div></li></ul></li>');
+    $section.append('<li class=board-data id=row' + add_rows + '><ul><li class=time></li><li class=username></li></li><li class="pull-requests2"><div class=pull-icon></div></li></ul></li>');
 
     // add the letter boxes in the left column
     // append
@@ -158,12 +158,12 @@ function addSolariBoard2(divSelector) {
     // add the letter boxes in the right column
     // append
     for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
-      $('#row' + add_rows + ' li.pull-requests').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
+      $('#row' + add_rows + ' li.pull-requests2').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
     }
   }
   solari_setup_done = 1;
-  window.setInterval(function (){updateSolariBoard()}, 1000 * REFRESH_TIME);
-  updateSolariBoard();
+  window.setInterval(function (){updateSolariBoard2()}, 1000 * REFRESH_TIME);
+  updateSolariBoard2();
 }
 
 function NextDue(id, timeframe) {
@@ -295,7 +295,7 @@ function GetFailBoard() {
   return board;
 }
 
-function updateSolariBoard() {
+function updateSolariBoard2() {
   if (syncing) {
     return;
   }
@@ -351,7 +351,7 @@ function clearBoard() {
   // append
   $(".time").children().stop(true, true);
   $(".username").children().stop(true, true);
-  $(".pull-requests").children().stop(true, true);
+  $(".pull-requests2").children().stop(true, true);
   //clear the next due and all rows
   NextDue("#time-frame", "");
   for (var r = 0; r < BOARD_ROWS; r++) {
