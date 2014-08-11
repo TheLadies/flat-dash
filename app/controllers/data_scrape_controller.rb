@@ -19,7 +19,6 @@ class DataScrapeController < ApplicationController
   def day
     def solari_pull_day
       json = Repository.todays_pull_requests().to_json
-      binding.pry
 
       render json: json, callback: params[:callback]
     end

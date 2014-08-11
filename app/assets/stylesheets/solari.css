@@ -405,3 +405,24 @@ div#ticker {
 .heart-div {
   
 }
+
+div.heart-chart g.node {
+  stroke-width: 1.5px;
+}
+
+div.heart-chart g.node:hover circle {
+  fill: grey !important;
+}
+
+div.heart-chart text {
+  font: 18px 'Open Sans', sans-serif;;
+  text-anchor: middle;
+  pointer-events: none;
+  fill: white;
+}
+div.heart-chart circle {
+  fill: #ccc;
+  stroke: white ;
+  stroke-width: 2px;
+}
+

@@ -124,8 +124,7 @@ class Repository < ActiveRecord::Base
     users = student_pulls.keys
 
     users.each_with_index do |user, i|
-      # changes data_scrape for semester pulls
-        user_list << ({:id => rand(0..2), :name => user, :r => rand(1..100)})     
+      user_list << ({:id => rand(0..2), :name => user, :r => rand(1..50)})     
     end
     user_list
   end
