@@ -28,7 +28,7 @@ $(function(){
   var force = d3.layout.force()
       .nodes(nodes)
       .links([])
-      .charge(-400)
+      .charge(-1000)
       //.chargeDistance(200)
       .gravity(0.1)
       .friction(0.8)
