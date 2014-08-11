@@ -39,12 +39,6 @@ $(function(){
       // .style('text-anchor', 'middle')
       .text(function(d) { return d.name; });
 
-//       circle {
-//   fill: #ccc;
-//   stroke: white ;
-//   stroke-width: 2px;
-// }
-
 
     node.attr('transform', function(d) {
         return 'translate(' + d.x + ',' + d.y + ')'; 
