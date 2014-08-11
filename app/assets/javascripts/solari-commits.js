@@ -15,7 +15,7 @@ var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in p
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
 var USERNAME_BOXES = 20; // number of letter boxes displayed in the username column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var PULL_BOXES = 20; // number of letter boxes displayed in the pullrequest column
+var COMMIT_BOXES = 32; // number of letter boxes displayed in the pullrequest column
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
   // will need to specify this for sem, week, day
@@ -157,7 +157,7 @@ function addSolariBoard2(divSelector) {
 
     // add the letter boxes in the right column
     // append
-    for (var add_pull_requests_col = 0; add_pull_requests_col < PULL_BOXES; add_pull_requests_col++) {
+    for (var add_pull_requests_col = 0; add_pull_requests_col < COMMIT_BOXES; add_pull_requests_col++) {
       $('#row' + add_rows + ' li.pull-requests2').append('<div id=pull-requests-row' + add_rows + 'box' + add_pull_requests_col + ' class=letterbox></div>');
     }
   }
@@ -196,7 +196,7 @@ function UpdateSolariRow(row, current_row, new_row) {
 
   new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nPullRequests === -1? "--" :new_row.nPullRequests.toString().length > 2 ? new_row.nPullRequests.toString() :new_row.nPullRequests.toString().length > 1 ? (new_row.nPullRequests = "0" + new_row.nPullRequests).toString() : (new_row.nPullRequests = "00" + new_row.nPullRequests).toString();
 
-  SpinChars(rate, '#pull-requests-row' + row, PULL_BOXES, current_row.sPull, new_row.sPull);  
+  SpinChars(rate, '#pull-requests-row' + row, COMMIT_BOXES, current_row.sPull, new_row.sPull);  
   SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nPullRequests, new_row.nPullRequests);
 }
 
