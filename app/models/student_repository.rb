@@ -23,10 +23,12 @@ class StudentRepository < ActiveRecord::Base
    # method to check if repository exists
   def self.student_repos
     repo_array = []
-    construct_names.each do |repo_name|
+    repo_total = construct_names.length
+    construct_names.each_with_index do |repo_name, i|
       if client.repository?(repo_name)
         repo_array << repo_name
       end
+      puts i.to_s + ":" + repo_total.to_s
     end
     repo_array
   end
@@ -38,7 +40,7 @@ class StudentRepository < ActiveRecord::Base
   #   if branches.length > 1
   #     branches.last.name
   #   else 
-  #     branches.first.name 
+  #     branches.first.name      
   #   end
   # end
 
@@ -46,15 +48,16 @@ class StudentRepository < ActiveRecord::Base
   def self.branches 
     new_array = []
     # student_repo_names.each do |repo_name|
-    student_repos.each do |repo_name|
+      student_repos = ["jbarrieault/task-lister-ruby-005", "ambertunnell/task-lister-ruby-005", "JessRudder/d3-bar-chart-ruby-005", "JessRudder/d3-bubble-chart-ruby-005"]
+      student_repos.each do |repo_name|
       binding.pry
       branch_name = client.branches(repo_name)
       if branch_name.length > 1 
-        new_array << (branch_name.last.name)
+        new_array << (repo_name => branch_name.last.name)
       else 
-        new_array << (branch_name.first.name)
+        new_array << (repo_name => branch_name.first.name)
       end
-    end
+    end  
     new_array
   end  
 

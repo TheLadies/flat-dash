@@ -18,8 +18,8 @@ class Commit < ActiveRecord::Base
 
   #This methods finds all of the commits for each repository and saves it to the database
   def self.make_commit_list
-    get_commits.collect do |repo_name| 
-      client.commits(repo_name).each do |commit_list|
+    get_commits.collect do |repo_name, branch| 
+      client.commits(repo_name, branch).each do |commit_list|
         if commit_list.author
           # commit_list.commit.author.name
           find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
@@ -55,12 +55,24 @@ class Commit < ActiveRecord::Base
     commit_array
   end
 
+  # This method picks one user at a time and shows their last 10 commit messages
+  def self.user_commits
+    commit_array = []
+    user_logins = Commit.pluck(:user_login).uniq 
+    login = user_logins.sample
+    messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
+    messages.each do |message|
+      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
+    end
+    commit_array
+  end
 
 end
 
 # if sha != "master"
 #   Commit.client.list_commits("denineguy/validating-user-forms-ruby-005")
 # end
+#Commit.client.list_commits("denineguy/validating-user-forms-ruby-005", 'working')
 # Commit.client.list_commits("denineguy/validating-user-forms-ruby-005", sha: 'working')
 #user login - client.commits("flatiron-school-students/intro-to-carrierwave-ruby-005")[1].author.login
 #user name - client.commits("flatiron-school-students/intro-to-carrierwave-ruby-005")[1].commit.author.name
