@@ -30,12 +30,20 @@ $(function(){
       .attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
     enter.append('circle')
       .style('fill', function(d) { return color(d.name); })
+      .style('stroke', '#26282c')
+      .style('stroke-width', '2px')
       .attr('r' , 10);
     enter.append('text')
-      .style('opacity', 1)
-      .style('fill', 'black')
-      .style('text-anchor', 'middle')
+      // .style('opacity', 1)
+      // .style('fill', 'black')
+      // .style('text-anchor', 'middle')
       .text(function(d) { return d.name; });
+
+//       circle {
+//   fill: #ccc;
+//   stroke: white ;
+//   stroke-width: 2px;
+// }
 
 
     node.attr('transform', function(d) {
@@ -45,7 +53,7 @@ $(function(){
     node.select('circle')
         .attr('r' , function(d) { return d.r; });
     node.select('text')
-        .style('opacity', 1)
+        // .style('opacity', 1)
         .style("font-size", function(d) { return Math.min(d.r, (d.r - 8) / this.getComputedTextLength() * 28) + "px"; });
       
     for(var i = 0; i < $(".node").size(); i++) {

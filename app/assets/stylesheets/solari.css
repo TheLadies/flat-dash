@@ -360,12 +360,12 @@ div#ticker {
   float: right;
   background: url("../images/train-panel-bg.png") repeat #262829;
   margin: 0 0 8px 0;
-  box-shadow: 1px 1px 3px #000;
-  -webkit-box-shadow: 1px 1px 3px #000;
+/*  box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;*/
   height: 650px;
   width: 44.5%;
   margin: 0 auto;
-  font-size: 12px;
+  /*font-size: 12px;*/
 }
 
 .glyphicon {
@@ -406,21 +406,21 @@ div#ticker {
   
 }
 
-div.heart-chart g.node {
+.node {
   stroke-width: 1.5px;
 }
 
-div.heart-chart g.node:hover circle {
+.node:hover circle {
   fill: grey !important;
 }
 
-div.heart-chart text {
+text {
   font: 18px 'Open Sans', sans-serif;;
   text-anchor: middle;
   pointer-events: none;
   fill: white;
 }
-div.heart-chart circle {
+circle {
   fill: #ccc;
   stroke: white ;
   stroke-width: 2px;
