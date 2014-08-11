@@ -1,7 +1,7 @@
 $(function(){
   var data = [
-    {"id": 0, "name": "AngularJS", "r": 50 },
-    {"id": 0, "name": "HTML5", "r": 40 },
+    {"id": 0, "name": "jessrudder", "r": 50 },
+    {"id": 0, "name": "aviflombaum", "r": 40 },
     {"id": 0, "name": "Javascript", "r": 30 },
     {"id": 0, "name": "NodeJs", "r": 30 },
     {"id": 0, "name": "D3.js", "r": 40 },
@@ -12,8 +12,8 @@ $(function(){
     {"id": 0, "name": "PHP", "r": 20 },
     {"id": 0, "name": "jQuery", "r": 30 },
 
-    {"id": 1, "name": "Actionscript", "r": 50 },
-    {"id": 1, "name": "Flash", "r": 32 },
+    {"id": 1, "name": "denineguy", "r": 50 },
+    {"id": 1, "name": "christinaleuci", "r": 32 },
     {"id": 1, "name": "Flex", "r": 50 },
     {"id": 1, "name": "AIR", "r": 40 },
     {"id": 1, "name": "Photoshop", "r": 30 },
@@ -53,6 +53,7 @@ $(function(){
   var counter = 0;
 
   function tick(e) {
+    debugger;
     var k = .1 * e.alpha;
 
     // Push nodes toward their designated focus.
@@ -67,6 +68,7 @@ $(function(){
 
 
   var timer = setInterval(function(){
+    debugger;
 
     if (nodes.length > data.length-1) { clearInterval(timer); return;}
 
@@ -116,4 +118,7 @@ $(function(){
   }
 
   d3.select(window).on('resize', resize);
+  tick(e);
+
+
 });
