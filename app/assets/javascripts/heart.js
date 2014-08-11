@@ -1,48 +1,16 @@
-// var data = [
-//   {"id": 0, "name": "ambertunnell", "r": 4}, {"id": 0, "name": "natalieparellano", "r": 42}, 
-//   {"id": 1, "name": "jusjmkim", "r": 28}, {"id": 2, "name": "jbarrieault", "r": 31}, 
-//   {"id": 2, "name": "wlowry88", "r": 20}, {"id": 1, "name": "callahanchris", "r": 1}, 
-//   {"id": 0, "name": "vanessadean", "r": 7}, {"id": 0, "name": "elowing", "r": 43}, 
-//   {"id": 0, "name": "pcrglennon", "r": 83}, {"id": 0, "name": "ablwr", "r": 72}, 
-//   {"id": 2, "name": "juliataitz", "r": 6}, {"id": 1, "name": "bajh", "r": 6}, 
-//   {"id": 0, "name": "ccmeyers", "r": 7}, {"id": 2, "name": "JessRudder", "r": 55}, 
-//   {"id": 1, "name": "dsully360", "r": 42}, {"id": 0, "name": "kamoh", "r": 77}, 
-//   {"id": 2, "name": "denineguy", "r": 10}, {"id": 0, "name": "mrmitchboyer", "r": 3}, 
-//   {"id": 2, "name": "KorenLeslieCohen", "r": 66}, {"id": 1, "name": "randallreedjr", "r": 85}, 
-//   {"id": 0, "name": "lizzerdrix", "r": 17}, {"id": 2, "name": "rebeccagreenblatt", "r": 100}, 
-//   {"id": 2, "name": "zacksheppard", "r": 68}, {"id": 0, "name": "amyrjohnson", "r": 66}, 
-//   {"id": 2, "name": "kylefdoherty", "r": 50}, {"id": 0, "name": "adriennefishman", "r": 51}, 
-//   {"id": 0, "name": "mmlkrx", "r": 65}, {"id": 0, "name": "bshore01", "r": 36}, 
-//   {"id": 0, "name": "analuperez", "r": 4}, {"id": 2, "name": "ilanasufrin", "r": 55}, 
-//   {"id": 2, "name": "Ewarren7", "r": 18}, {"id": 2, "name": "simonseroussi", "r": 27}, 
-//   {"id": 1, "name": "cassidypignatello", "r": 4}, {"id": 1, "name": "kriscroes", "r": 62}, 
-//   {"id": 1, "name": "SpencerTang", "r": 53}, {"id": 2, "name": "ldemarest", "r": 79}, 
-//   {"id": 1, "name": "biancatompkins", "r": 55}, {"id": 0, "name": "ChristinaLeuci", "r": 86}, 
-//   {"id": 1, "name": "davidcoronado", "r": 6}, {"id": 2, "name": "timothywtan", "r": 53}, 
-//   {"id": 2, "name": "jackiemorgan", "r": 22}, {"id": 1, "name": "loganhasson", "r": 100}, 
-//   {"id": 1, "name": "ChavaLovesFyedka", "r": 51}, {"id": 1, "name": "ErikPeterson", "r": 29}, 
-//   {"id": 1, "name": "FifthSurprise", "r": 92}, {"id": 1, "name": "MProuts", "r": 84}, 
-//   {"id": 1, "name": "Msea", "r": 13}, {"id": 0, "name": "NegaMorgan", "r": 27}, 
-//   {"id": 2, "name": "SML4EVA", "r": 81}, {"id": 0, "name": "TSiege", "r": 80}, 
-//   {"id": 2, "name": "aviflombaum", "r": 53}, {"id": 2, "name": "brian1987", "r": 24}, 
-//   {"id": 0, "name": "cheeseandpepper", "r": 39}, {"id": 1, "name": "chriskohlbrenner", "r": 42}, 
-//   {"id": 0, "name": "corbinpage", "r": 58}, {"id": 1, "name": "emmaife", "r": 82}, 
-//   {"id": 2, "name": "eugmill", "r": 47}, {"id": 1, "name": "lipenco", "r": 37}, 
-//   {"id": 2, "name": "pat-whitrock", "r": 27}, {"id": 0, "name": "wontaeyang", "r": 94},
-// ];
-
 $(function(){
 
-  var data;
-  var data = $.ajax({
+  $.ajax({
     url: "/list_of_users",
     type: "GET",
     dataType: "json"
   }).done(function(TEAM_MEMBERS){
-    // debugger;
     data = TEAM_MEMBERS;
   });
 
+  setTimeout(function() {
+    force.tick(1);
+  }, 3000);
 
   var width = window.innerWidth,
       height = 500;
@@ -67,13 +35,13 @@ $(function(){
       .size([width, height])
       .on("tick", tick);
 
+
   //var node = svg.selectAll("circle");
   var node = svg.selectAll("g");
 
   var counter = 0;
 
   function tick(e) {
-    debugger;
     var k = .1 * e.alpha;
 
     // Push nodes toward their designated focus.
@@ -124,6 +92,13 @@ $(function(){
   }, 100);
 
 
+  var animate = setInterval(function(){
+    force.start();
+    force.tick();
+    force.end();
+  }, 100);
+
+
   d3.selection.prototype.moveToFront = function() {
     return this.each(function(){
       this.parentNode.appendChild(this);
@@ -137,9 +112,7 @@ $(function(){
   }
 
   d3.select(window).on('resize', resize);
-
-
-
-
-
 });
+
+  force.tick(1);
+  // force.tick(2);

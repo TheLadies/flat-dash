@@ -33,7 +33,7 @@ class DataScrapeController < ApplicationController
   end
 
   def highlight
-    def solari_pull_day
+    def top_commits_by_user
       json = Repository.todays_pull_requests().to_json
 
       render json: json, callback: params[:callback]

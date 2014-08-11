@@ -124,7 +124,7 @@ class Repository < ActiveRecord::Base
     users = student_pulls.keys
 
     users.each_with_index do |user, i|
-      user_list << ({:id => rand(0..2), :name => user, :r => rand(10..90)})     
+      user_list << ({:id => rand(0..2), :name => user, :r => rand(15..75)})     
     end
     user_list
   end
