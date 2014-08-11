@@ -25,7 +25,7 @@ class Repository < ActiveRecord::Base
     get_repos.each do |repo|
       client.pull_requests(repo).each do |pull|  
        # repo.get_pull_requests.each do |pull|
-      find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
+        find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
       end
     end
   end
@@ -115,6 +115,19 @@ class Repository < ActiveRecord::Base
       repository_array << ({:sDate => last_pull[repo].strftime("%F"), :sTime => last_pull[repo].strftime("%R"), :sRepository => repo, :sTimeFrame => "week", :nPullRequests => count[i]})
     end
     repository_array     
+  end
+
+  def self.list_of_users
+    user_list = []
+
+    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+
+    users.each_with_index do |user, i|
+      # changes data_scrape for semester pulls
+        user_list << ({:id => rand(0..2), :name => user, :r => rand(1..100)})     
+    end
+    user_list
   end
 
 end
