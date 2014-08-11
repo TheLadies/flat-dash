@@ -13,12 +13,12 @@ $(function(){
   }, 3000);
 
   var width = window.innerWidth,
-      height = 500;
+      height = 575;
 
   var fill = d3.scale.category20();
 
   var nodes = [], labels = [],
-      foci = [{x: 0, y: 150}, {x: 350, y: 150}, {x: 200, y: 150}];
+      foci = [{x: 600, y: 400}, {x: 900, y: 200}, {x: 600, y: 200}, {x: 900, y: 500}, {x: 100, y: 100}, {x: 500, y: 100}, {x: 1200, y: 500}];
 
   var svg = d3.select("div.heart-chart").append("svg")
       .attr("width", "100%")
@@ -113,6 +113,3 @@ $(function(){
 
   d3.select(window).on('resize', resize);
 });
-
-  force.tick(1);
-  // force.tick(2);
