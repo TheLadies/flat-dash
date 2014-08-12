@@ -23,7 +23,6 @@ class Commit < ActiveRecord::Base
   #This methods finds all of the commits for each repository and saves it to the database
   def self.make_commit_list
     student_repos.collect do |student|
-      # binding.pry 
       client.commits(student["student_repo_name"], student["branch"]).each do |commit_list|
         if commit_list.author
           # commit_list.commit.author.name
@@ -35,7 +34,6 @@ class Commit < ActiveRecord::Base
 
   # def self.make_commit_list
   #   get_commits.collect do |Commit.student_repo_name, Commit.branch| 
-  #     binding.pry
   #     client.commits(repo_name, branch).each do |commit_list|
   #       if commit_list.author
   #         # commit_list.commit.author.name
@@ -77,19 +75,7 @@ class Commit < ActiveRecord::Base
     login = user_logins.sample
     messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
     messages.each do |message|
-      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
-    end
-    commit_array
-  end
-
-  # This method picks one user at a time and shows their last 10 commit messages
-  def self.user_commits
-    commit_array = []
-    user_logins = Commit.pluck(:user_login).uniq 
-    login = user_logins.sample
-    messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
-    messages.each do |message|
-      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
+      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message, :sTimeFrame => message.user_login})
     end
     commit_array
   end

@@ -33,7 +33,7 @@ class DataScrapeController < ApplicationController
   end
 
   def highlight
-    def top_commits_by_user
+    def user_commits
       json = Commit.user_commits().to_json
 
       render json: json, callback: params[:callback]

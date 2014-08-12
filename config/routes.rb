@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/solari_pull_week' => 'data_scrape#solari_pull_week'
   get '/solari_pull_day' => 'data_scrape#solari_pull_day'
   get '/latest_commit_messages' => 'data_scrape#latest_commit_messages'
-  get '/top_commits_by_user' => 'data_scrape#top_commits_by_user'
+  get '/user_commits' => 'data_scrape#user_commits'
   get '/list_of_users' => 'data_scrape#list_of_users'
 
   get '/week' => 'data_scrape#week'
