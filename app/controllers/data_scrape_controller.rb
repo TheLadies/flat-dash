@@ -26,7 +26,7 @@ class DataScrapeController < ApplicationController
 
   def commits
     def latest_commit_messages
-      json = Repository.todays_pull_requests().to_json
+      json = Commit.latest_commit_messages().to_json
 
       render json: json, callback: params[:callback]
     end
@@ -34,7 +34,7 @@ class DataScrapeController < ApplicationController
 
   def highlight
     def top_commits_by_user
-      json = Repository.todays_pull_requests().to_json
+      json = Commit.user_commits().to_json
 
       render json: json, callback: params[:callback]
     end
