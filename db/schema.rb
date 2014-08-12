@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809193517) do
+ActiveRecord::Schema.define(version: 20140811191509) do
 
   create_table "commits", force: true do |t|
     t.string   "name"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20140809193517) do
     t.datetime "updated_at"
     t.datetime "pull_created_at"
     t.datetime "pull_updated_at"
-    t.string   "student_repo_name"
   end
 
   add_index "repositories", ["user_login"], name: "index_repositories_on_user_login"
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140809193517) do
     t.string   "student_repo_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "branch"
   end
 
   create_table "students", force: true do |t|

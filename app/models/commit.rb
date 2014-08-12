@@ -12,14 +12,19 @@ class Commit < ActiveRecord::Base
   end
 
   # Octokit.org_repositories('github')
-  def self.get_commits
-    Repository.get_repos
+  # def self.get_commits
+  #   Repository.get_repos
+  # end
+
+  def self.student_repos
+    StudentRepository.select(:student_repo_name, :branch).to_a.map(&:serializable_hash)
   end
 
   #This methods finds all of the commits for each repository and saves it to the database
   def self.make_commit_list
-    get_commits.collect do |repo_name, branch| 
-      client.commits(repo_name, branch).each do |commit_list|
+    student_repos.collect do |student|
+      # binding.pry 
+      client.commits(student["student_repo_name"], student["branch"]).each do |commit_list|
         if commit_list.author
           # commit_list.commit.author.name
           find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
@@ -27,6 +32,18 @@ class Commit < ActiveRecord::Base
       end
     end
   end
+
+  # def self.make_commit_list
+  #   get_commits.collect do |Commit.student_repo_name, Commit.branch| 
+  #     binding.pry
+  #     client.commits(repo_name, branch).each do |commit_list|
+  #       if commit_list.author
+  #         # commit_list.commit.author.name
+  #         find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
+  #       end
+  #     end
+  #   end
+  # end
 
   #This method finds the top 10 users the highest commit count
   def self.top_commits_by_user
