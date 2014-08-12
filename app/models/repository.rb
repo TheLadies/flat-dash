@@ -24,7 +24,6 @@ class Repository < ActiveRecord::Base
   def self.make_pull_requests
     get_repos.each do |repo|
       client.pull_requests(repo).each do |pull|  
-       # repo.get_pull_requests.each do |pull|
         find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
       end
     end
@@ -38,8 +37,7 @@ class Repository < ActiveRecord::Base
     count = student_pulls.values
     last_pull = pull_dates
     users.each_with_index do |user, i|
-      # changes data_scrape for semester pulls
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
+      pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
     pull_counts_array
   end
@@ -68,7 +66,7 @@ class Repository < ActiveRecord::Base
     last_pull = pull_dates
     users.each_with_index do |user, i|
       # changes data for week pulls
-        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i], :name => user, :value => count[i]})     
+      pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
     pull_counts_array
   end
@@ -130,20 +128,9 @@ class Repository < ActiveRecord::Base
   end
 
 end
-# repos.size
-# repos.first.class
-# repos.first.pull_requests
-# repos.first
-# repos.first.full_name  (This gives the full name)
-# Octokit.pull_requests(“flatiron-school-students/rake-todo-ruby-004”)
 
 # Octokit.pull_requests(repos.first.full_name)  repository name (This gives all pull request for pull)
-
 # Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.user.login (This gives user login)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.created_at (This gives user pull request creation date)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.updated_at (This gives user pull request creation date)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.base.repo.name
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.base.repo.full_name
 
 
 
