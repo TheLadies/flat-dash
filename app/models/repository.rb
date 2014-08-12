@@ -1,6 +1,7 @@
 
 class Repository < ActiveRecord::Base
   attr_reader :client
+  default_scope
 
   def self.client
     client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'], auto_traversal: true)
@@ -11,7 +12,6 @@ class Repository < ActiveRecord::Base
   def client
     self.class.client
   end
-
 
   def self.get_repos
     repos = client.org_repos("flatiron-school-students")
@@ -31,7 +31,9 @@ class Repository < ActiveRecord::Base
 
   def self.top_pull_requests
     pull_counts_array = []
-    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    # binding.pry
+    # pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    pull_dates = Repository.order("pull_updated_at DESC").maximum(:pull_updated_at).group(:user_login)
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
     count = student_pulls.values
