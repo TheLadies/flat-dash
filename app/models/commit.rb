@@ -28,6 +28,14 @@ class Commit < ActiveRecord::Base
     end
   end
 
+  #This method gets rid of Commit made by teachers, TAs, non-current students"
+  def self.destroy_commits
+    user_login = ["NegaMorgan", "ChavaLovesFyedka", "flatiron-bot", "arelenglish", "aviflombaum",
+                  "spencer1248", "kthffmn", "loganhasson", "TSiege", "ahimmelstoss", "jongrover", 
+                  "SML4EVA", "Smylers", "StevenNunez", "jackiemorgan", "scottcreynolds"]
+    Commit.where(user_login: user_login).destroy_all
+  end
+
   #This method finds the top 10 users the highest commit count
   def self.top_commits_by_user
     commit_array = []
