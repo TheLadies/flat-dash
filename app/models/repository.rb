@@ -29,19 +29,29 @@ class Repository < ActiveRecord::Base
     end
   end
 
+  # def self.top_pull_requests
+  #   pull_counts_array = []
+  #   pull_dates = Repository.select(:user_login).group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
+  #   student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
+  #   users = student_pulls.keys
+  #   count = student_pulls.values
+  #   last_pull = pull_dates
+  #   users.each_with_index do |user, i|
+  #     pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
+  #   end
+  #   pull_counts_array
+  # end
+
   def self.top_pull_requests
     pull_counts_array = []
-    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
-    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
-    users = student_pulls.keys
-    count = student_pulls.values
-    last_pull = pull_dates
-    users.each_with_index do |user, i|
-      pull_counts_array << ({:sDate => last_pull[user][0].strftime("%F"), :sTime => last_pull[user][0].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
+    pull_dates = Repository.select(:user_login, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').group(:user_login)
+    pull_dates.each do |repo|
+      # puts "#{repo.user_login}: #{repo.last_updated}, #{repo.num_pull_requests}"
+      pull_counts_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo
+      last_updated.strftime("%R"), :sUsername => "@"+ repo.user_login, :sTimeFrame => "SEMESTER", :nPullRequests => repo.num_pull_requests, :name => repo.user_login, :value => repo.num_pull_requests})     
     end
-    pull_counts_array
+    pull_counts_array  
   end
-
 
   def self.todays_pull_requests
     pull_counts_array = []
