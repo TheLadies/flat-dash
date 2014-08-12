@@ -11,6 +11,9 @@
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
 
+  <% request.url %>
+<!--   This is the code that should pull in the current URL - maybe we can use it to get the code dryer so we're back to one header in application.html.erb -->
+
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 
   <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
