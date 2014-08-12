@@ -1,7 +1,6 @@
 
 class Repository < ActiveRecord::Base
   attr_reader :client
-  default_scope
 
   def self.client
     client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'], auto_traversal: true)
