@@ -49,9 +49,19 @@ class Commit < ActiveRecord::Base
     commit_array = []
     commit_user.each do |user,date|
        messages = Commit.where("commit_created_at >= ?", date).find_by "user_login = ?", user
-       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message})
+       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message, :sTimeFrame => "EVERYONE"})
     end
-    binding.pry
+    commit_array
+  end
+
+  def self.user_commits
+    commit_array = []
+    user_logins = Commit.pluck(:user_login).uniq 
+    login = user_logins.sample
+    messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
+    messages.each do |message|
+      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
+    end
     commit_array
   end
 
