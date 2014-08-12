@@ -18,7 +18,6 @@ class Commit < ActiveRecord::Base
   #This methods finds all of the commits for each repository and saves it to the database
   def self.make_commit_list
     student_repos.collect do |student|
-      # binding.pry 
       client.commits(student["student_repo_name"], student["branch"]).each do |commit_list|
         if commit_list.author
           # commit_list.commit.author.name
@@ -49,20 +48,18 @@ class Commit < ActiveRecord::Base
     commit_array = []
     commit_user.each do |user,date|
        messages = Commit.where("commit_created_at >= ?", date).find_by "user_login = ?", user
-       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message})
+       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message, :sTimeFrame => "EVERYONE"})
     end
-    binding.pry
     commit_array
   end
 
-  # This method picks one user at a time and shows their last 10 commit messages
   def self.user_commits
     commit_array = []
     user_logins = Commit.pluck(:user_login).uniq 
     login = user_logins.sample
     messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
     messages.each do |message|
-      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
+      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message, :sTimeFrame => message.user_login})
     end
     commit_array
   end

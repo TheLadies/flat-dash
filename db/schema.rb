@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140811191509) do
     t.datetime "updated_at"
     t.datetime "pull_created_at"
     t.datetime "pull_updated_at"
+    t.string   "student_repo_name"
   end
 
   add_index "repositories", ["user_login"], name: "index_repositories_on_user_login"

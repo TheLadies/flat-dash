@@ -22,9 +22,8 @@ var EMPTY_ROW = {
   "sDate": "",
   "sTime": "",
   "sUsername": "",
-  "nCommitMessage" : ""
+  "sCommitMessage" : ""
 };
-// debugger;
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
 var status_override = true;
 var URL = "";
@@ -170,35 +169,34 @@ function NextDue(id, timeframe) {
   $(id + ' .time-length').html(timeframe);
 }
 
-function updateSolariTable(board){
-  debugger;
+function updateSolariTable2(board){
   for (var row = 0; row < BOARD_ROWS; row++) {
     if ((board[row] === undefined)) {
       // make this an empty row
       board[row] = EMPTY_ROW;
     }
     // change the row
-    UpdateSolariRow(row, current_board[row], board[row]);
+    UpdateSolariRow2(row, current_board[row], board[row]);
   }
 
   // update the current_row board
   current_board = board;
 }
 
-function UpdateSolariRow(row, current_row, new_row) {
+function UpdateSolariRow2(row, current_row, new_row) {
   var rate = RATE_BASE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE + Math.random() * RATE_VARIANCE;
-  // debugger;
   SpinChars(rate, '#time-row' + row, TIME_BOXES, current_row.sTime.replace(":",""), new_row.sTime.replace(":",""));
   SpinChars(rate, '#username-row' + row, USERNAME_BOXES, current_row.sUsername, new_row.sUsername);
 
   //turn pull-requests numbers into strings for display. Ensure they are always 2 chars long
   // append
-  current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.nCommitMessage === -1? "--" : current_row.nCommitMessage.toString().length > 1 ? current_row.nCommitMessage.toString() : "0" + current_row.nCommitMessage.toString();
+    current_row.sPull = current_row === EMPTY_ROW ? "" : current_row.sCommitMessage === -1? "--" : current_row.sCommitMessage.toString().length > 1 ? current_row.sCommitMessage.toString() : "0" + current_row.sCommitMessage.toString();
 
-  new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.nCommitMessage === -1? "--" :new_row.nCommitMessage.toString().length > 2 ? new_row.nCommitMessage.toString() :new_row.nCommitMessage.toString().length > 1 ? (new_row.nCommitMessage = "0" + new_row.nCommitMessage).toString() : (new_row.nCommitMessage = "00" + new_row.nCommitMessage).toString();
 
-  SpinChars(rate, '#pull-requests-row' + row, COMMIT_BOXES, current_row.sPull, new_row.sPull);  
-  SpinImage(rate, '#row' + row + ' .pull-icon', current_row.nCommitMessage, new_row.nCommitMessage);
+    new_row.sPull = new_row === EMPTY_ROW ? "" : new_row.sCommitMessage === -1? "--" :new_row.sCommitMessage.toString().length > 2 ? new_row.sCommitMessage.toString() :new_row.sCommitMessage.toString().length > 1 ? (new_row.sCommitMessage = "0" + new_row.sCommitMessage).toString() : (new_row.sCommitMessage = "00" + new_row.sCommitMessage).toString();
+
+    SpinChars(rate, '#pull-requests-row' + row, COMMIT_BOXES, current_row.sPull, new_row.sPull);  
+    SpinImage(rate, '#row' + row + ' .pull-icon', current_row.sCommitMessage, new_row.sCommitMessage);
 }
 
 function SpinChars(rate, selector_prefix, max_boxes, current_text, new_text) {
@@ -290,7 +288,7 @@ function GetFailBoard() {
       // append
       "sTime": "",
       "sUsername": fail_whale[row],
-      "nCommitMessage": 0
+      "sCommitMessage": 0
     };
   }
   return board;
@@ -304,7 +302,6 @@ function updateSolariBoard2() {
   syncing = true;
 
   $.getJSON(URL + (URL.indexOf("?") === -1 ? '?' : '&') + "callback=?" + URL_SUFFIX, function(new_board) {
-
     syncing = false;
 
     if (new_board === null) {
@@ -331,7 +328,7 @@ function updateSolariBoard2() {
       NextDue("#time-frame", "");
     }
   //now that the nStatus values have been set, update the board
-  updateSolariTable(new_board);
+  updateSolariTable2(new_board);
   }
     // update last refresh time text
     $('#last-updated span').fadeOut("slow", function() {
@@ -340,7 +337,7 @@ function updateSolariBoard2() {
     }).fadeIn("slow");
   }).error(function () {
     syncing = false;
-    updateSolariTable(GetFailBoard());
+    updateSolariTable2(GetFailBoard());
     // append
     NextDue("#time-frame", '-FA1L-');
     $("ul.solari-board-columns li.username").text("FAIL WHALE");
@@ -356,7 +353,7 @@ function clearBoard() {
   //clear the next due and all rows
   NextDue("#time-frame", "");
   for (var r = 0; r < BOARD_ROWS; r++) {
-    UpdateSolariRow(r, current_board[r], EMPTY_ROW);
+    UpdateSolariRow2(r, current_board[r], EMPTY_ROW);
     current_board[r] = EMPTY_ROW;
   }
 }
