@@ -31,12 +31,11 @@ class Repository < ActiveRecord::Base
 
   def self.top_pull_requests
     pull_counts_array = []
-    pull_dates = Repository.group(:user_login, :pull_updated_at).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
     count = student_pulls.values
     last_pull = pull_dates
-    binding.pry
     users.each_with_index do |user, i|
       pull_counts_array << ({:sDate => last_pull[user][0].strftime("%F"), :sTime => last_pull[user][0].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
