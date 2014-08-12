@@ -12,6 +12,7 @@ class Repository < ActiveRecord::Base
     self.class.client
   end
 
+
   def self.get_repos
     repos = client.org_repos("flatiron-school-students")
     repos.map do |repo|
@@ -30,15 +31,13 @@ class Repository < ActiveRecord::Base
 
   def self.top_pull_requests
     pull_counts_array = []
-    # binding.pry
-    # pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     pull_dates = Repository.group(:user_login, :pull_updated_at).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
-    users = student_pulls.keys
+    users = student_pulls.keys[0]
     count = student_pulls.values
     last_pull = pull_dates
+    binding.pry
     users.each_with_index do |user, i|
-      binding.pry
       pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
     pull_counts_array
@@ -47,12 +46,11 @@ class Repository < ActiveRecord::Base
 
   def self.todays_pull_requests
     pull_counts_array = []
-    pull_dates = Repository.group(:user_login, :pull_updated_at).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.where("pull_updated_at > ?", 1.days.ago).group(:user_login).order("count_all DESC").calculate(:count, :all)
-    users = student_pulls[0].keys
+    users = student_pulls.keys
     count = student_pulls.values
     last_pull = pull_dates
-    binding.pry
     users.each_with_index do |user, i|
       # changes data for todays pulls
         pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "DAY", :nPullRequests => count[i], :name => user, :value => count[i]})     
