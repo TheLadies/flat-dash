@@ -47,8 +47,8 @@ class Repository < ActiveRecord::Base
     pull_dates = Repository.select(:user_login, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').group(:user_login)
     pull_dates.each do |repo|
       # puts "#{repo.user_login}: #{repo.last_updated}, #{repo.num_pull_requests}"
-      pull_counts_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo
-      last_updated.strftime("%R"), :sUsername => "@"+ repo.user_login, :sTimeFrame => "SEMESTER", :nPullRequests => repo.num_pull_requests, :name => repo.user_login, :value => repo.num_pull_requests})     
+    pull_counts_array << ({:sDate => "#{repo.last_updated}".strftime("%F"), :sTime => "#{repo
+              last_updated}".strftime("%R"), :sUsername => "@"+ "#{repo.user_login}", :sTimeFrame => "SEMESTER", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.user_login}", :value => "#{repo.num_pull_requests}"})     
     end
     pull_counts_array  
   end
