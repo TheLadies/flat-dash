@@ -32,7 +32,7 @@ class Repository < ActiveRecord::Base
     pull_counts_array = []
     # binding.pry
     # pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
-    pull_dates = Repository.order("pull_updated_at DESC").maximum(:pull_updated_at).group(:user_login)
+    pull_dates = Repository.order("pull_updated_at DESC").group(:user_login).maximum(:pull_updated_at)
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
     count = student_pulls.values
