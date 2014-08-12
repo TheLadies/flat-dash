@@ -103,7 +103,7 @@ class Repository < ActiveRecord::Base
     pull_counts_array
   end
 
-  def self.pull_request_by_user
+  def self.pull_request_by_user #//can get rid of 
     
     name_collection = Repository.all.collect do |repo|
       repo.user_login
@@ -167,7 +167,7 @@ class Repository < ActiveRecord::Base
     repository_array     
   end
 
-  def self.list_of_users
+  def self.list_of_users #//can get rid of
     user_list = []
 
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
@@ -184,7 +184,7 @@ end
 # Octokit.pull_requests(repos.first.full_name)  repository name (This gives all pull request for pull)
 # Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.user.login (This gives user login)
 
-
+# repo, read:org, read:repo_hook, user 
 
 
 
