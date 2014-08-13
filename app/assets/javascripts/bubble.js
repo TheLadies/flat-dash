@@ -30,10 +30,11 @@ $(function(){
         .style('fill', function(d) { return color(d.name); })
         .attr('r' , 0);
       enter.append('text')
-        .style('opacity', 0)
-        .style('fill', 'black')
+        .text(function(d){return d.name;})
+        .style("font-size", function(d) { 
+          return Math.min(d.r, (d.r - 8) / this.getComputedTextLength() * 28) + "px"; 
+        })
         .style('text-anchor', 'middle')
-        .text(function(d) { return d.name; });
 
       var update = node.transition().attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
 
