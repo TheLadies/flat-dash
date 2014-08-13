@@ -24,11 +24,15 @@
     $(document).ready(function() {
       URL = "/solari_pull_day.json";
       REFRESH_TIME = 15;
+      PREV_BUTTON = "/week"
+      NEXT_BUTTON = "/commits"
       addSolariBoard(".solari");
     });
   </script>
   <div class="solari">
   </div>
+  <a href="/week" class="prev_button"><button>Previous</button></a>
+  <a href="/commits"class="next button"><button>Next</button></a>
   <FORM METHOD="LINK" ACTION="commits.html">
     <INPUT TYPE="submit" VALUE="COMMITS">
   </FORM>

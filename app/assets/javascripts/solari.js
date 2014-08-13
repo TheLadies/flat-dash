@@ -24,6 +24,8 @@ var EMPTY_ROW = {
   "sTimeFrame": "",
   "nPullRequests" : 0
 };
+var PREV_BUTTON = "/";
+var NEXT_BUTTON = "/";
 // debugger;
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
 var status_override = true;
@@ -94,6 +96,8 @@ function addSolariBoard(divSelector) {
     "</div>" +
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
     "<div class=\"container\">"+
+    '<a href="'+ PREV_BUTTON +'">Previous</a>'+
+    // "<a href="+ NEXT_BUTTON + "class=\"prev_button\"><button>Next</button></a>"+
     "Made with <span class=\"glyphicon glyphicon-heart\"></span> at the <a href=\"http://flatironschool.com/\" target=\"_blank\" id=\"school\">Flatiron School</a> | "+
     "<a href=\"https://github.com/denineguy\" target=\"_blank\">@denineguy</a> | " + 
     "<a href=\"https://github.com/christinaleuci\" target=\"_blank\">@christinaleuci</a> | " + 
