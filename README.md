@@ -7,7 +7,7 @@ Flatdash is a dashboard for the Flatiron School, which provides a leaderboard fo
 ## Screenshots
 ![Pull Request Leaderboard](/public/images/pull_request.png)
 </br>
-![Commit Leaderboard](/public/images/commit.png)
+![Commit Leaderboard](/public/images/commits.png)
 
 
 ## Background
@@ -46,9 +46,9 @@ actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
 
 ## Author
 
-Denine Guy blog:denineguy.github.io  twitter:@sashaydoll
-Christina Leuci blog:  twitter:@ChristinaLeuci
-Jessica Rudder blog:   twitter:@JessRudder
+- Denine Guy blog:denineguy.github.io  twitter:@sashaydoll
+- Christina Leuci blog:  twitter:@ChristinaLeuci
+- Jessica Rudder blog:   twitter:@JessRudder
 
 ## License
 
