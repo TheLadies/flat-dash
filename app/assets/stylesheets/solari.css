@@ -138,11 +138,40 @@ ul.solari-board-columns {
   height: 40px;
   padding: 5px 0px 11px 20px;
 }
+
+
 ul.solari-board-rows {
   padding: 2px 0 0;
 }
-ul.solari-board-columns, ul.solari-board-rows {
+
+ul.solari-board-columns2, ul.solari-board-rows {
   width:55%;
+  float:center;
+}
+
+
+.solari-board-columns2, .solari-board-header, .solari-board-rows {
+  background: url("../images/train-panel-bg.png") repeat #262829;
+  margin: 0 0 8px 0;
+  box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  -moz-box-shadow: 1px 1px 3px #000;
+}
+.solari-board-header {
+  padding: 10px 0px 10px;
+  height: 70px;
+}
+ul.solari-board-columns2 {
+  font-size: 18px;
+  font-family: Lato, Arial, sans-serif;
+  height: 40px;
+  padding: 5px 0px 11px 20px;
+}
+
+
+
+ul.solari-board-columns2, ul.solari-board-rows {
+  width:100%;
   float:center;
 }
 
@@ -176,6 +205,11 @@ li.username, li.product, li.time, li.pull-requests {
   float: left;
   margin: 2px 14px 2px 0;
 }
+
+li.pull-requests2 {
+  float: left;
+  margin: 2px 14px 2px 0;
+}
 /* Column Width */
 li.time {
   width: 115px;
@@ -192,6 +226,9 @@ li.board-data li.pull-requests{
   margin-left: 5px;
 }
 
+li.pull-requests2 {
+  width: 736px;
+}
 
 .letterbox {
   float: left;
@@ -261,7 +298,12 @@ li.board-data {
 }
 #time-frame {
   float: left;
+<<<<<<< HEAD
   margin-left: -5px;
+=======
+  width: 161px;
+  margin-left: -9px;
+>>>>>>> master
   margin-right: 15px;
   margin-top: -7px;
   margin-bottom: -18px;
@@ -281,16 +323,70 @@ li.board-data {
 #time-frame .time-time {
   font-family: "Kelly Slab", Lucida Grande, Lucida Console, Courier New;
   font-size: 28px;
-  margin-left: 4px;
+  margin-left: -4px;
   margin-right: 8px;
 }
 
 #last-updated {
-  margin: 6px 0 2px 4px;
+  margin: 10px 0 2px 4px;
   height: 25px;
   padding: 3px;
   color: #999999;
 }
+
+#nav-buttons{
+  float: left;
+  margin-top: -28px;
+  margin-left:  550px;
+}
+
+.button{
+  color: #999999;
+  background: transparent;
+  width: 90px;
+  height: 30px;
+  margin-right: 28px;
+}
+
+.button:hover{
+  font-weight: bold;
+  color: #428bca;
+  border-color: #428bca;
+}
+
+.button_heart:hover{
+  font-weight: bold;
+  color: #428bca;
+  border-color: #428bca;
+}
+
+#prev_button_heart{
+  color: #333333;
+}
+
+#next_button_heart{
+  color: #333333;
+  float: right;
+}
+
+.button_heart{
+  color: #333333;
+  background: transparent;
+  width: 90px;
+  height: 30px;
+  margin-right: 28px;
+  margin-top: 20px;
+  font-family: Arial;
+}
+
+#prev_button_heart .button_heart{
+  margin-left: 10px;
+}
+
+#next_button_heart .button_heart{
+  margin-right: 10px;
+}
+
 .muted {
   color: #707275;
 }
@@ -333,3 +429,74 @@ div#ticker {
 
 #point { position:relative; padding-left:2px; padding-right:2px; }
 #ampm { font-size:2em; margin-left:2px; }
+
+.bubble-chart{
+  float: right;
+  background: url("../images/train-panel-bg.png") repeat #262829;
+  margin: 0 0 8px 0;
+/*  box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;*/
+  height: 650px;
+  width: 44.5%;
+  margin: 0 auto;
+  /*font-size: 12px;*/
+}
+
+.glyphicon {
+  color: red;
+}
+
+.container {
+  color:white;
+  width:530px !important;
+  float: right;
+  margin-top: -23px;
+}
+
+.time-length {
+  font-size: 20px;
+}
+
+.useful-div {
+  position: relative;
+  height: 80px;
+  margin: 0;
+  padding: 0;
+}
+
+.useful-p {
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  text-align: center;
+  font-size: 80px;
+  font-family: sans-serif;
+  color: #474747;
+  margin: 0;
+  padding: 0;
+}
+
+.heart-div {
+  
+}
+
+.node {
+  stroke-width: 1.5px;
+}
+
+.node:hover circle {
+  fill: grey !important;
+}
+
+text {
+  font: 18px 'Open Sans', sans-serif;;
+  text-anchor: middle;
+  pointer-events: none;
+  fill: white;Searching 313 files for "last-updated"
+}
+circle {
+  fill: #ccc;
+  stroke: white ;
+  stroke-width: 2px;
+}
+

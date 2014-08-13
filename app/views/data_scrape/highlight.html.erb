@@ -3,8 +3,7 @@
 <head>
   <title>FlatDash</title>
 
-  <!-- <META http-equiv="refresh" content="35;URL=week"> -->
-
+  <!-- <META http-equiv="refresh" content="40;URL=heart"> -->
   <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
@@ -22,16 +21,15 @@
 <body>
  <script>
     $(document).ready(function() {
-      URL = "/solari_pull_semester.json";
-      // REFRESH_TIME = 15;
-      PREV_BUTTON = "/heart"
-      NEXT_BUTTON = "/week"
-      addSolariBoard(".solari");
+      URL = "/user_commits.json";
+      // REFRESH_TIME = 60;
+      PREV_BUTTON = "/commits"
+      NEXT_BUTTON = "/heart"
+      addSolariBoard2(".solari-commit");
     });
   </script>
-
-  <div class="solari">
+  <div class="solari-commit">
   </div>
-  
+
 </body>
 </html>

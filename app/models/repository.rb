@@ -1,4 +1,4 @@
-require 'active_record'
+
 class Repository < ActiveRecord::Base
   attr_reader :client
 
@@ -20,122 +20,176 @@ class Repository < ActiveRecord::Base
     end
   end
 
-  # def self.make_repos
-  #   repos = get_repos
-  #   repos.map do |name|
-  #     find_or_create_by(name: name)
-  #   end
-  # end
-
-  # def get_pull_requests(repo)
-  #   client.pull_requests(repo)
-  # end
 
   def self.make_pull_requests
     get_repos.each do |repo|
-      client.pull_requests(repo).each do |pull|
-       # repo.get_pull_requests.each do |pull|
-      find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
+      client.pull_requests(repo).each do |pull|  
+        find_or_create_by(repo_name: pull.base.repo.name, repo_full_name: pull.base.repo.full_name, user_login: pull.user.login, pull_created_at: pull.created_at, pull_updated_at: pull.updated_at)
       end
     end
   end
 
-  def self.top_pull_requests
+#sqlite3 arel method 
+  def self.top_pull_requests 
     pull_counts_array = []
+    pull_dates = Repository.select(:user_login).group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
-    pulls = student_pulls.values
+    count = student_pulls.values
+    last_pull = pull_dates
     users.each_with_index do |user, i|
-      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+      pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "SEMESTER", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
-  pull_counts_array
+    pull_counts_array
   end
 
+  # sqlite3 arel method
   def self.todays_pull_requests
     pull_counts_array = []
+    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.where("pull_updated_at > ?", 1.days.ago).group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
-    pulls = student_pulls.values
+    count = student_pulls.values
+    last_pull = pull_dates
     users.each_with_index do |user, i|
-      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+      # changes data for todays pulls
+        pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "DAY", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
-  pull_counts_array
-  end
+    pull_counts_array
+  end 
 
+  # sqlite3 arel method
   def self.week_ago_pull_requests
     pull_counts_array = []
+    pull_dates = Repository.group(:user_login).order("pull_updated_at DESC").maximum(:pull_updated_at)
     student_pulls = Repository.where("pull_updated_at > ?", 1.weeks.ago).group(:user_login).order("count_all DESC").calculate(:count, :all)
     users = student_pulls.keys
-    pulls = student_pulls.values
+    count = student_pulls.values
+    last_pull = pull_dates
     users.each_with_index do |user, i|
-      pull_counts_array << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pulls[i]}) 
+      # changes data for week pulls
+      pull_counts_array << ({:sDate => last_pull[user].strftime("%F"), :sTime => last_pull[user].strftime("%R"), :sUsername => "@"+ user, :sTimeFrame => "WEEK", :nPullRequests => count[i], :name => user, :value => count[i]})     
     end
-  pull_counts_array
+    pull_counts_array
   end
 
-end  
-  # def self.top_pull_requests
-  #   students = []
-  #   self.all.each do |repo|
-  #     user = repo.user_login
-  #     pull_count = self.where(user_login: user).count
-  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@" + user, :sTimeFrame => "week", :nPullRequests => pull_count})
-  #   end
-  #   return students
-  # end
+  # sqlite3 arel method
+  def self.top_repositories
+    repository_array = []
+    pull_dates = Repository.group(:repo_name).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    top_repository = Repository.group(:repo_name).order("count_all DESC").calculate(:count, :all)
+    repos = top_repository.keys
+    count = top_repository.values
+    last_pull = pull_dates
+    top_repository.keys.each_with_index do |repo, i|
+      repository_array << ({:sDate => last_pull[repo].strftime("%F"), :sTime => last_pull[repo].strftime("%R"), :sRepository => repo, :sTimeFrame => "week", :nPullRequests => count[i]})     
+    end
+    repository_array
+  end
 
-  # def self.last_updated_pull
-  #   students = []
-  #   self.all.each do |repo|
-  #     # binding.pry
-  #     user = repo.user_login
-  #     pull_date = self.where(user_login: user).pluck(:pull_updated_at)
-  #     pull_date_max = pull_date.max
-  #     pull_count = self.where(user_login: user).count
-  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pull_count})
-  #     # pull_date.max
-  #    end  
-  #    students.uniq.sort_by{|student| student[:nPullRequests] }.reverse
-  #    # binding.pry
-  # end
 
-  # def self.top_pull_requests
-  #   students = []
-  #   users = self.all.pluck(:user_login)
-  #   users.uniq.each do |user|
-  #     # binding.pry
-  #     pull_count = users.count(user)
-  #     students << ({:sDate =>"today", :sTime => "13:30", :sUsername => "@"+ user, :sTimeFrame => "week", :nPullRequests => pull_count})
-  #   end
-  #   students.sort_by {|student| student[:nPullRequests] }.reverse
+  # sqlite3 arel method
+  def self.bottom_repositories
+    repository_array = []
+    pull_dates = Repository.group(:repo_name).order("pull_updated_at DESC").maximum(:pull_updated_at)
+    bottom_repository = Repository.group(:repo_name).order("count_all ASC").calculate(:count, :all)
+    repos = bottom_repository.keys
+    count = bottom_repository.values
+    last_pull = pull_dates
+    bottom_repository.keys.each_with_index do |repo, i|
+      repository_array << ({:sDate => last_pull[repo].strftime("%F"), :sTime => last_pull[repo].strftime("%R"), :sRepository => repo, :sTimeFrame => "week", :nPullRequests => count[i]})
+    end
+    repository_array     
+  end
+
+  #This method is for the heart/floating dot page 
+  def self.list_of_users
+    user_list = []
+
+    student_pulls = Repository.group(:user_login).order("count_all DESC").calculate(:count, :all)
+    users = student_pulls.keys
+
+    users.each_with_index do |user, i|
+      user_list << ({:id => rand(0..6), :name => user, :r => rand(15..75)})     
+    end
+    user_list
+  end
+  
+
+#   def self.top_pull_requests
+#     pull_counts_array = []
+#     pull_dates = Repository.select(:user_login, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').group(:user_login).order('COUNT(id) DESC')
+#     pull_dates.each do |repo|
+#       pull_counts_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo.last_updated.strftime("%R"), :sUsername => "@"+ "#{repo.user_login}", :sTimeFrame => "SEMESTER", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.user_login}", :value => "#{repo.num_pull_requests}"})     
+#     end
+#     pull_counts_array  
+#   end
+
+
+#   def self.todays_pull_requests  # changes data for todays pulls
+#     pull_counts_array = []
+#     pull_dates = Repository.select(:user_login, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').where("pull_updated_at > ?", 1.days.ago).group(:user_login).order('COUNT(id) DESC')
+#     pull_dates.each do |repo|
+#       puts "#{repo.user_login}: #{repo.last_updated}, #{repo.num_pull_requests}"
+#         pull_counts_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo.last_updated.strftime("%R"), :sUsername => "@"+ "#{repo.user_login}", :sTimeFrame => "DAY", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.user_login}", :value => "#{repo.num_pull_requests}"})     
+#     end
+#     pull_counts_array
+#   end  
+
+# # changes data for 1 week pulls
+#   def self.week_ago_pull_requests  
+#     pull_counts_array = []
+#     pull_dates = Repository.select(:user_login, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').where("pull_updated_at > ?", 1.weeks.ago).group(:user_login).order('COUNT(id) DESC')
+#     pull_dates.each do |repo|
+#       puts "#{repo.user_login}: #{repo.last_updated}, #{repo.num_pull_requests}"
+#         pull_counts_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo.last_updated.strftime("%R"), :sUsername => "@"+ "#{repo.user_login}", :sTimeFrame => "WEEK", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.user_login}", :value => "#{repo.num_pull_requests}"})     
+#     end
+#     pull_counts_array
+#   end
+
+#   def self.top_repositories
+#     repository_array = []
+#     pull_dates = Repository.select(:repo_name, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').group(:repo_name).order('COUNT(id) DESC')
+#     pull_dates.each do |repo|
+#       repository_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo.last_updated.strftime("%R"), :sRepository => "@"+ "#{repo.repo_name}", :sTimeFrame => "WEEK", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.repo_name}", :value => "#{repo.num_pull_requests}"})     
+#     end
+#     repository_array
+#   end
+
+#   def self.bottom_repositories
+#     repository_array = []
+#     pull_dates = Repository.select(:repo_name, 'MAX(pull_updated_at) AS last_updated', 'COUNT(id) AS num_pull_requests').group(:repo_name).order('COUNT(id)')
+#     pull_dates.each do |repo|
+#       repository_array << ({:sDate => repo.last_updated.strftime("%F"), :sTime => repo.last_updated.strftime("%R"), :sRepository => "@"+ "#{repo.repo_name}", :sTimeFrame => "WEEK", :nPullRequests => "#{repo.num_pull_requests}", :name => "#{repo.repo_name}", :value => "#{repo.num_pull_requests}"})     
+#     end
+#     repository_array     
+#   end
+
+
+  # def self.pull_request_by_user #//can get rid of 
     
+  #   name_collection = Repository.all.collect do |repo|
+  #     repo.user_login
+  #   end
+
+  #   name_used = []
+  #   pull_data = []
+    
+  #   name_collection.each do |name|
+  #     if !name_used.include? name
+  #       name_used << name
+  #       pull_data << {:name => name, :value => name_collection.count(name)}
+  #     end
+  #   end
+  #   pull_data
   # end
 
-  # Today 
-   
-
-
-# Last days 7 days  
-
-# Today 
-
-
-# repos.size
-# repos.first.class
-# repos.first.pull_requests
-# repos.first
-# repos.first.full_name  (This gives the full name)
-# Octokit.pull_requests(“flatiron-school-students/rake-todo-ruby-004”)
+end
 
 # Octokit.pull_requests(repos.first.full_name)  repository name (This gives all pull request for pull)
-
 # Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.user.login (This gives user login)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.created_at (This gives user pull request creation date)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.updated_at (This gives user pull request creation date)
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.base.repo.name
-# Octokit.pull_requests("flatiron-school-students/rake-todo-ruby-004").first.base.repo.full_name
 
-
+# repo, read:org, read:repo_hook, user 
 
 
 

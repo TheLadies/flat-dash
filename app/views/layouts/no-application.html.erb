@@ -2,9 +2,6 @@
 <html>
 <head>
   <title>FlatDash</title>
-
-  <!-- <META http-equiv="refresh" content="35;URL=week"> -->
-
   <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
@@ -14,24 +11,16 @@
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
 
+  <% request.url %>
+<!--   This is the code that should pull in the current URL - maybe we can use it to get the code dryer so we're back to one header in application.html.erb -->
+
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 
   <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
 
 </head>
 <body>
- <script>
-    $(document).ready(function() {
-      URL = "/solari_pull_semester.json";
-      // REFRESH_TIME = 15;
-      PREV_BUTTON = "/heart"
-      NEXT_BUTTON = "/week"
-      addSolariBoard(".solari");
-    });
-  </script>
+<%= yield %>
 
-  <div class="solari">
-  </div>
-  
 </body>
 </html>

@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require d3.min
-//= require bubble
 //= require bootstrap
+//= require d3.min
+//= heart
+//= require bubble
 //= require_tree .
+//= require_self
