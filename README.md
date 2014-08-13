@@ -5,8 +5,10 @@
 Flatdash is a dashboard for the Flatiron School, which provides a leaderboard for students with the most pull requests from GitHub, for the day, week and semester. The dashboard also provides a leaderboard for the commits submitted by students throughout the semester.
 
 ## Screenshots
+![Pull Request Leaderboard](/public/images/pull_request.png)
+</br>
+![Commit Leaderboard](/public/images/commit.png)
 
-Add some spiffy screenshots of your app here.
 
 ## Background
 
@@ -21,6 +23,7 @@ like?
 - D3.js is used to visualize the pull request and commit information of the students
 - Fog Creek's Solari dashboard is used to the Leaderboard information
 - Cron Job is implemented to update the information hourly.
+
 ## Usage
 
 How do users use your app?
@@ -36,14 +39,16 @@ Any things in particular you'd like to see in pull requests?
 
 ## Future
 
-We are currently working on implementing a view that will show the top repositories with pull request,  We are looking for ways to speed up the Solari grid so the information can be provided to the user quicker.  We are also currently working automate refreshing the date more frequently than every hour
+We are currently working on implementing a view that will show the top repositories with pull request,  We are looking for ways to speed up the Solari grid so the information can be provided to the user quicker.  We are also currently working automate refreshing the date more frequently than every hour.
+
 What features are you currently working on? Only mention things that you
 actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
 
 ## Author
 
-Denine Guy, Christina Leuci, and Jessica Rudder
-Link to your blog, twitter, etc!
+Denine Guy blog:denineguy.github.io  twitter:@sashaydoll
+Christina Leuci blog:  twitter:@ChristinaLeuci
+Jessica Rudder blog:   twitter:@JessRudder
 
 ## License
 

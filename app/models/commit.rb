@@ -59,7 +59,7 @@ class Commit < ActiveRecord::Base
     login = user_logins.sample
     messages = Commit.where("user_login = ?", login).order("commit_created_at DESC").select(:user_login, :commit_message, :commit_created_at).limit(10)
     messages.each do |message|
-      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message})
+      commit_array << ({:sDate => message.commit_created_at.strftime("%F"), :sTime =>message.commit_created_at.strftime("%R"),:sUsername => message.user_login, :sCommitMessage => message.commit_message, :sTimeFrame => message.user_login})
     end
     commit_array
   end
