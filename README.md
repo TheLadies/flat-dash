@@ -46,9 +46,9 @@ actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
 
 ## Author
 
-- Denine Guy - blog:http://denineguy.github.io/,   twitter:@sashaydoll
-- Christina Leuci -  blog:http://christinaleuci.github.io/,   twitter:@ChristinaLeuci
-- Jessica Rudder -  blog: http://jessrudder.github.io/,   twitter:@JessRudder
+- Denine Guy - blog: http://denineguy.github.io/,   twitter: @sashaydoll
+- Christina Leuci -  blog: http://christinaleuci.github.io/,   twitter: @ChristinaLeuci
+- Jessica Rudder -  blog: http://jessrudder.github.io/,   twitter: @JessRudder
 
 ## License
 
