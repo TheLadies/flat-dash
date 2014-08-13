@@ -50,6 +50,7 @@ $(function(){
           .attr('r' , function(d) { return d.r; });
       update.select('text')
           .style('opacity', 1);
+          
 
       var exit = node.exit()
         .transition()
@@ -58,16 +59,24 @@ $(function(){
       exit.select('text').style('opacity', 0);
     }
 
+    var i = 3;
+
     function fetchData() {
       $.ajax({
         url: URL,
         type: "GET",
         dataType: "json",
         success: function(data){
-          animate(data);
+          if(i > data.length) {
+            animate(data);
+          }
+          else {
+           animate(data.splice(0, i));
+           i = i + 3;
+          }
         }
       });
-      setTimeout(fetchData, 1000);
+      setTimeout(fetchData, 500);
     }
     fetchData();
 
