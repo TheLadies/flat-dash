@@ -220,7 +220,7 @@ li.pull-requests {
 }
 
 li.pull-requests2 {
-  width: 750px;
+  width: 736px;
 
 }
 
@@ -318,11 +318,65 @@ li.board-data {
 }
 
 #last-updated {
-  margin: 6px 0 2px 4px;
+  margin: 10px 0 2px 4px;
   height: 25px;
   padding: 3px;
   color: #999999;
 }
+
+#nav-buttons{
+  float: left;
+  margin-top: -28px;
+  margin-left:  550px;
+}
+
+.button{
+  color: #999999;
+  background: transparent;
+  width: 90px;
+  height: 30px;
+  margin-right: 28px;
+}
+
+.button:hover{
+  font-weight: bold;
+  color: #428bca;
+  border-color: #428bca;
+}
+
+.button_heart:hover{
+  font-weight: bold;
+  color: #428bca;
+  border-color: #428bca;
+}
+
+#prev_button_heart{
+  color: #333333;
+}
+
+#next_button_heart{
+  color: #333333;
+  float: right;
+}
+
+.button_heart{
+  color: #333333;
+  background: transparent;
+  width: 90px;
+  height: 30px;
+  margin-right: 28px;
+  margin-top: 20px;
+  font-family: Arial;
+}
+
+#prev_button_heart .button_heart{
+  margin-left: 10px;
+}
+
+#next_button_heart .button_heart{
+  margin-right: 10px;
+}
+
 .muted {
   color: #707275;
 }
@@ -386,7 +440,7 @@ div#ticker {
   color:white;
   width:530px !important;
   float: right;
-  margin-top: -26px;
+  margin-top: -23px;
 }
 
 .time-length {
@@ -428,7 +482,7 @@ text {
   font: 18px 'Open Sans', sans-serif;;
   text-anchor: middle;
   pointer-events: none;
-  fill: white;
+  fill: white;Searching 313 files for "last-updated"
 }
 circle {
   fill: #ccc;
