@@ -15,7 +15,7 @@ var IMAGE_HEIGHT = 20; // height of a single product or status image frame (in p
 var IMAGE_FACTOR = 2; // every N picture in the letter image is a "real" image (i.e., not an in-between frame)
 var USERNAME_BOXES = 20; // number of letter boxes displayed in the username column
 var TIME_BOXES = 4; // number of letter boxes displayed in the time column
-var COMMIT_BOXES = 32; // number of letter boxes displayed in the pullrequest column
+var COMMIT_BOXES = 30; // number of letter boxes displayed in the pullrequest column
 var REFRESH_TIME = 1; //refresh time in seconds
 var EMPTY_ROW = {
   // will need to specify this for sem, week, day
@@ -24,6 +24,8 @@ var EMPTY_ROW = {
   "sUsername": "",
   "sCommitMessage" : ""
 };
+var PREV_BUTTON = "/";
+var NEXT_BUTTON = "/";
 //if true, the status column will be handled automatically according to time and date. false will override status with nStatus from payload
 var status_override = true;
 var URL = "";
@@ -90,6 +92,10 @@ function addSolariBoard2(divSelector) {
     "</ul>" +
     "</div>" +
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
+    "<div id=\"nav-buttons\">" +
+    "<a id=\"prev_button\" href="+ PREV_BUTTON +"><button class=\"button\">Previous</button></a>"+
+    "<a id=\"next_button\" href="+ NEXT_BUTTON +"><button class=\"button\">Next</button></a>"+
+    "</div>"+
     "<div class=\"container\">"+
     "Made with <span class=\"glyphicon glyphicon-heart\"></span> at the <a href=\"http://flatironschool.com/\" target=\"_blank\" id=\"school\">Flatiron School</a> | "+
     "<a href=\"https://github.com/denineguy\" target=\"_blank\">@denineguy</a> | " + 

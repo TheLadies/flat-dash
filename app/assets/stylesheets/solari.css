@@ -220,7 +220,7 @@ li.pull-requests {
 }
 
 li.pull-requests2 {
-  width: 750px;
+  width: 736px;
 
 }
 
@@ -327,11 +327,7 @@ li.board-data {
 #nav-buttons{
   float: left;
   margin-top: -28px;
-  margin-left:  571px;
-}
-
-#prev_button{
-  margin-right: 30px;
+  margin-left:  550px;
 }
 
 .button{
@@ -339,13 +335,46 @@ li.board-data {
   background: transparent;
   width: 90px;
   height: 30px;
-  margin-right: 30px;
+  margin-right: 28px;
 }
 
 .button:hover{
   font-weight: bold;
   color: #428bca;
   border-color: #428bca;
+}
+
+.button_heart:hover{
+  font-weight: bold;
+  color: #428bca;
+  border-color: #428bca;
+}
+
+#prev_button_heart{
+  color: #333333;
+}
+
+#next_button_heart{
+  color: #333333;
+  float: right;
+}
+
+.button_heart{
+  color: #333333;
+  background: transparent;
+  width: 90px;
+  height: 30px;
+  margin-right: 28px;
+  margin-top: 20px;
+  font-family: Arial;
+}
+
+#prev_button_heart .button_heart{
+  margin-left: 10px;
+}
+
+#next_button_heart .button_heart{
+  margin-right: 10px;
 }
 
 .muted {

@@ -96,8 +96,8 @@ function addSolariBoard(divSelector) {
     "</div>" +
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
     "<div id=\"nav-buttons\">" +
-    "<a href="+ PREV_BUTTON + "id=\"prev_button\"><button class=\"button\">Previous</button></a>"+
-    "<a href="+ NEXT_BUTTON + "id=\"next_button\"><button class=\"button\">Next</button></a>"+
+    "<a id=\"prev_button\" href="+ PREV_BUTTON +"><button class=\"button\">Previous</button></a>"+
+    "<a id=\"next_button\" href="+ NEXT_BUTTON +"><button class=\"button\">Next</button></a>"+
     "</div>"+
     "<div class=\"container\">"+
     "Made with <span class=\"glyphicon glyphicon-heart\"></span> at the <a href=\"http://flatironschool.com/\" target=\"_blank\" id=\"school\">Flatiron School</a> | "+
