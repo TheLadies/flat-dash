@@ -34,7 +34,15 @@ $(function(){
         .style("font-size", function(d) { 
           return Math.min(d.r, (d.r - 8) / this.getComputedTextLength() * 28) + "px"; 
         })
-        .style('text-anchor', 'middle')
+        .style('text-anchor', 'middle');
+
+        for(var i = 0; i < $(".node").size(); i++) {
+          if ($(".node circle")[i].r.animVal.value < 8) {
+            $($(".node text")[i]).hide()
+          } else {
+            $($(".node text")[i]).show()
+          }
+        }
 
       var update = node.transition().attr('transform', function(d) {return 'translate(' + d.x + ',' + d.y + ')'; });
 
