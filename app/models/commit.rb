@@ -20,19 +20,10 @@ class Commit < ActiveRecord::Base
     student_repos.collect do |student|
       client.commits(student["student_repo_name"], student["branch"]).each do |commit_list|
         if commit_list.author
-          # commit_list.commit.author.name
           find_or_create_by(user_login: commit_list.author.login, name: commit_list.commit.author.name, commit_message: commit_list.commit.message, commit_created_at: commit_list.commit.committer.date)
         end
       end
     end
-  end
-
-  #This method gets rid of Commit made by teachers, TAs, non-current students"
-  def self.destroy_commits
-    user_login = ["NegaMorgan", "ChavaLovesFyedka", "flatiron-bot", "arelenglish", "aviflombaum",
-                  "spencer1248", "kthffmn", "loganhasson", "TSiege", "ahimmelstoss", "jongrover", 
-                  "SML4EVA", "Smylers", "StevenNunez", "jackiemorgan", "scottcreynolds"]
-    Commit.where(user_login: user_login).destroy_all
   end
 
   #This method finds the top 10 users the highest commit count
@@ -56,11 +47,12 @@ class Commit < ActiveRecord::Base
     commit_array = []
     commit_user.each do |user,date|
        messages = Commit.where("commit_created_at >= ?", date).find_by "user_login = ?", user
-       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message, :sTimeFrame => "EVERYONE"})
+       commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message})
     end
     commit_array
   end
 
+  # This method picks one user at a time and shows their last 10 commit messages
   def self.user_commits
     commit_array = []
     user_logins = Commit.pluck(:user_login).uniq 
