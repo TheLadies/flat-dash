@@ -49,7 +49,6 @@ class Commit < ActiveRecord::Base
        messages = Commit.where("commit_created_at >= ?", date).find_by "user_login = ?", user
        commit_array << ({:sDate => date.strftime("%F"), :sTime =>date.strftime("%R"), :sUsername => messages.user_login, :sCommitMessage => messages.commit_message})
     end
-    binding.pry
     commit_array
   end
 
