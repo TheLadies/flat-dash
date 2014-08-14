@@ -324,9 +324,14 @@ li.board-data {
   color: #999999;
 }
 
+#about{
+  margin-top: -22px;
+  margin-left: 300px;
+}
+
 #nav-buttons{
   float: left;
-  margin-top: -28px;
+  margin-top: -25px;
   margin-left:  550px;
 }
 

@@ -95,6 +95,7 @@ function addSolariBoard(divSelector) {
     "</ul>" +
     "</div>" +
     "<div id=\"last-updated\">Last updated: <span>n/a</span></div>" +
+    "<div id=\"about\"><a href=\"/about\">ABOUT</a></div>"+
     "<div id=\"nav-buttons\">" +
     "<a id=\"prev_button\" href="+ PREV_BUTTON +"><button class=\"button\">Previous</button></a>"+
     "<a id=\"next_button\" href="+ NEXT_BUTTON +"><button class=\"button\">Next</button></a>"+
