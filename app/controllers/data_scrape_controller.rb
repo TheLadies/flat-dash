@@ -1,6 +1,10 @@
 class DataScrapeController < ApplicationController
   protect_from_forgery except: :solari_data
   def index
+    @tweets = Tweet.all
+  end
+
+  def semester
       def solari_pull_semester
         json = Repository.top_pull_requests().to_json
 
