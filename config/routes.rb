@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get '/commits' => 'data_scrape#commits'
   get '/highlight' => 'data_scrape#highlight'
   get '/heart' => 'data_scrape#heart'
+  get '/about' => 'data_scrape#about'
 
 end

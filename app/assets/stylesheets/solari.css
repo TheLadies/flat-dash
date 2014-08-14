@@ -334,9 +334,14 @@ li.board-data {
   color: #999999;
 }
 
+#about{
+  margin-top: -22px;
+  margin-left: 300px;
+}
+
 #nav-buttons{
   float: left;
-  margin-top: -28px;
+  margin-top: -25px;
   margin-left:  550px;
 }
 
@@ -492,11 +497,10 @@ text {
   font: 18px 'Open Sans', sans-serif;;
   text-anchor: middle;
   pointer-events: none;
-  fill: white;Searching 313 files for "last-updated"
+  fill: white;
 }
 circle {
   fill: #ccc;
   stroke: white ;
   stroke-width: 2px;
 }
-
