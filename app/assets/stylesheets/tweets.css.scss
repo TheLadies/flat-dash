@@ -1,0 +1,67 @@
+// Place all the styles related to the tweets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+  background:rgb(255, 255, 255);
+}
+.introduction{
+  width:350px !important;
+  height:748px !important;
+}
+.webprogram, .iosprogram{
+  height:365px;
+  margin-left:2px;
+  border:2px solid #eee;
+  border-bottom: none;
+}
+.webprogram{
+  margin-top:2px;
+}
+.web_title, .ios_title{
+  color: #aaa;
+  color: #4c4c4c;
+}
+.web_tag, .ios_tag{
+  text-transform: uppercase;
+  color: #aaa;
+  line-height: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px #eee;
+}
+
+.twitter{
+  float: right;
+  width: 424px;
+  margin-top: -755px;
+  margin-right: 52px;
+}
+.twitter{
+  color: #292f33;
+  font-size: 14px;
+  line-height: 18px;
+}
+.twitter_header{
+  border: 1px solid #e1e8ed;
+  border-bottom-width: 0;
+  border-radius: 6px 6px 0 0;
+  background-clip: padding-box;
+}
+.twitter_header{
+  min-height: 20px;
+  padding: 12px;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e8ed;
+  border-radius: 5px 5px 0 0;
+}
+.twitter_header{
+  color: #66757f;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 22px;
+}
+.tweets{
+  border-right:1px solid #e1e8ed;
+  border-bottom:1px solid #e1e8ed;
+  border-left:1px solid #e1e8ed; 
+}

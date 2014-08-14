@@ -14,23 +14,50 @@
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
 
-  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-
-  <%= audio_tag('solari.mp3', id: 'solari-audio') %> 
-
 </head>
 <body>
  <script>
     $(document).ready(function() {
-      URL = "/solari_pull_semester.json";
-      // REFRESH_TIME = 15;
       PREV_BUTTON = "/heart"
       NEXT_BUTTON = "/week"
-      addSolariBoard(".solari");
     });
   </script>
-
+  <div class="introduction">
+    <div class="webprogram">
+      <h3 class="web_title">Web Program</h3>
+      <p class="web_tag">BECOME A FULL-STACK DEVELOPER</p>
+      <p class="web_excerpt">The Web Program is a 12 week, full time program, designed to turn you into a web developer. The goal of the program is to give you the equivalent skillset and experience of an entry-level Ruby developer. That means you'll be an internet swiss-army knife, equipped with all the tools needed to build applications. You don't need any programming experience to attend, just a strong desire to create and a whole lot of grit.</p>
+    </div>
+    <div class="iosprogram">
+      <h3 class="ios_title">iOS Program</h3>
+      <p class="ios_tag">TAKE YOUR DEV SKILLS MOBILE</p>
+      <p class="ios_excerpt">The iOS Program is a 12 week, full time program, designed to turn you into a iPhone/iPad developer. The goal is to turn students without any development experience into entry-level iOS developers. You'll leave the school having developed real world applications, and heard from the best in the business. To attend, all we require is a strong desire to create.</p>
+    </div>
+  </div>
+  <div class="heart">
+    <%=render "data_scrape/heart2"%>
+  </div>
+  <div class="twitter">
+    <h2 class="twitter_header">Flatiron Rocks!!</h2>
+    <%i=1%>
+    <%@tweets.each do |tweet|%>
+      <div class="tweets tweet_<%=i%>">
+      <%=tweet.name  %>
+      <%=tweet.username  %>
+      <%=tweet.time%>
+      <br>
+      <%=tweet.text%>
+      <%i=i+1%>
+      </div>
+      <br>
+    <%end%>
+  </div>
   <div class="solari">
+    <div id="nav-buttons">
+      <a id="next_button" href="/semester">
+        <button class="button">Next</button>
+      </a>
+    </div>
   </div>
   
 </body>

@@ -6,22 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-flatiron = Company.create(name: "Flatiron School")
-
-ruby = Program.create(name: "Ruby 005", company_id: 1)
-ios = Program.create(name: "iOS 001", company_id: 1)
-
-jess = Student.create(name: "Jessica Rudder", username: "JessRudder", program_id: 1)
-denine = Student.create(name: "Denine Guy", username: "denineguy", program_id: 1)
-christina = Student.create(name: "Christina Leuci", username: "christinaleuci", program_id: 1)
-joe = Student.create(name: "Joe Burgess", username: "joestheman", program_id: 2)
-
-flatdash = Project.create(name: "Flat Dash", program_id: 1, company_id: 1)
-sillyiosthing = Project.create(name: "Silly iOS Thing", program_id: 2, company_id: 1)
-playlister = Project.create(name: "Playlister", program_id: 1, company_id: 1)
-
-join1 = StudentProject.create(student_id: 1, project_id: 1)
-join2 = StudentProject.create(student_id: 2, project_id: 1)
-join3 = StudentProject.create(student_id: 3, project_id: 1)
-join4 = StudentProject.create(student_id: 3, project_id: 3)
-join5 = StudentProject.create(student_id: 4, project_id: 2)
+mm = Tweet.create([{name: "Matthias Loker", username: "@MatthiasLoker", time: "2h", text: "#sciencefair @FlatironSchool tomorrow. Working anywhere rules! #perksofbeingaprogrammer pic.twitter.com/gOcIxvLh5j"}])
+avi = Tweet.create([{name: "Avi Flombaum", username: "@aviflombaum", time: "3h", text: "I'm pretty sure my 200th @flatironschool student in the last 2 years will be demo'ing tomorrow at our #ScienceFair http://go.flatironschool.com/science-fair-rsvp-summer-2014 …"}])
+tt = Tweet.create([{name: "Tristan Siegel", username: "@ttsiege", time: "3h", text: "For anyone going to @FlatironSchool's #ScienceFair and not sure what it's about, it be like this http://bit.ly/1yxWKu0  but way awesomer!"}])
+ts = Tweet.create([{name: "Tristan Siegel", username: "@ttsiege", time: "3h", text: "Can't wait for @FlatironSchool's awesome students to blow everyone away at tomorrows #ScienceFair"}])
+ash = Tweet.create([{name: "Ashley Blewer! ❥", username: "@ablwr", time: "3h", text: "Hard not to have severe imposter syndrome when surrounded by such amazing, talented people! We ship tomorrow. @FlatironSchool  #ScienceFair"}])
+cc = Tweet.create([{name: "Catherine Meyers", username: "@ccmeyers324", time: "4h", text: "I feel like a kid the night before Christmas! Can't wait for @FlatironSchool #ScienceFair tomorrow!"}])
+es = Tweet.create([{name: "Emily Simonton", username: "@emilysimonton", time: "4h", text: "Come by @FlatironSchool tmrw to check out my team's apps + other cool projects! http://karaoke.pickl.me/  http://poll.pickl.me/  #ScienceFair"}])
+vd = Tweet.create([{name: "Vanessa Dean", username: "@vanessadeano", time: "5h", text: "Carbo loading in prep for @FlatironSchool #ScienceFair tomorrow with some whole wheat pasta. Gluten fo' life! #hashtag"}])
