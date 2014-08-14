@@ -482,11 +482,10 @@ text {
   font: 18px 'Open Sans', sans-serif;;
   text-anchor: middle;
   pointer-events: none;
-  fill: white;Searching 313 files for "last-updated"
+  fill: white;
 }
 circle {
   fill: #ccc;
   stroke: white ;
   stroke-width: 2px;
 }
-

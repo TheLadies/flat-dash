@@ -1,0 +1,95 @@
+//= depend_on_asset "christina.jpeg" 
+//= depend_on_asset "jessica.jpg"
+//= depend_on_asset "denine.jpg"
+.about_wrapper{
+  background-color: #E0E0DB;
+  height: 100%;
+}
+.team-images{
+  // border: 1px solid black;
+}
+
+#image_container{
+  // border: 1px solid black;
+  width: 70%;
+  padding-top: 40px;
+}
+
+.team-images{
+  width: 31%;
+}
+
+#image1,
+#image2,
+#image3{
+  float: left;
+  margin-right: 10px;
+  margin-left: 10px;
+  // border: 1px solid black;
+}
+
+.name{
+  // border: 1px solid black;
+  margin-top: 0px;
+}
+
+#photo1,
+#photo2,
+#photo3{
+  // border: 1px solid black;
+  height: 300px;
+}
+
+#photo1{
+  background-image: image-url('christina.jpeg');
+  background-size: cover;
+}
+
+#photo2{
+   background-image: image-url('jessica.jpg');
+   background-size: cover;
+}
+
+#photo3{
+   background-image: image-url('denine.jpg');
+   background-size: cover;
+}
+
+.github,
+.twitter{
+  width: 20%;
+  float: left;
+  // border: 1px solid black;
+}
+
+.github{
+  margin-left: 30%;
+}
+
+.about_header{
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 5px solid #FFBD47;
+  width: 20%;
+}
+
+.git{
+  width: 60%;
+  height: 60%;
+}
+
+.tweet{
+  margin-top: 5px;
+  width: 50%;
+  height: 50%;
+}
+
+.section,
+.team_members{
+  padding-top: 10px;
+}
+
+.section p{
+  font-size: 17px;  
+  line-height: 25px;
+}

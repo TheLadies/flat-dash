@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FlatDash</title>
+  <link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">  
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= analytics_init if Rails.env.production? %>
+
+  <% request.url %>
+<!--   This is the code that should pull in the current URL - maybe we can use it to get the code dryer so we're back to one header in application.html.erb -->
+
+</head>
+<body> 
+  <div class="about_wrapper">
+      <div class="section">
+        <center>
+          <h2 class="about_header">ABOUT FLATDASH</h2>
+          <p>The Flatiron School is full of Type-A overachievers.</br>
+          The best way to motivate those kinds of people is to put their stats up on a giant dashboard for the entire world to see.</br>
+          The teachers had the vision, we supplied the technology.</br>
+          No data - from Github Pull Requests to late night commit messages - is safe. How do you stack up? It's time to find out.</br>
+          FlatDash was built with love by current Flatiron students for future Flatiron students.</br>
+          It utilizes the Github API, the open source Solari Dashboard from Fog Creek and D3.js visualizations.</br>
+        </center>
+      </div>
+     
+      <div class="team_members">
+        <center>
+          <div>
+            <h2 class="about_header">TEAM MEMBERS</h2>
+          </div>
+        </center>
+        <center>
+          <div id="image_container">
+            <div class="team-images" id="image1">
+              <div id="photo1">
+              </div>
+              <h3 class="name">Christina Leuci</h3> 
+              <div class="personal-info">
+                <div class="github">
+                  <p>
+                    <a href="https://github.com/christinaleuci">
+                      <%=image_tag 'github.png', class:'git'%>
+                    </a>
+                  </p>
+                </div>
+                <div class="twitter">
+                  <p>
+                    <a href="http://twitter.com/christinaleuci">
+                      <%=image_tag 'twitter.png', class:'tweet'%>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="team-images" id="image2">
+              <div id="photo2">
+                
+              </div>
+              <h3 class="name">Jessica Rudder</h3>
+              <div class="personal-info">
+                <div class="github">
+                  <p>
+                    <a href="https://github.com/jessrudder"/>
+                      <%=image_tag 'github.png', class:'git'%>
+                    </a>
+                  </p>
+                </div>
+                <div class="twitter">
+                  <p>
+                    <a href="http://twitter.com/jessicarudder">
+                      <%=image_tag 'twitter.png', class:'tweet'%>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="team-images" id="image3">
+              <div id="photo3">
+              </div>
+              <h3 class="name">Denine Guy</h3>
+
+              <div class="personal-info">
+                <div class="github">
+                  <p>
+                    <a href="https://github.com/denineguy">
+                      <%=image_tag 'github.png', class:'git'%>
+                    </a>
+                  </p>
+                </div>
+                <div class="twitter">
+                  <p>
+                    <a href="http://twitter.com/sashaydoll">
+                      <%=image_tag 'twitter.png', class:'tweet'%>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </center>
+      <!-- </div> -->
+    </div>  
+  </div>
+</body>
+</html>
