@@ -12891,7 +12891,7 @@ $(function(){
           animate(TEAM_MEMBERS);
         }, 3750);
 
-        var new_e3 = (TEAM_MEMBERS.push({name: "RidingRails", value: 30}) - 1);
+        var new_e3 = (TEAM_MEMBERS.push({name: "", value: 30}) - 1);
 
         setTimeout(function() {
           animate(TEAM_MEMBERS);
